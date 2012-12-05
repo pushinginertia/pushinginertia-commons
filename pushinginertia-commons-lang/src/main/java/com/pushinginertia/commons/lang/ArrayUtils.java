@@ -1,3 +1,18 @@
+/* Copyright (c) 2011-2012 Pushing Inertia
+ * All rights reserved.  http://pushinginertia.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.pushinginertia.commons.lang;
 
 import java.util.Arrays;
@@ -17,13 +32,14 @@ public class ArrayUtils {
 	}
 
 	/**
-	 * Prepends an item to the beginning of an array
-	 * @param item
-	 * @param arr cannot be null
-	 * @param <T>
-	 * @return
+	 * Prepends an item to the beginning of an array. The array is not mutated and a new array is instantiated.
+	 * @param item item to prepend
+	 * @param arr array to prepend the item to
+	 * @param <T> type of each item in the array
+	 * @return new array instance containing the item concatenated with the existing array
+	 * @throws IllegalArgumentException if arr is null
 	 */
-	public static <T> T[] prepend(T item, T[] arr) {
+	public static <T> T[] prepend(T item, T[] arr) throws IllegalArgumentException {
 		if (arr == null) {
 			throw new IllegalArgumentException("arr is null");
 		}

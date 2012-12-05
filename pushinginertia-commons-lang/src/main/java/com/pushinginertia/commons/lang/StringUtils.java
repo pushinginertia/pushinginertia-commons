@@ -1,3 +1,18 @@
+/* Copyright (c) 2011-2012 Pushing Inertia
+ * All rights reserved.  http://pushinginertia.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.pushinginertia.commons.lang;
 
 import java.util.ArrayList;
@@ -9,7 +24,12 @@ import java.util.Map;
  * String utility methods.
  */
 public class StringUtils {
-	public static String removeDoubleSpaces(String s) {
+	/**
+	 * Replaces all occurrences of multiple whitespace with a single space (#32) character.
+	 * @param s string to replace
+	 * @return resulting string, or null if the input is null
+	 */
+	public static String removeDoubleSpaces(final String s) {
 		if (s == null)
 			return null;
 		return s.replaceAll("\\s\\s\\s*", " ");
@@ -17,12 +37,12 @@ public class StringUtils {
 
 	/**
 	 * Joins a list of strings into one string with a given separator.
-	 * @param separator
-	 * @param ss
+	 * @param separator separator to insert between strings
+	 * @param ss list of strings to join
 	 * @return never null
 	 */
 	private static String join(final String separator, final String... ss) {
-		final StringBuffer sb = new StringBuffer();
+		final StringBuilder sb = new StringBuilder();
 		for (String s: ss) {
 			if (sb.length() > 0)
 				sb.append(separator);
@@ -33,16 +53,16 @@ public class StringUtils {
 
 	/**
 	 * Returns the first N words in a string or the entire string if it has less than N words.
-	 * @param s
-	 * @param n
+	 * @param s string to search
+	 * @param n number of words to return
 	 * @return null if s is null
 	 */
-	public static String firstNWords(String s, int n) {
+	public static String firstNWords(final String s, final int n) {
 		if (s == null)
 			return null;
 
 		final String[] sArr = s.split("\\s+", n + 1); // this might not work with newlines
-		final StringBuffer sb = new StringBuffer();
+		final StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < n && i < sArr.length; i++)
 			sb.append(sArr[i]).append(' ');
 		sb.setLength(sb.length() - 1);
@@ -50,12 +70,12 @@ public class StringUtils {
 	}
 
 	/**
-	 * Converts a map to a string containing name-value pairs.
-	 * @param m
-	 * @return
+	 * Transforms a map to a string containing name-value pairs separated by '&'.
+	 * @param m map to transform
+	 * @return resulting string
 	 */
-	public static String mapToString(Map<String, String> m) {
-		final StringBuffer sb = new StringBuffer();
+	public static String mapToString(final Map<String, String> m) {
+		final StringBuilder sb = new StringBuilder();
 		for (Map.Entry<String, String> e: m.entrySet()) {
 			sb.append(e.getKey().replace("&", "&&")).append('=');
 			final String value = e.getValue();
@@ -70,15 +90,15 @@ public class StringUtils {
 	/**
 	 * Converts a string containing name-value pairs to a map. Values that are undefined (i.e., string length is zero)
 	 * are added as null rather than not empty strings.
-	 * @param s
+	 * @param s string to transform
 	 * @return null if input is null
 	 */
-	public static Map<String, String> stringToMap(String s) {
+	public static Map<String, String> stringToMap(final String s) {
 		if (s == null)
 			return null;
 		final Map<String, String> m = new HashMap<String, String>();
 
-		final StringBuffer sb = new StringBuffer();
+		final StringBuilder sb = new StringBuilder();
 		int equalSignIdx = -1;
 		int ampersandCount = 0;
 		for (char c: s.toCharArray()) {
@@ -126,7 +146,7 @@ public class StringUtils {
 	/**
 	 * Converts a string separated by newlines into a List object. Leading and trailing whitespace is stripped from each
 	 * line, and lines with no text are ignored.
-	 * @param newlineString
+	 * @param newlineString a string with newlines separating sub-strings
 	 * @param limit maximum number of lines to include in the list (zero for no limit)
 	 * @return null if newlineString is null
 	 */
