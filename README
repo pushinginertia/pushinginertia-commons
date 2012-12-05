@@ -1,0 +1,66 @@
+This is a set of libraries with common reusable Java components. It is structured
+in a way similar to Apache Commons but contains functionality that does not exist
+in Apache Commons.
+
+
+COMPONENTS
+==========
+
+This collection consists of the following components:
+
+pushinginertia-commons-io: Common I/O related logic.
+pushinginertia-commons-lang: Extensions to the java.lang package.
+pushinginertia-commons-net: Network and protocol logic.
+pushinginertia-commons-web: Logic to assist with web-related development.
+
+
+INSTALLATION
+============
+
+At present, you'll need to pull the source and build the JARs on your own. I have
+future plans to make these components available through a maven repository but
+that's not available yet. A proper versioning scheme will follow at this point
+too.
+
+You can build the JARs and install them into your local maven repository by
+running:
+
+    mvn install
+
+Add the following dependency to your pom.xml:
+
+    <dependency>
+        <groupId>com.pushinginertia</groupId>
+        <artifactId>pushinginertia-commons-XXX</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
+
+where XXX is the specific component to include.
+
+
+LICENSE AND COPYRIGHT
+=====================
+
+Copyright (c) 2011-2012 Pushing Inertia
+All rights reserved.  http://pushinginertia.com
+
+
+All code is licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+
+SOURCE CODE
+===========
+
+Source code is available on GitHub:
+https://github.com/pushinginertia/pushinginertia-commons
+
