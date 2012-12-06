@@ -34,9 +34,13 @@ public class IpAddressUtils {
 	 * Converts an IP address to an IP number for efficient database lookups.
 	 * @param ipAddress IPv4 address with four octets separated by dots
 	 * @return IP number representation
-	 * @throws IllegalArgumentException if the input is not a valid IPv4 address
+	 * @throws IllegalArgumentException if the input is not a valid IPv4 address or is null
 	 */
 	public static long toIpNumber(final String ipAddress) throws IllegalArgumentException {
+		if (ipAddress == null) {
+			throw new IllegalArgumentException("ipAddress is null");
+		}
+
 		// 1. split string into octets
 		final String[] s = ipAddress.split("\\.");
 		if (s.length != 4) {

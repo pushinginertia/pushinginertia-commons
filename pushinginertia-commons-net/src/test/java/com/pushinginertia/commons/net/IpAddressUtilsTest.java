@@ -23,6 +23,11 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class IpAddressUtilsTest {
+	@Test(expected = IllegalArgumentException.class)
+	public void toIpNumberNull() {
+		IpAddressUtils.toIpNumber(null);
+	}
+
 	@Test
 	public void toIpNumber() {
 		assertEquals(3401532416L, IpAddressUtils.toIpNumber("202.191.68.0"));
