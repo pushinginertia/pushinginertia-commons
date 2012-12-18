@@ -138,4 +138,13 @@ public class IpAddressUtils {
 		}
 		return pairs;
 	}
+
+	/**
+	 * Identifies if a given IP address is from the local host (127.0.0.1).
+	 * @param ipAddress IP address to examine
+	 * @return true iff the given IP address maps to localhost
+	 */
+	public static boolean isLocalhost(final String ipAddress) {
+		return "127.0.0.1".equals(ipAddress);
+	}
 }
