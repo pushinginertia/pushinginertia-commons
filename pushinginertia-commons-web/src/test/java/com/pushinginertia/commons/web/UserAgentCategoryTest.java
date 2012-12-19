@@ -104,16 +104,17 @@ public class UserAgentCategoryTest {
 	@Test
 	public void searchBot() {
 		Assert.assertEquals(UserAgentCategory.SEARCHBOT, UserAgentCategory.parseUserAgent("Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)"));
+		Assert.assertEquals(UserAgentCategory.SEARCHBOT, UserAgentCategory.parseUserAgent("Baiduspider-image+(+http://www.baidu.com/search/spider.htm)"));
 		Assert.assertEquals(UserAgentCategory.SEARCHBOT, UserAgentCategory.parseUserAgent("Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)"));
 		Assert.assertEquals(UserAgentCategory.SEARCHBOT, UserAgentCategory.parseUserAgent("Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"));
 		Assert.assertEquals(UserAgentCategory.SEARCHBOT, UserAgentCategory.parseUserAgent("Mozilla/5.0 (compatible; MSIE or Firefox mutant; not on Windows server; + http://tab.search.daum.net/aboutWebSearch.html) Daumoa/3.0"));
 		Assert.assertEquals(UserAgentCategory.SEARCHBOT, UserAgentCategory.parseUserAgent("Mozilla/5.0 (compatible; MSIE or Firefox mutant; not on Windows server; +http://ws.daum.net/aboutWebSearch.html) Daumoa/2.0"));
 		Assert.assertEquals(UserAgentCategory.SEARCHBOT, UserAgentCategory.parseUserAgent("Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots)"));
 		Assert.assertEquals(UserAgentCategory.SEARCHBOT, UserAgentCategory.parseUserAgent("msnbot/2.0b (+http://search.msn.com/msnbot.htm)"));
+		Assert.assertEquals(UserAgentCategory.SEARCHBOT, UserAgentCategory.parseUserAgent("msnbot-media/1.1 (+http://search.msn.com/msnbot.htm)"));
 		Assert.assertEquals(UserAgentCategory.SEARCHBOT, UserAgentCategory.parseUserAgent("Yeti/1.0 (NHN Corp.; http://help.naver.com/robots/)"));
 		Assert.assertEquals(UserAgentCategory.SEARCHBOT, UserAgentCategory.parseUserAgent("Mozilla/4.0 (compatible; NaverBot/1.0; http://help.naver.com/delete_main.asp)"));
 		Assert.assertEquals(UserAgentCategory.SEARCHBOT, UserAgentCategory.parseUserAgent("Mozilla/4.0 (compatible; NaverBot/1.0; http://help.naver.com/customer_webtxt_02.jsp)"));
-
 		Assert.assertEquals(UserAgentCategory.USER, UserAgentCategory.parseUserAgent("Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.2.13) Gecko/20101206 Ubuntu/9.10 (karmic) Firefox/3.6.13 GTB7.1"));
 	}
 }

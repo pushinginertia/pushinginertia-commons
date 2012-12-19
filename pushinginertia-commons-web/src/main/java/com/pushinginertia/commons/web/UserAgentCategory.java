@@ -51,11 +51,12 @@ public enum UserAgentCategory {
 	static {
 		// this is baidu's v1.0 crawler user agent: Baiduspider+(+http://www.baidu.com/search/spider.htm)
 		SEARCH_BOT_SET.add("^Mozilla/5\\.0 \\(compatible; Baiduspider/[0-9.]+; \\+http://www\\.baidu\\.com/search/spider\\.html\\)$");
+		SEARCH_BOT_SET.add("^Baiduspider-image\\+\\(\\+http://www\\.baidu\\.com/search/spider\\.htm\\)$");
 		SEARCH_BOT_SET.add("^Mozilla/5\\.0 \\(compatible; bingbot/[0-9.]+; \\+http://www\\.bing\\.com/bingbot\\.htm\\)$");
 		SEARCH_BOT_SET.add("^Mozilla/5\\.0 \\(compatible; Googlebot/[0-9.]+; \\+http://www\\.google\\.com/bot\\.html\\)$");
 		SEARCH_BOT_SET.add("^Mozilla/5\\.0 \\(compatible; MSIE or Firefox mutant; not on Windows server; \\+ ?http://(tab\\.search|ws).daum.net/aboutWebSearch.html\\) Daumoa/[0-9.]+$");
 		SEARCH_BOT_SET.add("^Mozilla/5\\.0 \\(compatible; YandexBot/[0-9.]+; \\+http://yandex\\.com/bots\\)$");
-		SEARCH_BOT_SET.add("^msnbot/2\\.0b \\(\\+http://search\\.msn\\.com/msnbot\\.htm\\)$");
+		SEARCH_BOT_SET.add("^msnbot(/2\\.0b|-media/1\\.1) \\(\\+http://search\\.msn\\.com/msnbot\\.htm\\)$");
 		SEARCH_BOT_SET.add("^Yeti/1\\.0 \\(NHN Corp.; http://help\\.naver\\.com/robots/\\)$");
 		SEARCH_BOT_SET.add("^Mozilla/4\\.0 \\(compatible; NaverBot/1.0; http://help.naver.com/[a-z0-9_]+.[aj]sp\\)");
 
