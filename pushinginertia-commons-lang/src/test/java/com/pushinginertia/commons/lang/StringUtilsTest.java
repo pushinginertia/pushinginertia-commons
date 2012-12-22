@@ -75,4 +75,10 @@ public class StringUtilsTest {
 		Assert.assertEquals("abc", StringUtils.stripTrailingCharIfPresent("abc", '/'));
 		Assert.assertEquals("abc", StringUtils.stripTrailingCharIfPresent("abc/", '/'));
 	}
+
+	@Test
+	public void replaceAllCaseInsensitive() {
+		Assert.assertEquals("DEF DEF DEF", StringUtils.replaceAllCaseInsensitive("abc ABC Abc", "Abc", "DEF"));
+		Assert.assertEquals("DEF\nDEF DEF", StringUtils.replaceAllCaseInsensitive("abc\nABC Abc", "Abc", "DEF"));
+	}
 }

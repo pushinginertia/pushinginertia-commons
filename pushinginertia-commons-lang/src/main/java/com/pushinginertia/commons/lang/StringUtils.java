@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * String utility methods.
@@ -192,5 +194,18 @@ public class StringUtils {
 			return s.substring(0, s.length() - 1);
 		}
 		return s;
+	}
+
+	/**
+	 * Performs a case insensitive replacement of all occurrences of a given string with a replacement value.
+	 * @param s string to modify
+	 * @param search case insensitive substring to locate
+	 * @param replacement replacement value for all matches
+	 * @return modified string
+	 */
+	public static String replaceAllCaseInsensitive(final String s, final String search, final String replacement) {
+		final Pattern p = Pattern.compile(search, Pattern.CASE_INSENSITIVE);
+		final Matcher m = p.matcher(s);
+		return m.replaceAll(replacement);
 	}
 }
