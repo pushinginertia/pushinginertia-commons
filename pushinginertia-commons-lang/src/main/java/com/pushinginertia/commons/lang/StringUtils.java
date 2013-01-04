@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2012 Pushing Inertia
+/* Copyright (c) 2011-2013 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,6 +26,24 @@ import java.util.regex.Pattern;
  * String utility methods.
  */
 public class StringUtils {
+	/**
+	 * Constructs a string containing a given character repeated N times.
+	 * @param c character to repeat
+	 * @param n number of times to repeat the character
+	 * @return string of length n
+	 * @throws IllegalArgumentException if n is negative
+	 */
+	public static String repeat(final char c, final int n) throws IllegalArgumentException {
+		if (n < 0) {
+			throw new IllegalArgumentException("n must be non-negative: " + n);
+		}
+		final StringBuilder sb = new StringBuilder(n);
+		for (int i = 0; i < n; i++) {
+			sb.append(c);
+		}
+		return sb.toString();
+	}
+
 	/**
 	 * Replaces all occurrences of multiple whitespace with a single space (#32) character.
 	 * @param s string to replace

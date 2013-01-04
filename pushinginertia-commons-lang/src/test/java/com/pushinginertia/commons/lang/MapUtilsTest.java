@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2012 Pushing Inertia
+/* Copyright (c) 2011-2013 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,19 +16,31 @@
 package com.pushinginertia.commons.lang;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class MapUtilsTest {
-	@Test
-	public void testToString() {
-		final Map<String, String> m = new LinkedHashMap<String, String>();
+	private Map<String, String> m;
+
+	@Before
+	public void setUp() {
+		m = new LinkedHashMap<String, String>();
 		m.put("a", "1");
 		m.put("b", "2");
+	}
 
+	@Test
+	public void testToString() {
 		final String s = MapUtils.toString(m, "\n");
 		Assert.assertEquals("a=1\nb=2", s);
+	}
+
+	@Test
+	public void toStringIndent() {
+		final String s = MapUtils.toString(m, "\n", 4);
+		Assert.assertEquals("    a=1\n    b=2", s);
 	}
 }

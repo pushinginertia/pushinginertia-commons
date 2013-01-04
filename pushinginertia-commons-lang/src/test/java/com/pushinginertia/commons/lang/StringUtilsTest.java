@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2012 Pushing Inertia
+/* Copyright (c) 2011-2013 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,6 +22,19 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class StringUtilsTest {
+	@Test
+	public void repeat() {
+		Assert.assertEquals("", StringUtils.repeat('x', 0));
+		Assert.assertEquals("x", StringUtils.repeat('x', 1));
+		Assert.assertEquals("  ", StringUtils.repeat(' ', 2));
+		Assert.assertEquals("xxx", StringUtils.repeat('x', 3));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void repeatErr() {
+		StringUtils.repeat('x', -1);
+	}
+
 	@Test
 	public void firstNWords() {
 		Assert.assertEquals("a b c", StringUtils.firstNWords("a b c d e f g h i j", 3));

@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2012 Pushing Inertia
+/* Copyright (c) 2011-2013 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,21 +27,39 @@ public class MapUtils {
 	 * Transforms a map to a string for logging purposes.
 	 * @param map map to transform
 	 * @param separator separator to insert between each key-value pair
+	 * @param indent number of whitespace characters to insert before each key-value pair
 	 * @param <K> type of the map's key
 	 * @param <V> type of the map's value
 	 * @return null if the input is null
 	 */
-	public static <K, V> String toString(final Map<K, V> map, final String separator) {
+	public static <K, V> String toString(final Map<K, V> map, final String separator, final int indent) {
+		// return null if no input
 		if (map == null)
 			return null;
+
+		// create an indentation string
+		final String indentString = StringUtils.repeat(' ', indent);
 
 		final StringBuilder sb = new StringBuilder();
 		for (Map.Entry<K, V> e: map.entrySet()) {
 			if (sb.length() > 0)
 				sb.append(separator);
+			sb.append(indentString);
 			sb.append(e.getKey()).append('=').append(e.getValue());
 		}
 		return sb.toString();
+	}
+
+	/**
+	 * Transforms a map to a string for logging purposes.
+	 * @param map map to transform
+	 * @param separator separator to insert between each key-value pair
+	 * @param <K> type of the map's key
+	 * @param <V> type of the map's value
+	 * @return null if the input is null
+	 */
+	public static <K, V> String toString(final Map<K, V> map, final String separator) {
+		return toString(map, separator, 0);
 	}
 
 	/**
@@ -52,6 +70,6 @@ public class MapUtils {
 	 * @return null if the input is null
 	 */
 	public static <K, V> String toString(final Map<K, V> map) {
-		return toString(map, DEFAULT_SEPARATOR);
+		return toString(map, DEFAULT_SEPARATOR, 0);
 	}
 }

@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2012 Pushing Inertia
+/* Copyright (c) 2011-2013 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,7 +30,7 @@ public class ListUtils {
 	 * @param <T> type of the objects in the input collection
 	 * @return sorted list
 	 */
-	public static <T extends Comparable<? super T>> List<T> asSortedList(Collection<T> c) {
+	public static <T extends Comparable<? super T>> List<T> asSortedList(final Collection<T> c) {
 		final List<T> list = new ArrayList<T>(c);
 		java.util.Collections.sort(list);
 		return list;
