@@ -1,7 +1,6 @@
 package com.pushinginertia.commons.net.email;
 
 import java.io.Serializable;
-import java.util.Locale;
 
 /**
  * Encapsulates the information required to construct a multipart email with all headers and both text and html content.
