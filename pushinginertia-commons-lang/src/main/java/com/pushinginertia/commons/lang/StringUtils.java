@@ -222,6 +222,15 @@ public class StringUtils {
 	 * @return modified string
 	 */
 	public static String replaceAllCaseInsensitive(final String s, final String search, final String replacement) {
+		if (s == null) {
+			throw new IllegalArgumentException("String to modify cannot be null.");
+		}
+		if (search == null) {
+			throw new IllegalArgumentException("Search substring cannot be null.");
+		}
+		if (replacement == null) {
+			throw new IllegalArgumentException("Replacement string cannot be null.");
+		}
 		final Pattern p = Pattern.compile(search, Pattern.CASE_INSENSITIVE);
 		final Matcher m = p.matcher(s);
 		return m.replaceAll(replacement);
