@@ -15,21 +15,30 @@
  */
 package com.pushinginertia.commons.lang;
 
-import org.junit.Test;
+import java.io.Serializable;
 
-public class ValidateAsTest {
-	@Test(expected = IllegalArgumentException.class)
-	public void notNull() {
-		ValidateAs.notNull(null, "nullParameter");
+/**
+ * A generic container for a set of two values.
+ */
+public class Tuple2<V1 extends Serializable, V2 extends Serializable> implements Serializable {
+	private final V1 v1;
+	private final V2 v2;
+
+	public Tuple2(final V1 v1, final V2 v2) {
+		this.v1 = v1;
+		this.v2 = v2;
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void positive0() {
-		ValidateAs.positive(0, "zeroParameter");
+	public V1 getV1() {
+		return v1;
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void positiveMinus1() {
-		ValidateAs.positive(-1, "minusOneParameter");
+	public V2 getV2() {
+		return v2;
+	}
+
+	@Override
+	public String toString() {
+		return "Tuple2{v1=" + v1 + ", v2=" + v2 + '}';
 	}
 }

@@ -24,12 +24,40 @@ public class ValidateAs {
 	 * @param value value to check
 	 * @param name name of the value that will be echoed in the exception if the value is null
 	 * @param <T> type of the value to check
-	 * @return the value passed in as a parameter
+	 * @return the given value
 	 * @throws IllegalArgumentException if the value is null
 	 */
 	public static <T> T notNull(final T value, final String name) throws IllegalArgumentException {
 		if (value == null) {
 			throw new IllegalArgumentException("Value for [" + name + "] cannot be null.");
+		}
+		return value;
+	}
+
+	/**
+	 * Validates that a variable is a positive integer (i.e., greater than zero).
+	 * @param value value to check
+	 * @param name name of the value that will be echoed in the exception if the value is null
+	 * @return the given value
+	 * @throws IllegalArgumentException if the value is less than one
+	 */
+	public static int positive(final int value, final String name) throws IllegalArgumentException {
+		if (value <= 0) {
+			throw new IllegalArgumentException("Value for [" + name + "] must be positive: " + value);
+		}
+		return value;
+	}
+
+	/**
+	 * Validates that a variable is a positive long (i.e., greater than zero).
+	 * @param value value to check
+	 * @param name name of the value that will be echoed in the exception if the value is null
+	 * @return the given value
+	 * @throws IllegalArgumentException if the value is less than one
+	 */
+	public static long positive(final long value, final String name) throws IllegalArgumentException {
+		if (value <= 0) {
+			throw new IllegalArgumentException("Value for [" + name + "] must be positive: " + value);
 		}
 		return value;
 	}
