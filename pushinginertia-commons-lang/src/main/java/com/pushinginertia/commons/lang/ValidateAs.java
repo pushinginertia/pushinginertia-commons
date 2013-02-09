@@ -61,4 +61,18 @@ public class ValidateAs {
 		}
 		return value;
 	}
+
+	/**
+	 * Validates that a variable is non-negative (i.e., zero or greater).
+	 * @param value value to check
+	 * @param name name of the value that will be echoed in the exception if the value is null
+	 * @return the given value
+	 * @throws IllegalArgumentException if the value is less than zero
+	 */
+	public static int nonNegative(final int value, final String name) throws IllegalArgumentException {
+		if (value < 0) {
+			throw new IllegalArgumentException("Value for [" + name + "] must be non-negative: " + value);
+		}
+		return value;
+	}
 }
