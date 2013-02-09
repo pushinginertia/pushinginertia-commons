@@ -66,6 +66,8 @@ public class UserAgentCategoryTest {
 		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("Mozilla/5.0 (Windows NT 5.1; rv:8.0.1) Gecko/20100101 Firefox/8.0.1"));
 		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("Mozilla/4.0 (compatible; MSIE 5.5; Windows 95; BCD2000)"));
 		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("Python-urllib/2.7"));
+		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("Mozilla/5.0 ()"));
+		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("python-requests/1.1.0 CPython/2.7.3 Linux/3.2.0-31-virtual"));
 	}
 
 	@Test
