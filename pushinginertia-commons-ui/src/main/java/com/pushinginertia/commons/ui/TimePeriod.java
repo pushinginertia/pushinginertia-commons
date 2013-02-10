@@ -16,6 +16,7 @@
 package com.pushinginertia.commons.ui;
 
 import com.pushinginertia.commons.lang.MathUtils;
+import com.pushinginertia.commons.lang.ValidateAs;
 import org.joda.time.Duration;
 
 import java.io.Serializable;
@@ -44,6 +45,7 @@ public class TimePeriod implements Serializable {
 	private final String descriptorResourceKey;
 
 	public TimePeriod(final Duration duration) {
+		ValidateAs.notNull(duration, "duration");
 		final long days = duration.getStandardDays();
 
 		// about 30.4 days in a month
