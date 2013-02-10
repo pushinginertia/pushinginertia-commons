@@ -11,6 +11,7 @@
         <module>pushinginertia-commons-lang</module>
         <module>pushinginertia-commons-io</module>
         <module>pushinginertia-commons-net</module>
+        <module>pushinginertia-commons-ui</module>
         <module>pushinginertia-commons-web</module>
     </modules>
 

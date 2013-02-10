@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.pushinginertia.commons.lang;
+package com.pushinginertia.commons.ui.i18n;
 
 /**
  * Logic to support internationalization.
@@ -35,5 +35,22 @@ public class I18nUtils {
 			return prefix + '.' + ONE;
 		}
 		return prefix + '.' + MANY;
+	}
+
+	/**
+	 * Generates a resource lookup key based on a given count of items. If the count hits the 'manyCount' threshold,
+	 * the generated key will be of the form "&lt;prefix&gt;.Many", else it will be of the form "&lt;prefix&gt;.&lt;count&gt;".
+	 * This is useful for cases when the string varies for the first few count values but is then generalized for counts
+	 * exceeding a threshold.
+	 * @param prefix prefix of the resource lookup key
+	 * @param manyCount threshold at which point a static suffix of {@link #MANY} is appended
+	 * @param count count of items
+	 * @return generated key
+	 */
+	public static String generateResourceLookupKeyManyThreshold(final String prefix, final int manyCount, final int count) {
+		if (count >= manyCount) {
+			return prefix + '.' + MANY;
+		}
+		return prefix + '.' + count;
 	}
 }

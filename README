@@ -11,6 +11,7 @@ This collection consists of the following components:
 pushinginertia-commons-io: Common I/O related logic.
 pushinginertia-commons-lang: Extensions to the java.lang package.
 pushinginertia-commons-net: Network and protocol logic.
+pushinginertia-commons-ui: Support for generating UI strings and internationalization.
 pushinginertia-commons-web: Logic to assist with web-related development.
 
 
