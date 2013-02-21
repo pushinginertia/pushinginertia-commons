@@ -20,6 +20,7 @@ import com.pushinginertia.commons.lang.ValidateAs;
 import org.joda.time.Duration;
 
 import java.io.Serializable;
+import java.util.ResourceBundle;
 
 /**
  * Accepts a duration and represents it in days, weeks, or months, depending on the length of the duration.
@@ -74,5 +75,35 @@ public class TimePeriod implements Serializable {
 
 	public long getQuantity() {
 		return quantity;
+	}
+
+	/**
+	 * Looks up the appropriate resource string defined by {@link #getDescriptorResourceKey()} and applies a substitution
+	 * on all instances of '${i}' with the quantity for the time period.
+	 * @param rb resource bundle to use
+	 * @return constructed string
+	 */
+	public String getString(final ResourceBundle rb) {
+		final String s = rb.getString(descriptorResourceKey);
+		return s.replace("${i}", Long.toString(quantity));
+	}
+
+	/**
+	 * A simple interface used by {@link TimePeriod#getString(com.pushinginertia.commons.ui.TimePeriod.TimePeriodResourceBundle)}
+	 * to enclose a custom resource bundle definition.
+	 */
+	public interface TimePeriodResourceBundle {
+		public String getString(String resourceKey);
+	}
+
+	/**
+	 * Looks up the appropriate resource string defined by {@link #getDescriptorResourceKey()} and applies a substitution
+	 * on all instances of '${i}' with the quantity for the time period.
+	 * @param rb resource bundle to use
+	 * @return constructed string
+	 */
+	public String getString(final TimePeriodResourceBundle rb) {
+		final String s = rb.getString(descriptorResourceKey);
+		return s.replace("${i}", Long.toString(quantity));
 	}
 }

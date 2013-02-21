@@ -21,6 +21,17 @@ import org.junit.Test;
 
 public class TimePeriodTest {
 	@Test
+	public void getString() {
+		final TimePeriod period = new TimePeriod(Period.days(1).toStandardDuration());
+		Assert.assertEquals("1 Day", period.getString(new TimePeriod.TimePeriodResourceBundle() {
+			public String getString(final String resourceKey) {
+				Assert.assertEquals("TimePeriod.Day", resourceKey);
+				return "${i} Day";
+			}
+		}));
+	}
+
+	@Test
 	public void day() {
 		final TimePeriod period = new TimePeriod(Period.days(1).toStandardDuration());
 		Assert.assertEquals(1, period.getQuantity());
