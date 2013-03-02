@@ -217,22 +217,16 @@ public class StringUtils {
 	/**
 	 * Performs a case insensitive replacement of all occurrences of a given string with a replacement value.
 	 * @param s string to modify
-	 * @param search case insensitive substring to locate
-	 * @param replacement replacement value for all matches
+	 * @param searchString case insensitive substring to locate
+	 * @param replacementString replacement value for all matches
 	 * @return modified string
 	 */
-	public static String replaceAllCaseInsensitive(final String s, final String search, final String replacement) {
-		if (s == null) {
-			throw new IllegalArgumentException("String to modify cannot be null.");
-		}
-		if (search == null) {
-			throw new IllegalArgumentException("Search substring cannot be null.");
-		}
-		if (replacement == null) {
-			throw new IllegalArgumentException("Replacement string cannot be null.");
-		}
-		final Pattern p = Pattern.compile(search, Pattern.CASE_INSENSITIVE);
+	public static String replaceAllCaseInsensitive(final String s, final String searchString, final String replacementString) {
+		ValidateAs.notNull(s, "s");
+		ValidateAs.notNull(searchString, "searchString");
+		ValidateAs.notNull(replacementString, "replacementString");
+		final Pattern p = Pattern.compile(searchString, Pattern.CASE_INSENSITIVE);
 		final Matcher m = p.matcher(s);
-		return m.replaceAll(replacement);
+		return m.replaceAll(replacementString);
 	}
 }
