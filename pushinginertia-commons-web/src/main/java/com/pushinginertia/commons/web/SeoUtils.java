@@ -16,6 +16,8 @@
 package com.pushinginertia.commons.web;
 
 import com.pushinginertia.commons.lang.CharUtils;
+import com.pushinginertia.commons.lang.Tuple2;
+import com.pushinginertia.commons.lang.ValidateAs;
 
 /**
  * Methods that assist with SEO.
@@ -83,5 +85,26 @@ public class SeoUtils {
 		}
 
 		return sb.toString();
+	}
+
+	/**
+	 * Parses a slug with two words separated by a hyphen into a {@link Tuple2} containing the two words.
+	 * @param slug slug to parse
+	 * @return words separated into a data structure
+	 * @throws IllegalArgumentException if the input is not valid
+	 */
+	public static Tuple2<String, String> parseTwoWordSlug(final String slug) throws IllegalArgumentException {
+		ValidateAs.notNull(slug, "slug");
+
+		if (slug.indexOf('-') < 0) {
+			throw new IllegalArgumentException("Slug [" + slug + "] does not contain two words.");
+		}
+
+		final String[] slugs = slug.split("-");
+		if (slugs.length != 2 || slugs[0].length() == 0 || slugs[1].length() == 0) {
+			throw new IllegalArgumentException("Slug [" + slug + "] does not contain two words.");
+		}
+
+		return new Tuple2<String, String>(slugs[0], slugs[1]);
 	}
 }
