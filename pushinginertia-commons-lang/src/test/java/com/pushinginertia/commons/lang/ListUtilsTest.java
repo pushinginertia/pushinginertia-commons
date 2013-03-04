@@ -19,6 +19,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -42,5 +43,19 @@ public class ListUtilsTest {
 		Assert.assertEquals(SomeEnumeration.C, l.get(1));
 		Assert.assertEquals(SomeEnumeration.B, l.get(2));
 		Assert.assertEquals(SomeEnumeration.D, l.get(3));
+	}
+
+	@Test
+	public void cloneAndRemove() {
+		final List<String> sourceList = Collections.unmodifiableList(Arrays.asList("a", "b", "c", "d"));
+
+		final List la = ListUtils.cloneAndRemove(sourceList, "a");
+		Assert.assertEquals(3, la.size());
+		Assert.assertEquals(4, sourceList.size());
+		Assert.assertFalse(la.contains("a"));
+
+		final List le = ListUtils.cloneAndRemove(sourceList, "e");
+		Assert.assertEquals(4, le.size());
+		Assert.assertEquals(4, sourceList.size());
 	}
 }

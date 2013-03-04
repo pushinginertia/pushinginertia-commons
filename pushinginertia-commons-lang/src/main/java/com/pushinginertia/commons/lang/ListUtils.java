@@ -35,4 +35,20 @@ public class ListUtils {
 		java.util.Collections.sort(list);
 		return list;
 	}
+
+	/**
+	 * Clones a list with a given element removed. The output list will be the same size as the input list or will contain
+	 * one less item.
+	 * @param list list to clone
+	 * @param itemToRemove item to remove
+	 * @param <T> type of the items in the list
+	 * @return cloned list with the given item removed (if that item exists in the source list)
+	 */
+	public static <T> List<T> cloneAndRemove(final List<T> list, final T itemToRemove) {
+		ValidateAs.notNull(list, "list");
+		ValidateAs.notNull(itemToRemove, "itemToRemove");
+		final List<T> clonedList = new ArrayList<T>(list);
+		clonedList.remove(itemToRemove);
+		return clonedList;
+	}
 }
