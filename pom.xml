@@ -13,6 +13,7 @@
         <module>pushinginertia-commons-net</module>
         <module>pushinginertia-commons-ui</module>
         <module>pushinginertia-commons-web</module>
+        <module>pushinginertia-commons-service</module>
     </modules>
 
     <properties>
