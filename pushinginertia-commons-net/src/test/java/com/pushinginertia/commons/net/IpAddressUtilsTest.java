@@ -32,6 +32,7 @@ public class IpAddressUtilsTest {
 	public void toIpNumber() {
 		assertEquals(3401532416L, IpAddressUtils.toIpNumber("202.191.68.0"));
 		assertEquals(3401190660L, IpAddressUtils.toIpNumber("202.186.13.4"));
+		assertEquals(4294967295L, IpAddressUtils.toIpNumber("255.255.255.255"));
 	}
 
 	@Test
