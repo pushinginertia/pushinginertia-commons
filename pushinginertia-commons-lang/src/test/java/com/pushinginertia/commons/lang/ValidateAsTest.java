@@ -23,6 +23,16 @@ public class ValidateAsTest {
 		ValidateAs.notNull(null, "nullParameter");
 	}
 
+	@Test
+	public void notEqual() {
+		ValidateAs.notEqual("abc", "def", "string1", "string2");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void notEqualFail() {
+		ValidateAs.notEqual("abc", "abc", "string1", "string2");
+	}
+
 	@Test(expected = IllegalArgumentException.class)
 	public void positive0() {
 		ValidateAs.positive(0, "zeroParameter");
