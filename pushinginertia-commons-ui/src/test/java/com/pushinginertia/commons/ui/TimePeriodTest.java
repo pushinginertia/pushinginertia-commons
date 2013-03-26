@@ -32,6 +32,34 @@ public class TimePeriodTest {
 	}
 
 	@Test
+	public void minute() {
+		final TimePeriod period = new TimePeriod(Period.minutes(1).toStandardDuration());
+		Assert.assertEquals(1, period.getQuantity());
+		Assert.assertEquals("TimePeriod.Minute", period.getDescriptorResourceKey());
+	}
+
+	@Test
+	public void minutes() {
+		final TimePeriod period = new TimePeriod(Period.minutes(59).toStandardDuration());
+		Assert.assertEquals(59, period.getQuantity());
+		Assert.assertEquals("TimePeriod.Minutes", period.getDescriptorResourceKey());
+	}
+
+	@Test
+	public void hour() {
+		final TimePeriod period = new TimePeriod(Period.hours(1).toStandardDuration());
+		Assert.assertEquals(1, period.getQuantity());
+		Assert.assertEquals("TimePeriod.Hour", period.getDescriptorResourceKey());
+	}
+
+	@Test
+	public void hours() {
+		final TimePeriod period = new TimePeriod(Period.minutes(1439).toStandardDuration());
+		Assert.assertEquals(23, period.getQuantity());
+		Assert.assertEquals("TimePeriod.Hours", period.getDescriptorResourceKey());
+	}
+
+	@Test
 	public void day() {
 		final TimePeriod period = new TimePeriod(Period.days(1).toStandardDuration());
 		Assert.assertEquals(1, period.getQuantity());

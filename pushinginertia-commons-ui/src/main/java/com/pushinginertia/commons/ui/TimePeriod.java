@@ -31,6 +31,10 @@ import java.util.ResourceBundle;
  * <p>
  * Strings for the following resource keys must exist:
  * <ul>
+ *     <li>TimePeriod.Minute</li>
+ *     <li>TimePeriod.Minutes</li>
+ *     <li>TimePeriod.Hour</li>
+ *     <li>TimePeriod.Hours</li>
  *     <li>TimePeriod.Day</li>
  *     <li>TimePeriod.Days</li>
  *     <li>TimePeriod.Week</li>
@@ -54,7 +58,16 @@ public class TimePeriod implements Serializable {
 		// N weeks: if 31 < dayCount <= 61 and
 		// N months: if 61 < dayCount
 		final StringBuilder key = new StringBuilder("TimePeriod.");
-		if (days <= 31) {
+		if (days < 1) {
+			final long minutes = duration.getStandardMinutes();
+			if (minutes < 60) {
+				quantity = minutes;
+				key.append("Minute");
+			} else {
+				quantity = duration.getStandardHours();
+				key.append("Hour");
+			}
+		} else if (days <= 31) {
 			quantity = days;
 			key.append("Day");
 		} else if (days <= 61) {
