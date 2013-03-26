@@ -15,6 +15,8 @@
  */
 package com.pushinginertia.commons.net;
 
+import com.pushinginertia.commons.lang.ValidateAs;
+
 import java.io.Serializable;
 
 /**
@@ -33,7 +35,7 @@ public class IpAddress implements Serializable {
 	 * @throws IllegalArgumentException if the input is not a valid IPv4 address
 	 */
 	public IpAddress(final String ipAddress) throws IllegalArgumentException {
-		this.ipAddress = ipAddress;
+		this.ipAddress = ValidateAs.notNull(ipAddress, "ipAddress");
 		this.ipNumber = IpAddressUtils.toIpNumber(ipAddress);
 	}
 
