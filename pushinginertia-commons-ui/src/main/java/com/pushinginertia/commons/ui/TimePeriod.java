@@ -82,10 +82,20 @@ public class TimePeriod implements Serializable {
 		descriptorResourceKey = key.toString();
 	}
 
+	/**
+	 * The resource key to look up when presenting the time period. The string associated with the returned key must
+	 * contain a '${i}' placeholder, which will be replaced with the quantity.
+	 * @return resource key
+	 */
 	public String getDescriptorResourceKey() {
 		return descriptorResourceKey;
 	}
 
+	/**
+	 * The quantity that is substituted into the '${i}' placeholder in the resource string matching
+	 * {@link #descriptorResourceKey}.
+	 * @return calculated quantity
+	 */
 	public long getQuantity() {
 		return quantity;
 	}
