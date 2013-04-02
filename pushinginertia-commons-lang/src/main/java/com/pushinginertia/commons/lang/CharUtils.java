@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2012 Pushing Inertia
+/* Copyright (c) 2011-2013 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,15 +20,33 @@ package com.pushinginertia.commons.lang;
  */
 public class CharUtils {
 	/**
-	 * identifies if a given character exists in the character array
+	 * Identifies if a given character exists in the character array.
 	 * @param c character to search for
 	 * @param arr array to search
 	 * @return index of the character or -1 if not found
 	 */
-	public static int inCharArray(char c, char[] arr) {
+	public static int inCharArray(final char c, final char[] arr) {
 		for (int i = 0; i < arr.length; i++) {
 			if (c == arr[i])
 				return i;
+		}
+		return -1;
+	}
+
+	/**
+	 * Identifies the first character in a given string that exists in a given character array.
+	 * @param s string to search
+	 * @param arr character array to match against
+	 * @return index of the first matching character in the string or -1 if not found
+	 */
+	public static int inCharArray(final String s, final char[] arr) {
+		final char[] sArr = s.toCharArray();
+		for (int i = 0; i < sArr.length; i++) {
+			final char c = sArr[i];
+			final int ofs = inCharArray(c, arr);
+			if (ofs >= 0) {
+				return i;
+			}
 		}
 		return -1;
 	}
