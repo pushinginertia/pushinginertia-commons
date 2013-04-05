@@ -8,12 +8,13 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>pushinginertia-commons-lang</module>
+        <module>pushinginertia-commons-domain</module>
         <module>pushinginertia-commons-io</module>
+        <module>pushinginertia-commons-lang</module>
         <module>pushinginertia-commons-net</module>
+        <module>pushinginertia-commons-service</module>
         <module>pushinginertia-commons-ui</module>
         <module>pushinginertia-commons-web</module>
-        <module>pushinginertia-commons-service</module>
     </modules>
 
     <properties>
