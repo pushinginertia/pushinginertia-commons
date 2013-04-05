@@ -34,7 +34,7 @@ public class NameEmail implements Serializable {
 			throw new IllegalArgumentException("email cannot be null.");
 		}
 		if (email.indexOf('@') < 0) {
-			throw new IllegalArgumentException("email does not contain an '@' sign - check that the name and email did not get mixed up.");
+			throw new IllegalArgumentException("email [" + email + "] does not contain an '@' sign - check that the name [" + name + "] and email did not get mixed up.");
 		}
 		this.name = name;
 		this.email = email;
