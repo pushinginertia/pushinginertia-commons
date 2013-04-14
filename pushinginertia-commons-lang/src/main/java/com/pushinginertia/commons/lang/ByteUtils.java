@@ -20,8 +20,22 @@ package com.pushinginertia.commons.lang;
  */
 public class ByteUtils {
 	/**
+	 * Converts an int to a byte array of length 4
+	 * @param v int value to convert
+	 * @return a byte array of length 4
+	 */
+	public static byte[] intToByteArray(int v) {
+		final byte[] writeBuffer = new byte[4];
+		writeBuffer[0] = (byte)(v >>> 24);
+		writeBuffer[1] = (byte)(v >>> 16);
+		writeBuffer[2] = (byte)(v >>>  8);
+		writeBuffer[3] = (byte)(v >>>  0);
+		return writeBuffer;
+	}
+
+	/**
 	 * Converts a long to a byte array of length 8
-	 * @param v
+	 * @param v long value to convert
 	 * @return a byte array of length 8
 	 */
 	public static byte[] longToByteArray(long v) {
