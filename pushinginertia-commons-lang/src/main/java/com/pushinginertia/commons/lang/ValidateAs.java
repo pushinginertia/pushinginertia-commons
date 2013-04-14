@@ -35,6 +35,37 @@ public class ValidateAs {
 	}
 
 	/**
+	 * Validates that a string is not null and not empty.
+	 * @param value value to check
+	 * @param name name of the value that will be echoed in the exception if the value is null or empty
+	 * @return the given value
+	 * @throws IllegalArgumentException if the value is null or empty
+	 */
+	public static String notEmpty(final String value, final String name) throws IllegalArgumentException {
+		ValidateAs.notNull(value, name);
+		if (value.isEmpty()) {
+			throw new IllegalArgumentException("Value [" + value + "] for [" + name + "] cannot be empty.");
+		}
+		return value;
+	}
+
+	/**
+	 * Validates that a string is not null and not empty when leading/trailing whitespace is trimmed from it.
+	 * @param value value to check
+	 * @param name name of the value that will be echoed in the exception if the value is null or empty
+	 * @return the given value with leading and trailing whitespace removed
+	 * @throws IllegalArgumentException if the value is null or empty
+	 */
+	public static String trimmedNotEmpty(final String value, final String name) throws IllegalArgumentException {
+		ValidateAs.notNull(value, name);
+		final String trimmedValue = value.trim();
+		if (trimmedValue.isEmpty()) {
+			throw new IllegalArgumentException("Value [" + value + "] for [" + name + "] cannot be empty when leading and trailing whitespace is removed.");
+		}
+		return trimmedValue;
+	}
+
+	/**
 	 * Validates that two values are not equal to each other via their {@link T#equals(Object)} methods.
 	 * @param value1 first value to check
 	 * @param value2 second value to check

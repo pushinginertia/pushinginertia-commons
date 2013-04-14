@@ -15,12 +15,33 @@
  */
 package com.pushinginertia.commons.lang;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class ValidateAsTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void notNull() {
 		ValidateAs.notNull(null, "nullParameter");
+	}
+
+	@Test
+	public void notEmpty() {
+		ValidateAs.notEmpty("abc", "emptyParameter");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void notEmptyFail() {
+		ValidateAs.notEmpty("", "emptyParameter");
+	}
+
+	@Test
+	public void trimmedNotEmpty() {
+		Assert.assertEquals("abc", ValidateAs.trimmedNotEmpty(" abc ", "emptyParameter"));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void trimmedNotEmptyFail() {
+		ValidateAs.trimmedNotEmpty("  ", "emptyParameter");
 	}
 
 	@Test
