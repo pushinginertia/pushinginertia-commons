@@ -229,4 +229,20 @@ public class StringUtils {
 		final Matcher m = p.matcher(s);
 		return m.replaceAll(replacementString);
 	}
+
+	/**
+	 * Truncates a string exceeding a given length to that length.
+	 * @param s string to truncate
+	 * @param length length to truncate the string to
+	 * @return truncated string
+	 */
+	public static String truncate(final String s, final int length) {
+		ValidateAs.notNull(s, "s");
+		ValidateAs.nonNegative(length, "length");
+
+		if (s.length() <= length) {
+			return s;
+		}
+		return s.substring(0, length);
+	}
 }

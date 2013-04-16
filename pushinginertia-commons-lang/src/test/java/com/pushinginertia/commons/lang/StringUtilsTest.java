@@ -94,4 +94,13 @@ public class StringUtilsTest {
 		Assert.assertEquals("DEF DEF DEF", StringUtils.replaceAllCaseInsensitive("abc ABC Abc", "Abc", "DEF"));
 		Assert.assertEquals("DEF\nDEF DEF", StringUtils.replaceAllCaseInsensitive("abc\nABC Abc", "Abc", "DEF"));
 	}
+
+	@Test
+	public void truncate() {
+		Assert.assertEquals("abc", StringUtils.truncate("abc", 4));
+		Assert.assertEquals("abc", StringUtils.truncate("abc", 3));
+		Assert.assertEquals("ab", StringUtils.truncate("abc", 2));
+		Assert.assertEquals("a", StringUtils.truncate("abc", 1));
+		Assert.assertEquals("", StringUtils.truncate("abc", 0));
+	}
 }
