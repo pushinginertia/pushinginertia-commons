@@ -75,7 +75,7 @@ public final class HttpServletRequestUtils {
 	 * @param req request received from the user agent
 	 * @return null if no user agent in the request
 	 */
-	public String getUserAgent(final HttpServletRequest req) {
+	public static String getUserAgent(final HttpServletRequest req) {
 		ValidateAs.notNull(req, "req");
 		return req.getHeader(HttpHeaders.USER_AGENT);
 	}

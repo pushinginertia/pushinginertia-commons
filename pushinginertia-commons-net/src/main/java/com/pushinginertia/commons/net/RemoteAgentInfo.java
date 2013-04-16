@@ -31,7 +31,7 @@ public class RemoteAgentInfo implements Serializable {
 	public RemoteAgentInfo(final HttpServletRequest req) {
 		ValidateAs.notNull(req, "req");
 		this.ipAddress = new IpAddress(HttpServletRequestUtils.getRemoteIpAddress(req));
-		this.userAgent = HttpServletRequestUtils.getRequestHostName(req);
+		this.userAgent = HttpServletRequestUtils.getUserAgent(req);
 	}
 
 	public RemoteAgentInfo(final IpAddress ipAddress, final String userAgent) {
