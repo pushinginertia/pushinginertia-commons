@@ -34,6 +34,11 @@ public class RemoteAgentInfo implements Serializable {
 		this.userAgent = HttpServletRequestUtils.getRequestHostName(req);
 	}
 
+	public RemoteAgentInfo(final IpAddress ipAddress, final String userAgent) {
+		this.ipAddress = ipAddress;
+		this.userAgent = userAgent;
+	}
+
 	public IpAddress getIpAddress() {
 		return ipAddress;
 	}
