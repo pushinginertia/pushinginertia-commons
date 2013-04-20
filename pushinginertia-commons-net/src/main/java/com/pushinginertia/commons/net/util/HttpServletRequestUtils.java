@@ -16,15 +16,22 @@
 package com.pushinginertia.commons.net.util;
 
 import com.pushinginertia.commons.lang.ValidateAs;
+import com.pushinginertia.commons.net.IpAddress;
+import com.pushinginertia.commons.net.IpAddressUtils;
 import org.apache.http.HttpHeaders;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
 import java.util.StringTokenizer;
 
 /**
  * Utility methods for extracting information out of a {@link javax.servlet.http.HttpServletRequest}.
  */
 public final class HttpServletRequestUtils {
+	private static final Logger LOG = LoggerFactory.getLogger(HttpServletRequestUtils.class);
+
 	public static final String HOST = "Host";
 	public static final String X_FORWARDED_HOST = "X-Forwarded-Host";
 	public static final String X_FORWARDED_FOR = "X-Forwarded-For";
@@ -57,17 +64,31 @@ public final class HttpServletRequestUtils {
 	public static String getRemoteIpAddress(final HttpServletRequest req) {
 		ValidateAs.notNull(req, "req");
 
-		final String remoteAddr = req.getHeader(X_FORWARDED_FOR); // method is case insensitive
-		if (remoteAddr == null)
+		final String xForwardedFor = req.getHeader(X_FORWARDED_FOR); // method is case insensitive
+		if (xForwardedFor == null) {
 			return req.getRemoteAddr();
-
-		if (remoteAddr.contains(",")) {
-			// sometimes the header is of form: client ip,proxy 1 ip,proxy 2 ip,...,proxy n ip
-			// we just want the client
-			return remoteAddr.split(",")[0].trim();
 		}
 
-		return remoteAddr;
+		final IpAddress remoteIpAddress = getRemoteIpAddressFromXForwardedFor(xForwardedFor);
+		if (IpAddressUtils.isNonRoutable(remoteIpAddress)) {
+			LOG.warn(
+					X_FORWARDED_FOR + " reports a non-routable IP [" + xForwardedFor +
+					"]. This should always report the remote IP address. Servlet reports remote addr [" +
+					req.getRemoteAddr() + "]. Full request:\n" +
+					toString(req));
+		}
+		return remoteIpAddress.getIpAddress();
+	}
+
+	private static IpAddress getRemoteIpAddressFromXForwardedFor(final String xForwardedFor) {
+		if (xForwardedFor.contains(",")) {
+			// sometimes the header is of form: client ip,proxy 1 ip,proxy 2 ip,...,proxy n ip
+			// we just want the client
+			final String first = xForwardedFor.split(",")[0].trim();
+			return new IpAddress(first);
+		}
+
+		return new IpAddress(xForwardedFor);
 	}
 
 	/**
@@ -78,5 +99,25 @@ public final class HttpServletRequestUtils {
 	public static String getUserAgent(final HttpServletRequest req) {
 		ValidateAs.notNull(req, "req");
 		return req.getHeader(HttpHeaders.USER_AGENT);
+	}
+
+	/**
+	 * Converts all of the headers in a request to a newline-separated string of name-value pairs. This is required
+	 * because not all implementations of {@link javax.servlet.http.HttpServletRequest} implement the toString method.
+	 * @param req request received from the user agent
+	 * @return null if req is null
+	 */
+	public static String toString(final HttpServletRequest req) {
+		ValidateAs.notNull(req, "req");
+
+		final StringBuilder sb = new StringBuilder();
+		for (Enumeration<String> headerNames = req.getHeaderNames(); headerNames.hasMoreElements();) {
+			final String headerName = headerNames.nextElement();
+			for (Enumeration<String> headers = req.getHeaders(headerName); headers.hasMoreElements();) {
+				final String value = headers.nextElement();
+				sb.append(headerName).append('=').append(value).append('\n');
+			}
+		}
+		return sb.toString();
 	}
 }
