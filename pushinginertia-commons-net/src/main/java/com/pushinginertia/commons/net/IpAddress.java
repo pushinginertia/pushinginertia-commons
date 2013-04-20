@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2012 Pushing Inertia
+/* Copyright (c) 2011-2013 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -98,6 +98,28 @@ public class IpAddress implements Serializable {
 	 */
 	public boolean isHigher(final long otherIpNumber) {
 		return ipNumber > otherIpNumber;
+	}
+
+	/**
+	 * True if this IP address is between (inclusive) the given IP addresses, equal to the expression lo &lt;= this &lt;= hi.
+	 * @param lo minimun
+	 * @param hi maximum
+	 * @return comparison result
+	 */
+	public boolean isBetween(final String lo, final String hi) {
+		return isBetween(new IpAddress(lo), new IpAddress(hi));
+	}
+
+	/**
+	 * True if this IP address is between (inclusive) the given IP addresses, equal to the expression lo &lt;= this &lt;= hi.
+	 * @param lo minimun
+	 * @param hi maximum
+	 * @return comparison result
+	 */
+	public boolean isBetween(final IpAddress lo, final IpAddress hi) {
+		ValidateAs.notNull(lo, "lo");
+		ValidateAs.notNull(hi, "hi");
+		return (lo.ipNumber <= this.ipNumber && this.ipNumber <= hi.ipNumber);
 	}
 
 	/**

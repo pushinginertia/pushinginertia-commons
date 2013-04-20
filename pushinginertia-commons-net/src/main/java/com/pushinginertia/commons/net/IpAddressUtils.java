@@ -15,6 +15,8 @@
  */
 package com.pushinginertia.commons.net;
 
+import com.pushinginertia.commons.lang.Tuple2;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +31,17 @@ public class IpAddressUtils {
 					0xFFFF0000, 0xFFFF8000, 0xFFFFC000, 0xFFFFE000, 0xFFFFF000, 0xFFFFF800, 0xFFFFFC00, 0xFFFFFE00,
 					0xFFFFFF00, 0xFFFFFF80, 0xFFFFFFC0, 0xFFFFFFE0, 0xFFFFFFF0, 0xFFFFFFF8, 0xFFFFFFFC, 0xFFFFFFFE,
 					0xFFFFFFFF};
+
+	/**
+	 * Defines the ranges of non-routable IP addresses.
+	 */
+	private static final List<Tuple2<IpAddress, IpAddress>> NON_ROUTABLE_IPS = new ArrayList<Tuple2<IpAddress, IpAddress>>();
+	static {
+		NON_ROUTABLE_IPS.add(new Tuple2<IpAddress, IpAddress>(new IpAddress("10.0.0.0"), new IpAddress("10.255.255.255")));
+		NON_ROUTABLE_IPS.add(new Tuple2<IpAddress, IpAddress>(new IpAddress("172.16.0.0"), new IpAddress("172.31.255.255")));
+		NON_ROUTABLE_IPS.add(new Tuple2<IpAddress, IpAddress>(new IpAddress("192.168.0.0"), new IpAddress("192.168.255.255")));
+	}
+
 
 	/**
 	 * Converts an IP address to an IP number for efficient database lookups.
@@ -146,5 +159,21 @@ public class IpAddressUtils {
 	 */
 	public static boolean isLocalhost(final String ipAddress) {
 		return "127.0.0.1".equals(ipAddress);
+	}
+
+	/**
+	 * Identifies if a given IP address is non-routable.
+	 * @param ipAddress IP address to test
+	 * @return true if non-routable
+	 */
+	public static boolean isNonRoutable(final IpAddress ipAddress) {
+		for (final Tuple2<IpAddress, IpAddress> range: NON_ROUTABLE_IPS) {
+			final IpAddress lo = range.getV1();
+			final IpAddress hi = range.getV2();
+			if (ipAddress.isBetween(lo, hi)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

@@ -36,5 +36,9 @@ public class IpAddressTest {
 		assertFalse(ip.isEqual("100.100.99.255"));
 		assertTrue(ip.isEqual("100.100.100.0"));
 		assertFalse(ip.isEqual("100.100.100.1"));
+
+		assertTrue(ip.isBetween("100.100.100.0", "100.100.100.255"));
+		assertFalse(ip.isBetween("100.100.100.1", "100.100.100.255"));
+
 	}
 }

@@ -16,6 +16,7 @@
  */
 package com.pushinginertia.commons.net;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
@@ -55,5 +56,13 @@ public class IpAddressUtilsTest {
 		assertEquals("1.1.1.111/32", l.get(0));
 		assertEquals("1.1.1.112/29", l.get(1));
 		assertEquals("1.1.1.120/32", l.get(2));
+	}
+
+	@Test
+	public void isNonRoutable() {
+		Assert.assertTrue(IpAddressUtils.isNonRoutable(new IpAddress("172.16.0.0")));
+		Assert.assertTrue(IpAddressUtils.isNonRoutable(new IpAddress("172.31.255.255")));
+		Assert.assertTrue(IpAddressUtils.isNonRoutable(new IpAddress("172.22.0.11")));
+		Assert.assertFalse(IpAddressUtils.isNonRoutable(new IpAddress("8.8.8.8")));
 	}
 }
