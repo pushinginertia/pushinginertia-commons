@@ -47,6 +47,9 @@ public class EmailUtils {
 				case '>':
 					sb.append("&gt;");
 					break;
+				case '&':
+					sb.append("&amp;");
+					break;
 				default:
 					sb.append(c);
 			}
