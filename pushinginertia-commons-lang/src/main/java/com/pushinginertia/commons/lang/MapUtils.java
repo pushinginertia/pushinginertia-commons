@@ -16,6 +16,7 @@
 package com.pushinginertia.commons.lang;
 
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Utility methods to mutate {@link java.util.Map}s.
@@ -71,5 +72,32 @@ public class MapUtils {
 	 */
 	public static <K, V> String toString(final Map<K, V> map) {
 		return toString(map, DEFAULT_SEPARATOR, 0);
+	}
+
+	/**
+	 * Parses a string containing key-value pairs separated by a common deliminator into a map. This is useful for a
+	 * simple representation of a list of key-value pairs, where the delimiter is not present within the keys or values.
+	 * For example, the string representation of a map using newlines as a delimiter could be parsed by this method.
+	 * If a value is not present for a key, it is added as an empty string.
+	 * @param s string to parse
+	 * @param delimiterRegex delimiter between key-value pairs
+	 * @return map of items
+	 */
+	public static Map<String, String> parseDelimited(final String s, final String delimiterRegex) {
+		ValidateAs.notNull(s, "s");
+		ValidateAs.notNull(delimiterRegex, "delimiterRegex");
+
+		final String[] items = s.split(delimiterRegex);
+		final Map<String, String> map = new TreeMap<String, String>();
+		for (final String item: items) {
+			final String[] kvPair = item.split("=", 2);
+			final String key = kvPair[0];
+			if (kvPair.length == 1) {
+				map.put(key, "");
+			} else {
+				map.put(key, kvPair[1]);
+			}
+		}
+		return map;
 	}
 }

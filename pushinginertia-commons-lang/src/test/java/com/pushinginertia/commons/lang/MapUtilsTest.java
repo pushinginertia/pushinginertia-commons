@@ -43,4 +43,19 @@ public class MapUtilsTest {
 		final String s = MapUtils.toString(m, "\n", 4);
 		Assert.assertEquals("    a=1\n    b=2", s);
 	}
+
+	@Test
+	public void parseDelimited() {
+		final String s = "a=b\nc=d\ne=\nf";
+		final Map<String, String> map = MapUtils.parseDelimited(s, "\n");
+		Assert.assertEquals(4, map.size());
+		Assert.assertTrue(map.containsKey("a"));
+		Assert.assertTrue(map.containsKey("c"));
+		Assert.assertTrue(map.containsKey("e"));
+		Assert.assertTrue(map.containsKey("f"));
+		Assert.assertEquals("b", map.get("a"));
+		Assert.assertEquals("d", map.get("c"));
+		Assert.assertEquals("", map.get("e"));
+		Assert.assertEquals("", map.get("f"));
+	}
 }
