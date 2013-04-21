@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2012 Pushing Inertia
+/* Copyright (c) 2011-2013 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,7 +25,7 @@ public class ArrayUtils {
 	 * @param <T> type of each item in the array
 	 * @return concatenated array
 	 */
-	public static <T> T[] concat(T[] first, T[] second) {
+	public static <T> T[] concat(final T[] first, final T[] second) {
 		final T[] result = Arrays.copyOf(first, first.length + second.length);
 		System.arraycopy(second, 0, result, first.length, second.length);
 		return result;
@@ -39,10 +39,8 @@ public class ArrayUtils {
 	 * @return new array instance containing the item concatenated with the existing array
 	 * @throws IllegalArgumentException if arr is null
 	 */
-	public static <T> T[] prepend(T item, T[] arr) throws IllegalArgumentException {
-		if (arr == null) {
-			throw new IllegalArgumentException("arr is null");
-		}
+	public static <T> T[] prepend(final T item, final T[] arr) throws IllegalArgumentException {
+		ValidateAs.notNull(arr, "arr");
 		final int length = arr.length;
 		final T[] result = (T[])java.lang.reflect.Array.newInstance(arr.getClass().getComponentType(), length + 1);
 		result[0] = item;
