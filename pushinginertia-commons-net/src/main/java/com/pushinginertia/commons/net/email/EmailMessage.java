@@ -15,13 +15,15 @@
  */
 package com.pushinginertia.commons.net.email;
 
+import com.pushinginertia.commons.lang.ValidateAs;
+
 import java.io.Serializable;
 
 /**
  * Encapsulates the information required to construct a multipart email with all headers and both text and html content.
  */
 public class EmailMessage implements Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 
 	private NameEmail sender;
 	private Recipient recipient;
@@ -47,26 +49,11 @@ public class EmailMessage implements Serializable {
 			final NameEmail sender, final Recipient recipient,
 			final String subject,
 			final String textContent, final String htmlContent) {
-		if (sender == null) {
-			throw new IllegalArgumentException("sender cannot be null");
-		}
-		if (recipient == null) {
-			throw new IllegalArgumentException("recipient cannot be null");
-		}
-		if (subject == null) {
-			throw new IllegalArgumentException("subject cannot be null");
-		}
-		if (textContent == null) {
-			throw new IllegalArgumentException("textContent cannot be null");
-		}
-		if (htmlContent == null) {
-			throw new IllegalArgumentException("htmlContent cannot be null");
-		}
-		this.sender = sender;
-		this.recipient = recipient;
-		this.subject = subject;
-		this.textContent = textContent;
-		this.htmlContent = htmlContent;
+		this.sender = ValidateAs.notNull(sender, "sender");
+		this.recipient = ValidateAs.notNull(recipient, "recipient");
+		this.subject = ValidateAs.notNull(subject, "subject");
+		this.textContent = ValidateAs.notNull(textContent, "textContent");
+		this.htmlContent = ValidateAs.notNull(htmlContent, "htmlContent");
 
 		this.replyTo = null;
 		this.bounceEmailAddress = null;

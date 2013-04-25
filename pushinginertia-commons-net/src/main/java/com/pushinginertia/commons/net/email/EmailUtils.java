@@ -15,6 +15,7 @@
  */
 package com.pushinginertia.commons.net.email;
 
+import com.pushinginertia.commons.lang.ValidateAs;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.MultiPartEmail;
 
@@ -25,7 +26,7 @@ import javax.mail.internet.MimeMultipart;
 /**
  * Common email logic.
  */
-public class EmailUtils {
+public final class EmailUtils {
 	private static final String UTF_8 = "utf-8";
 
 	/**
@@ -67,15 +68,9 @@ public class EmailUtils {
 	 */
 	public static void populateMultiPartEmail(final MultiPartEmail email, final String smtpHost, final EmailMessage msg)
 	throws IllegalArgumentException, EmailException {
-		if (email == null) {
-			throw new IllegalArgumentException("Email cannot be null.");
-		}
-		if (smtpHost == null) {
-			throw new IllegalArgumentException("smtpHost cannot be null.");
-		}
-		if (msg == null) {
-			throw new IllegalArgumentException("Message cannot be null.");
-		}
+		ValidateAs.notNull(email, "email");
+		ValidateAs.notNull(smtpHost, "smtpHost");
+		ValidateAs.notNull(msg, "msg");
 
 		email.setHostName(smtpHost);
 		email.setCharset(UTF_8);
@@ -126,4 +121,6 @@ public class EmailUtils {
 		}
 
 	}
+
+	private EmailUtils() {}
 }
