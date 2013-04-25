@@ -16,6 +16,7 @@
 package com.pushinginertia.commons.net;
 
 import com.pushinginertia.commons.lang.Tuple2;
+import com.pushinginertia.commons.lang.ValidateAs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -150,6 +151,16 @@ public class IpAddressUtils {
 			curIpNumber += Math.pow(2, (32 - maxsize));
 		}
 		return pairs;
+	}
+
+	/**
+	 * Identifies if a given IP address is from the local host (127.0.0.1).
+	 * @param ipAddress IP address to examine
+	 * @return true iff the given IP address maps to localhost
+	 */
+	public static boolean isLocalhost(final IpAddress ipAddress) {
+		ValidateAs.notNull(ipAddress, "ipAddress");
+		return isLocalhost(ipAddress.getIpAddress());
 	}
 
 	/**
