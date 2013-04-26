@@ -245,4 +245,23 @@ public class StringUtils {
 		}
 		return s.substring(0, length);
 	}
+
+	/**
+	 * Removes all occurrences of a set of characters from a given string.
+	 * @param value string to remove characters from
+	 * @param removeCharArr array containing characters that will be stripped from the string
+	 * @return string containing no characters in the given array
+	 */
+	public static String removeChars(final String value, final char[] removeCharArr) {
+		ValidateAs.notNull(value, "value");
+
+		final StringBuilder sb = new StringBuilder(value.length());
+		for (final char c: value.toCharArray()) {
+			final int idx = CharUtils.inCharArray(c, removeCharArr);
+			if (idx < 0) {
+				sb.append(c);
+			}
+		}
+		return sb.toString();
+	}
 }

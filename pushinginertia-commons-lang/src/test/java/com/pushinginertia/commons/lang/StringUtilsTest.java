@@ -103,4 +103,10 @@ public class StringUtilsTest {
 		Assert.assertEquals("a", StringUtils.truncate("abc", 1));
 		Assert.assertEquals("", StringUtils.truncate("abc", 0));
 	}
+
+	@Test
+	public void removeChars() {
+		Assert.assertEquals("abc", StringUtils.removeChars("<abc>", new char[]{'<', '>'}));
+		Assert.assertEquals("abc", StringUtils.removeChars("abc", new char[]{'<', '>'}));
+	}
 }
