@@ -18,7 +18,9 @@ package com.pushinginertia.commons.lang;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 public class StringUtilsTest {
@@ -108,5 +110,25 @@ public class StringUtilsTest {
 	public void removeChars() {
 		Assert.assertEquals("abc", StringUtils.removeChars("<abc>", new char[]{'<', '>'}));
 		Assert.assertEquals("abc", StringUtils.removeChars("abc", new char[]{'<', '>'}));
+	}
+
+	@Test
+	public void unicodeBlocksInString() {
+		// a string with hangul, Japanese, Chinese, Latin
+		final String s = "중국어 日本語 简化 ﾌﾗﾝｽ語 abc";
+		Assert.assertEquals(20, s.length());
+		final Set<Character.UnicodeBlock> set = StringUtils.unicodeBlocksInString(s);
+		Assert.assertEquals(4, set.size());
+		Assert.assertTrue(set.contains(Character.UnicodeBlock.BASIC_LATIN));
+		Assert.assertTrue(set.contains(Character.UnicodeBlock.HANGUL_SYLLABLES));
+		Assert.assertTrue(set.contains(Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS));
+		Assert.assertTrue(set.contains(Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS));
+	}
+
+	@Test
+	public void isLatin() {
+		Assert.assertTrue(StringUtils.isLatin(""));
+		Assert.assertTrue(StringUtils.isLatin("abc"));
+		Assert.assertFalse(StringUtils.isLatin("중국어"));
 	}
 }

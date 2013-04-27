@@ -17,8 +17,10 @@ package com.pushinginertia.commons.lang;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -263,5 +265,41 @@ public class StringUtils {
 			}
 		}
 		return sb.toString();
+	}
+
+	/**
+	 * Identifies the various unicode character subsets contained in a given string.
+	 * @param value value to parse
+	 * @return set of unicode character subsets
+	 */
+	public static Set<Character.UnicodeBlock> unicodeBlocksInString(final String value) {
+		ValidateAs.notNull(value, "value");
+
+		final Set<Character.UnicodeBlock> set = new HashSet<Character.UnicodeBlock>();
+		for (final char c: value.toCharArray()) {
+			final Character.UnicodeBlock block = Character.UnicodeBlock.of(c);
+			set.add(block);
+		}
+		return set;
+	}
+
+	/**
+	 * Identifies if every character in a given string is a latin character. This is defined by
+	 * {@link Character.UnicodeBlock#of(char)} returning {@link Character.UnicodeBlock#BASIC_LATIN} for every character
+	 * in the string.
+	 * @param value value to parse
+	 * @return true if the string is latin (or empty)
+	 */
+	public static boolean isLatin(final String value) {
+		ValidateAs.notNull(value, "value");
+
+		for (final char c: value.toCharArray()) {
+			final Character.UnicodeBlock block = Character.UnicodeBlock.of(c);
+			if (!Character.UnicodeBlock.BASIC_LATIN.equals(block)) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 }
