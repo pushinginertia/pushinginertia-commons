@@ -284,7 +284,7 @@ public class StringUtils {
 	}
 
 	/**
-	 * Identifies if every character in a given string is a latin character. This is defined by
+	 * Identifies if every character in a given string is a latin character. This is defined as
 	 * {@link Character.UnicodeBlock#of(char)} returning {@link Character.UnicodeBlock#BASIC_LATIN} for every character
 	 * in the string.
 	 * @param value value to parse
