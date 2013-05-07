@@ -71,11 +71,16 @@ public final class HttpServletRequestUtils {
 
 		final IpAddress remoteIpAddress = getRemoteIpAddressFromXForwardedFor(xForwardedFor);
 		if (IpAddressUtils.isNonRoutable(remoteIpAddress)) {
+			final String remoteAddr = req.getRemoteAddr();
 			LOG.warn(
 					X_FORWARDED_FOR + " reports a non-routable IP [" + xForwardedFor +
 					"]. This should always report the remote IP address. Servlet reports remote addr [" +
-					req.getRemoteAddr() + "]. Full request:\n" +
+					remoteAddr + "]. Full request:\n" +
 					toString(req));
+			if (!IpAddressUtils.isNonRoutable(new IpAddress(remoteAddr))) {
+				// return the ip address reported by the servlet if it's routable
+				return remoteAddr;
+			}
 		}
 		return remoteIpAddress.getIpAddress();
 	}
