@@ -54,6 +54,16 @@ public class ValidateAsTest {
 		ValidateAs.notEqual("abc", "abc", "string1", "string2");
 	}
 
+	@Test
+	public void equal() {
+		ValidateAs.equal("abc", "abc", "string1", "string2");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void equalFail() {
+		ValidateAs.equal("abc", "def", "string1", "string2");
+	}
+
 	@Test(expected = IllegalArgumentException.class)
 	public void positive0() {
 		ValidateAs.positive(0, "zeroParameter");

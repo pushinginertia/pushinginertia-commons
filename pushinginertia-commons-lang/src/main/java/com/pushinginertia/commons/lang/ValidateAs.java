@@ -85,6 +85,25 @@ public class ValidateAs {
 	}
 
 	/**
+	 * Validates that two values are equal to each other via their {@link T#equals(Object)} methods.
+	 * @param value1 first value to check
+	 * @param value2 second value to check
+	 * @param value1Name name of the value that will be echoed in the exception if the value is null
+	 * @param value2Name name of the value that will be echoed in the exception if the value is null
+	 * @param <T> type of the values to check
+	 * @throws IllegalArgumentException if one of the values is null or {@link T#equals(Object)} returns false
+	 */
+	public static <T> void equal(final T value1, final T value2, final String value1Name, final String value2Name)
+	throws IllegalArgumentException {
+		notNull(value1, value1Name);
+		notNull(value2, value2Name);
+
+		if (!value1.equals(value2)) {
+			throw new IllegalArgumentException("Values for [" + value1Name + "] and [" + value2Name + "] must be equal.");
+		}
+	}
+
+	/**
 	 * Validates that a variable is a positive integer (i.e., greater than zero).
 	 * @param value value to check
 	 * @param name name of the value that will be echoed in the exception if the value is null
