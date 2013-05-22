@@ -19,7 +19,7 @@ package com.pushinginertia.commons.lang;
  * Utility class that normalizes the case of input strings.
  */
 public final class NormalizeStringCaseUtils {
-	private static final String WORD_SEPARATORS = " .-_";
+	private static final String WORD_SEPARATORS = " .-_/()";
 
 	private NormalizeStringCaseUtils() {}
 
