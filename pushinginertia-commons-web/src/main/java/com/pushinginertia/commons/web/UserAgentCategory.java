@@ -71,7 +71,7 @@ public enum UserAgentCategory {
 		ABUSE_BOT_SET.add(".*;1813.*"); // http://www.the-art-of-web.com/system/logs-avg/
 		ABUSE_BOT_SET.add(".*LYCOSA;.*"); // http://www.forumpostersunion.com/showthread.php?t=20497
 		ABUSE_BOT_SET.add(".*MSIE 5\\.5; Windows NT 4\\.0\\) Opera 7\\.0.*"); // http://www.webmasterworld.com/search_engine_spiders/4288915.htm
-		ABUSE_BOT_SET.add("^Internet Explorer 6\\.0$");
+		ABUSE_BOT_SET.add("^Internet Explorer( 6\\.0)?$");
 		ABUSE_BOT_SET.add("^Mozilla/5\\.0 \\(Windows; U; Windows NT 5\\.0; en-US; rv:0\\.9\\.4\\) Gecko/20011128 Netscape6/6\\.2\\.1$");
 //		ABUSE_BOT_SET.add("^Mozilla/5\\.0 \\(Windows NT 5\\.1; rv:8\\.0\\.1\\) Gecko/20100101 Firefox/8\\.0\\.1$");
 		ABUSE_BOT_SET.add("^Mozilla/4\\.0 \\(compatible; MSIE 5\\.5; Windows 95; BCD2000\\)$");  // Xrumer forum spam bot: http://www.forumpostersunion.com/showthread.php?p=83742
