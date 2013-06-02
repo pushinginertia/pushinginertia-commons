@@ -15,14 +15,14 @@
  */
 package com.pushinginertia.commons.net;
 
-import com.pushinginertia.commons.lang.ValidateAs;
+import com.pushinginertia.commons.core.validation.ValidateAs;
 import com.pushinginertia.commons.net.util.HttpServletRequestUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 
 /**
- * An object representation of data found in an {@link javax.servlet.http.HttpServletRequest}.
+ * An bean that represents data found in an {@link javax.servlet.http.HttpServletRequest}.
  */
 public class RemoteAgentInfo implements Serializable {
 	private IpAddress ipAddress;

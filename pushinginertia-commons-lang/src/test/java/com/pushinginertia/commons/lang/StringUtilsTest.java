@@ -38,6 +38,12 @@ public class StringUtilsTest {
 	}
 
 	@Test
+	public void removeDoubleSpaces() {
+		Assert.assertEquals("a b", StringUtils.removeDoubleSpaces("a      b"));
+		Assert.assertEquals("a b cdef g", StringUtils.removeDoubleSpaces("a   b   cdef g"));
+	}
+
+	@Test
 	public void firstNWords() {
 		Assert.assertEquals("a b c", StringUtils.firstNWords("a b c d e f g h i j", 3));
 		Assert.assertEquals("a b", StringUtils.firstNWords("a b", 3));

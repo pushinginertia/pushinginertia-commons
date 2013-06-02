@@ -15,7 +15,7 @@
  */
 package com.pushinginertia.commons.web;
 
-import com.pushinginertia.commons.lang.ValidateAs;
+import com.pushinginertia.commons.core.validation.ValidateAs;
 
 /**
  * Utility methods to work with HTML characters.

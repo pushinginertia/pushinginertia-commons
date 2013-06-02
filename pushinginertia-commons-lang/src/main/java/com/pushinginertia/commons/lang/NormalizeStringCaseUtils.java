@@ -15,6 +15,8 @@
  */
 package com.pushinginertia.commons.lang;
 
+import com.pushinginertia.commons.core.validation.ValidateAs;
+
 /**
  * Utility class that normalizes the case of input strings.
  */

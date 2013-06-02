@@ -15,8 +15,8 @@
  */
 package com.pushinginertia.commons.net;
 
+import com.pushinginertia.commons.core.validation.ValidateAs;
 import com.pushinginertia.commons.lang.Tuple2;
-import com.pushinginertia.commons.lang.ValidateAs;
 
 import java.util.ArrayList;
 import java.util.List;

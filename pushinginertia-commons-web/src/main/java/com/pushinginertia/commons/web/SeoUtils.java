@@ -15,9 +15,9 @@
  */
 package com.pushinginertia.commons.web;
 
+import com.pushinginertia.commons.core.validation.ValidateAs;
 import com.pushinginertia.commons.lang.CharUtils;
 import com.pushinginertia.commons.lang.Tuple2;
-import com.pushinginertia.commons.lang.ValidateAs;
 
 /**
  * Methods that assist with SEO.

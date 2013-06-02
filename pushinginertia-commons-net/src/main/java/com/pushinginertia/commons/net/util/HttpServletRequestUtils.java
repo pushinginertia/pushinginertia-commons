@@ -15,7 +15,7 @@
  */
 package com.pushinginertia.commons.net.util;
 
-import com.pushinginertia.commons.lang.ValidateAs;
+import com.pushinginertia.commons.core.validation.ValidateAs;
 import com.pushinginertia.commons.net.IpAddress;
 import com.pushinginertia.commons.net.IpAddressUtils;
 import org.apache.http.HttpHeaders;

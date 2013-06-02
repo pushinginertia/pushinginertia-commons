@@ -64,5 +64,6 @@ public class IpAddressUtilsTest {
 		Assert.assertTrue(IpAddressUtils.isNonRoutable(new IpAddress("172.31.255.255")));
 		Assert.assertTrue(IpAddressUtils.isNonRoutable(new IpAddress("172.22.0.11")));
 		Assert.assertFalse(IpAddressUtils.isNonRoutable(new IpAddress("8.8.8.8")));
+		Assert.assertFalse(IpAddressUtils.isNonRoutable(new IpAddress("189.125.121.50")));
 	}
 }

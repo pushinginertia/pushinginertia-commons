@@ -15,7 +15,7 @@
  */
 package com.pushinginertia.commons.net;
 
-import com.pushinginertia.commons.lang.ValidateAs;
+import com.pushinginertia.commons.core.validation.ValidateAs;
 
 import java.net.MalformedURLException;
 import java.net.URL;

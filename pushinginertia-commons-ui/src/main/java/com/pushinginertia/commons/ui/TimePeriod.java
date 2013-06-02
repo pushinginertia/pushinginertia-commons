@@ -15,8 +15,8 @@
  */
 package com.pushinginertia.commons.ui;
 
+import com.pushinginertia.commons.core.validation.ValidateAs;
 import com.pushinginertia.commons.lang.MathUtils;
-import com.pushinginertia.commons.lang.ValidateAs;
 import org.joda.time.Duration;
 
 import java.io.Serializable;

@@ -14,8 +14,23 @@
     <dependencies>
         <dependency>
             <groupId>com.pushinginertia.commons</groupId>
+            <artifactId>pushinginertia-commons-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.pushinginertia.commons</groupId>
             <artifactId>pushinginertia-commons-lang</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.pushinginertia.commons</groupId>
+            <artifactId>pushinginertia-commons-net</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>edu.jwetherell</groupId>
+            <artifactId>jw-algorithms</artifactId>
+            <version>${jw-algorithms.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

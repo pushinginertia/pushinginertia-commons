@@ -15,6 +15,8 @@
  */
 package com.pushinginertia.commons.lang;
 
+import com.pushinginertia.commons.core.validation.ValidateAs;
+
 import java.util.Arrays;
 
 public class ArrayUtils {

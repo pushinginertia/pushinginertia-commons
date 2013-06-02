@@ -15,6 +15,8 @@
  */
 package com.pushinginertia.commons.lang;
 
+import com.pushinginertia.commons.core.validation.ValidateAs;
+
 import java.util.Map;
 import java.util.TreeMap;
 

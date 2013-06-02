@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.pushinginertia.commons.lang;
+package com.pushinginertia.commons.core.validation;
 
 import org.junit.Assert;
 import org.junit.Test;

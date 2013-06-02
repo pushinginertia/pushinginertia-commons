@@ -15,6 +15,8 @@
  */
 package com.pushinginertia.commons.lang;
 
+import com.pushinginertia.commons.core.validation.ValidateAs;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -46,15 +48,28 @@ public class StringUtils {
 		return sb.toString();
 	}
 
+	public static final char[] WHITESPACES = {'\t', ' '};
+
 	/**
 	 * Replaces all occurrences of multiple whitespace with a single space (#32) character.
 	 * @param s string to replace
 	 * @return resulting string, or null if the input is null
 	 */
 	public static String removeDoubleSpaces(final String s) {
-		if (s == null)
+		if (s == null) {
 			return null;
-		return s.replaceAll("\\s\\s\\s*", " ");
+		}
+
+		final StringBuilder sb = new StringBuilder();
+		boolean prevWhitespace = false;
+		for (final char c: s.toCharArray()) {
+			final boolean isWhitespace = CharUtils.inCharArray(c, WHITESPACES) >= 0;
+			if (!isWhitespace || !prevWhitespace) {
+				sb.append(c);
+			}
+			prevWhitespace = isWhitespace;
+		}
+		return sb.toString();
 	}
 
 	/**
