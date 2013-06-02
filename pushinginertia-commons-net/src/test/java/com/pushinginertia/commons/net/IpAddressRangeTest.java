@@ -49,4 +49,25 @@ public class IpAddressRangeTest {
 		assertEquals(1, cidrList.size());
 		assertEquals("67.117.201.128/28", cidrList.get(0));
 	}
+
+	@Test
+	public void parseIpAddressRangeHyphen() {
+		final IpAddressRange range = IpAddressRange.parse("67.117.201.128 - 67.117.201.143");
+		assertEquals("67.117.201.128", range.getLowAddress().getIpAddress());
+		assertEquals("67.117.201.143", range.getHighAddress().getIpAddress());
+	}
+
+	@Test
+	public void parseIpAddressRangeCidr() {
+		final IpAddressRange range = IpAddressRange.parse("67.117.201.128/28");
+		assertEquals("67.117.201.128", range.getLowAddress().getIpAddress());
+		assertEquals("67.117.201.143", range.getHighAddress().getIpAddress());
+	}
+
+	@Test
+	public void parseIpAddressRangeSingle() {
+		final IpAddressRange range = IpAddressRange.parse("67.117.201.128");
+		assertEquals("67.117.201.128", range.getLowAddress().getIpAddress());
+		assertEquals("67.117.201.128", range.getHighAddress().getIpAddress());
+	}
 }

@@ -44,6 +44,36 @@ public class IpAddressRange {
 		return new IpAddressRange(lo, hi);
 	}
 
+	/**
+	 * Parses an input string into an IP range. The input string must be of one of three forms:
+	 * <ul>
+	 *     <li>&lt;IPlo&gt;-&lt;IPhi&gt;</li>
+	 *     <li>CIDR notation</li>
+	 *     <li>single IP</li>
+	 * </ul>
+	 * @param rangeAsString string representation to parse
+	 * @return parsed IP address range
+	 * @throws IllegalArgumentException if the input cannot be parsed
+	 */
+	public static IpAddressRange parse(final String rangeAsString) throws IllegalArgumentException {
+		final int hyphenIndex = rangeAsString.indexOf('-');
+		if (hyphenIndex >= 0) {
+			// expect two IP addresses separated by a hyphen
+			final String ipLo = rangeAsString.substring(0, hyphenIndex).trim();
+			final String ipHi = rangeAsString.substring(hyphenIndex + 1).trim();
+			return IpAddressRange.fromIpAddressRange(ipLo, ipHi);
+		}
+
+		if (rangeAsString.contains("/")) {
+			// expect CIDR notation
+			return IpAddressRange.fromCidrNotation(rangeAsString);
+		}
+
+		// expect single IP address
+		final IpAddress ip = new IpAddress(rangeAsString);
+		return IpAddressRange.fromIpAddressRange(ip, ip);
+	}
+
 	protected IpAddressRange(final String cidrNotation) throws IllegalArgumentException {
 		// 1. compute lo/hi addresses from given cidr block
 		final SubnetUtils su = new SubnetUtils(cidrNotation);
@@ -60,7 +90,7 @@ public class IpAddressRange {
 	}
 
 	public static IpAddressRange fromCidrNotation(final String cidrNotation) {
-		return new IpAddressRange(cidrNotation);
+		return new IpAddressRange(cidrNotation.trim());
 	}
 
 	/**
