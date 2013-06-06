@@ -17,9 +17,14 @@ package com.pushinginertia.commons.lang;
 
 import com.pushinginertia.commons.core.validation.ValidateAs;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 /**
  * Logic that manipulates Java lists.
@@ -52,5 +57,37 @@ public class ListUtils {
 		final List<T> clonedList = new ArrayList<T>(list);
 		clonedList.remove(itemToRemove);
 		return clonedList;
+	}
+
+	/**
+	 * Produces a random sample from a list of items using Floyd's algorithm. The returned set retains the order in
+	 * which the items were inserted, which means that iterating on the set will give the items in a random order.
+	 * @param list source list of items
+	 * @param m number of items to
+	 * @param <T> type of the items in the list
+	 * @return subset of the list of the given size
+	 * @throws IllegalArgumentException if m is greater than the size of the list
+	 * @see <a href="http://eyalsch.wordpress.com/2010/04/01/random-sample/">http://eyalsch.wordpress.com/2010/04/01/random-sample/</a>
+	 */
+	public static <T> Set<T> randomSampleFloyd(final List<T> list, final int m) throws IllegalArgumentException {
+		// input validation
+		ValidateAs.notNull(list, "list");
+		final int listSize = list.size();
+		if (m > listSize) {
+			throw new IllegalArgumentException("Value of m [" + m + "] is greater than the list size [" + listSize + "].");
+		}
+
+		final Random rnd = new SecureRandom();
+		final Set<T> res = new LinkedHashSet<T>(m);
+		for (int i = listSize - m; i < listSize; i++) {
+			final int pos = rnd.nextInt(i + 1);
+			final T item = list.get(pos);
+			if (res.contains(item)) {
+				res.add(list.get(i));
+			} else {
+				res.add(item);
+			}
+		}
+		return res;
 	}
 }
