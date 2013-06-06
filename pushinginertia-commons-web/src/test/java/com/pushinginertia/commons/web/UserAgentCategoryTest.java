@@ -70,6 +70,7 @@ public class UserAgentCategoryTest {
 		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("Mozilla/5.0 ()"));
 		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("python-requests/1.1.0 CPython/2.7.3 Linux/3.2.0-31-virtual"));
 		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("ip-search-bot.com"));
+		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("CatchBot/2.0; +http://www.catchbot.com"));
 	}
 
 	@Test
