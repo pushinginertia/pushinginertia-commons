@@ -30,14 +30,22 @@ import java.util.Set;
 public class IpIntervalMappings<T> {
 	private static final Logger LOG = LoggerFactory.getLogger(IpIntervalMappings.class);
 
-	private final IntervalTree tree;
+	private IntervalTree tree;
 
 	public IpIntervalMappings(final ListInitializer<IntervalTree.IntervalData<T>> initializer) {
-		final List<IntervalTree.IntervalData<T>> list = initializer.newList();
-		tree = new IntervalTree<T>(list);
+		try {
+			final List<IntervalTree.IntervalData<T>> list = initializer.newList();
+			tree = new IntervalTree<T>(list);
+		} catch (final Exception e) {
+			LOG.error("A failure occurred initializing class: " + this.getClass().getName(), e);
+			tree = null;
+		}
 	}
 
 	public T get(final IpAddress ipAddress) {
+		if (tree == null) {
+			throw new IllegalStateException("Class did not initialize successfully.");
+		}
 		final IntervalTree.IntervalData<T> data = tree.query(ipAddress.getIpNumber());
 		if (data == null) {
 			return null;
@@ -52,6 +60,9 @@ public class IpIntervalMappings<T> {
 	 * @return true if an interval contains the given IP address
 	 */
 	public boolean exists(final IpAddress ipAddress) {
+		if (tree == null) {
+			throw new IllegalStateException("Class did not initialize successfully.");
+		}
 		final IntervalTree.IntervalData<T> data = tree.query(ipAddress.getIpNumber());
 		return data != null;
 	}
