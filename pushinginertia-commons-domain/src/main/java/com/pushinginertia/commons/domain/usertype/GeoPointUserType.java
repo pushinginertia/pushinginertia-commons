@@ -42,18 +42,22 @@ public class GeoPointUserType implements CompositeUserType {
 	private static final String[] PROPERTY_NAMES = new String[]{"lat", "lon"};
 	private static final Type[] TYPES = new Type[]{StandardBasicTypes.BIG_DECIMAL, StandardBasicTypes.BIG_DECIMAL};
 
+	@Override
 	public Object assemble(final Serializable cached, final SessionImplementor session, final Object owner) throws HibernateException {
 		return cached;
 	}
 
+	@Override
 	public Object deepCopy(final Object value) throws HibernateException {
 		return value;
 	}
 
+	@Override
 	public Serializable disassemble(final Object value, final SessionImplementor session) throws HibernateException {
 		return (Serializable) value;
 	}
 
+	@Override
 	public boolean equals(final Object x, final Object y) throws HibernateException {
 		if (x == y) {
 			return true;
@@ -64,14 +68,17 @@ public class GeoPointUserType implements CompositeUserType {
 		return x.equals(y);
 	}
 
+	@Override
 	public String[] getPropertyNames() {
 		return PROPERTY_NAMES;
 	}
 
+	@Override
 	public Type[] getPropertyTypes() {
 		return TYPES;
 	}
 
+	@Override
 	public Object getPropertyValue(final Object component, final int property) throws HibernateException {
 		final GeoPoint point = (GeoPoint)component;
 		if (property == 0) {
@@ -80,14 +87,17 @@ public class GeoPointUserType implements CompositeUserType {
 		return point.getLon();
 	}
 
+	@Override
 	public int hashCode(final Object x) throws HibernateException {
 		return x.hashCode();
 	}
 
+	@Override
 	public boolean isMutable() {
 		return false;
 	}
 
+	@Override
 	public GeoPoint nullSafeGet(final ResultSet resultSet, final String[] names, final SessionImplementor session, final Object owner)
 	throws HibernateException, SQLException {
 		if (resultSet == null) {
@@ -105,6 +115,7 @@ public class GeoPointUserType implements CompositeUserType {
 		return new GeoPoint(lat, lon);
 	}
 
+	@Override
 	public void nullSafeSet(final PreparedStatement statement, final Object value, final int index, final SessionImplementor session)
 	throws HibernateException, SQLException {
 		if (value == null) {
@@ -117,15 +128,18 @@ public class GeoPointUserType implements CompositeUserType {
 		statement.setBigDecimal(index + 1, point.getLon());
 	}
 
+	@Override
 	public Object replace(final Object original, final Object target, final SessionImplementor session, final Object owner)
 	throws HibernateException {
 		return original;
 	}
 
+	@Override
 	public Class returnedClass() {
 		return GeoPoint.class;
 	}
 
+	@Override
 	public void setPropertyValue(final Object component, final int property, final Object value) throws HibernateException {
 		throw new UnsupportedOperationException("Immutable " + GeoPoint.class.getName());
 	}

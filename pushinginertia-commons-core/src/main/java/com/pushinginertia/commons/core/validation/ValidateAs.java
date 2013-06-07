@@ -18,7 +18,9 @@ package com.pushinginertia.commons.core.validation;
 /**
  * Provides some common validation logic.
  */
-public class ValidateAs {
+public final class ValidateAs {
+	private ValidateAs() {}
+
 	/**
 	 * Validates that a variable is not null.
 	 * @param value value to check

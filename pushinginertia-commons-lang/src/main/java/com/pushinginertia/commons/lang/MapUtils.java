@@ -23,8 +23,10 @@ import java.util.TreeMap;
 /**
  * Utility methods to mutate {@link java.util.Map}s.
  */
-public class MapUtils {
+public final class MapUtils {
 	public static final String DEFAULT_SEPARATOR = "\n";
+
+	private MapUtils() {}
 
 	/**
 	 * Transforms a map to a string for logging purposes.

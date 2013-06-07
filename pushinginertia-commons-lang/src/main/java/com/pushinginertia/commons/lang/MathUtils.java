@@ -18,7 +18,9 @@ package com.pushinginertia.commons.lang;
 /**
  * Reusable math functionality.
  */
-public class MathUtils {
+public final class MathUtils {
+	private MathUtils() {}
+
 	/**
 	 * Divides a by b and rounds the result without using floating point arithmetic.
 	 * @param a numerator

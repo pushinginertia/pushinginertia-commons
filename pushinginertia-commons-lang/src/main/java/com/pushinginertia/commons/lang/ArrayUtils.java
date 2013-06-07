@@ -19,7 +19,9 @@ import com.pushinginertia.commons.core.validation.ValidateAs;
 
 import java.util.Arrays;
 
-public class ArrayUtils {
+public final class ArrayUtils {
+	private ArrayUtils() {}
+
 	/**
 	 * Concatenates two arrays into one new array.
 	 * @param first first array to concatenate

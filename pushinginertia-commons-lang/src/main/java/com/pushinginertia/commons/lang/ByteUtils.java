@@ -18,7 +18,9 @@ package com.pushinginertia.commons.lang;
 /**
  * Methods that deal with byte manipulation.
  */
-public class ByteUtils {
+public final class ByteUtils {
+	private ByteUtils() {}
+
 	/**
 	 * Converts an int to a byte array of length 4
 	 * @param v int value to convert

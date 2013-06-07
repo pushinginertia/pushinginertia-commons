@@ -29,7 +29,9 @@ import java.util.Set;
 /**
  * Logic that manipulates Java lists.
  */
-public class ListUtils {
+public final class ListUtils {
+	private ListUtils() {}
+
 	/**
 	 * Sorts a collection of objects into an indexed list. For example, a {@link java.util.Set} could be passed in and
 	 * its members would be sorted into a list.

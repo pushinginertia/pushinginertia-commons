@@ -29,7 +29,9 @@ import java.util.regex.Pattern;
 /**
  * String utility methods.
  */
-public class StringUtils {
+public final class StringUtils {
+	private StringUtils() {}
+
 	/**
 	 * Constructs a string containing a given character repeated N times.
 	 * @param c character to repeat

@@ -18,7 +18,9 @@ package com.pushinginertia.commons.lang;
 /**
  * Character utility methods.
  */
-public class CharUtils {
+public final class CharUtils {
+	private CharUtils() {}
+
 	/**
 	 * Identifies if a given character exists in the character array.
 	 * @param c character to search for
