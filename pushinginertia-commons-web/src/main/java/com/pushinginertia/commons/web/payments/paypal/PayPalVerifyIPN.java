@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- *
+ * Not ready yet.
  */
 public class PayPalVerifyIPN {
 	private static final Logger LOG = LoggerFactory.getLogger(PayPalVerifyIPN.class);

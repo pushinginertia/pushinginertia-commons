@@ -23,6 +23,7 @@
         <slf4j.version>1.6.6</slf4j.version>
         <jodatime.version>2.0</jodatime.version>
         <jw-algorithms.version>0.1.0</jw-algorithms.version>
+        <hibernate.version>3.6.8.Final</hibernate.version>
 
         <maven-compiler-plugin.version>3.0</maven-compiler-plugin.version>
         <maven-source-plugin.version>2.2.1</maven-source-plugin.version>
