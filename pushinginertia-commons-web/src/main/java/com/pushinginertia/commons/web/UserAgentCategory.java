@@ -88,7 +88,7 @@ public enum UserAgentCategory {
 			return ABUSE;
 
 		// 1. first check for known abuse bots
-		for (String regex: ABUSE_BOT_SET) {
+		for (final String regex: ABUSE_BOT_SET) {
 			if (userAgent.matches(regex))
 				return ABUSE;
 		}
@@ -97,7 +97,7 @@ public enum UserAgentCategory {
 		if (userAgent.matches(IE6_UA))
 			return IE6;
 
-		for (String regex: SEARCH_BOT_SET) {
+		for (final String regex: SEARCH_BOT_SET) {
 			if (userAgent.matches(regex))
 				return SEARCHBOT;
 		}
