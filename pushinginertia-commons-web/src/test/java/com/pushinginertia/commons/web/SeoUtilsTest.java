@@ -27,7 +27,7 @@ public class SeoUtilsTest {
 		// English
 		Assert.assertEquals("Someones-WebPage", SeoUtils.generateSlug("Someone's WebPage"));
 		Assert.assertEquals("Someones-WebPage", SeoUtils.generateSlug(" Someone's - WebPage-*- *"));
-		Assert.assertEquals("My-Web-Page-1", SeoUtils.generateSlug("My Web Page (#1)"));
+		Assert.assertEquals("My-Web-Page-1", SeoUtils.generateSlug("My Web Page = (#1)"));
 
 		// Korean
 		Assert.assertEquals("지불-가능-최대예산", SeoUtils.generateSlug("지불 가능 최대예산"));
