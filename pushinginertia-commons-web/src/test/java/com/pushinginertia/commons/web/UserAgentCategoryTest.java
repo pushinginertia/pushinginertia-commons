@@ -111,6 +111,7 @@ public class UserAgentCategoryTest {
 		Assert.assertEquals(UserAgentCategory.SEARCHBOT, UserAgentCategory.parseUserAgent("Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)"));
 		Assert.assertEquals(UserAgentCategory.SEARCHBOT, UserAgentCategory.parseUserAgent("Baiduspider-image+(+http://www.baidu.com/search/spider.htm)"));
 		Assert.assertEquals(UserAgentCategory.SEARCHBOT, UserAgentCategory.parseUserAgent("Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)"));
+		Assert.assertEquals(UserAgentCategory.SEARCHBOT, UserAgentCategory.parseUserAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534+ (KHTML, like Gecko) BingPreview/1.0b"));
 		Assert.assertEquals(UserAgentCategory.SEARCHBOT, UserAgentCategory.parseUserAgent("Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"));
 		Assert.assertEquals(UserAgentCategory.SEARCHBOT, UserAgentCategory.parseUserAgent("Mozilla/5.0 (compatible; MSIE or Firefox mutant; not on Windows server; + http://tab.search.daum.net/aboutWebSearch.html) Daumoa/3.0"));
 		Assert.assertEquals(UserAgentCategory.SEARCHBOT, UserAgentCategory.parseUserAgent("Mozilla/5.0 (compatible; MSIE or Firefox mutant; not on Windows server; +http://ws.daum.net/aboutWebSearch.html) Daumoa/2.0"));

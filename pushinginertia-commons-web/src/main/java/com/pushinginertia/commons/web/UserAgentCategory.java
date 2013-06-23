@@ -53,6 +53,7 @@ public enum UserAgentCategory {
 		SEARCH_BOT_SET.add("^Mozilla/5\\.0 \\(compatible; Baiduspider/[0-9.]+; \\+http://www\\.baidu\\.com/search/spider\\.html\\)$");
 		SEARCH_BOT_SET.add("^Baiduspider-image\\+\\(\\+http://www\\.baidu\\.com/search/spider\\.htm\\)$");
 		SEARCH_BOT_SET.add("^Mozilla/5\\.0 \\(compatible; bingbot/[0-9.]+; \\+http://www\\.bing\\.com/bingbot\\.htm\\)$");
+		SEARCH_BOT_SET.add("^Mozilla/5\\.0 \\(Windows NT 6\\.1; WOW64\\) AppleWebKit/534\\+ \\(KHTML, like Gecko\\) BingPreview/1\\.0b$");
 		SEARCH_BOT_SET.add("^Mozilla/5\\.0 \\(compatible; Googlebot/[0-9.]+; \\+http://www\\.google\\.com/bot\\.html\\)$");
 		SEARCH_BOT_SET.add("^Mozilla/5\\.0 \\(compatible; MSIE or Firefox mutant; not on Windows server; \\+ ?http://(tab\\.search|ws).daum.net/aboutWebSearch.html\\) Daumoa/[0-9.]+$");
 		SEARCH_BOT_SET.add("^Mozilla/5\\.0 \\(compatible; YandexBot/[0-9.]+; \\+http://yandex\\.com/bots\\)$");
@@ -63,7 +64,7 @@ public enum UserAgentCategory {
 		ABUSE_BOT_SET.add("^Java.*");
 		ABUSE_BOT_SET.add("^$");
 		ABUSE_BOT_SET.add("^Jakarta.*");
-		ABUSE_BOT_SET.add("^User-Agent.*");
+		ABUSE_BOT_SET.add("^User-Agent.*"); // strings should not start with "User-Agent"
 		ABUSE_BOT_SET.add(".*compatible ;.*");
 		ABUSE_BOT_SET.add("^Mozilla(/[0-9]\\.0)?( \\(\\))?$");
 		ABUSE_BOT_SET.add(".*(libwww|lwp-trivial|curl|PHP/|urllib|GT::WWW|Snoopy|MFC_Tear_Sample|HTTP::Lite|PHPCrawl|URI::Fetch|Zend_Http_Client|http client|PECL::HTTP|IBM EVV|Bork-edition|Fetch API Request|WEP Search|Wells Search II|Missigua Locator|ISC Systems iRc Search 2.1|Microsoft URL Control|Indy Library|SiteSucker|LWP::|larbin|Nutch|WBSearchBot|intelium_bot|CPython|CatchBot).*");
