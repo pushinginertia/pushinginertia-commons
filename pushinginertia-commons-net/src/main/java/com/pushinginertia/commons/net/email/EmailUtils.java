@@ -96,21 +96,13 @@ public final class EmailUtils {
 			email.addHeader("Content-Language", languageId);
 		}
 
+		// add optional headers
 		final EmailMessageHeaders headers = msg.getHeaders();
 		if (headers != null) {
 			for (final Map.Entry<String, String> header: headers.getHeaders().entrySet()) {
 				email.addHeader(header.getKey(), header.getValue());
 			}
 		}
-
-//		final String senderIpAddress = msg.getSenderIpAddress();
-//		if (senderIpAddress != null && senderIpAddress.length() > 0) {
-//			email.addHeader("X-Originating-IP", senderIpAddress);
-//		}
-//		final String senderIpAddressCountryId = msg.getSenderIpAddressCountryId();
-//		if (senderIpAddressCountryId != null) {
-//			email.addHeader("X-Originating-Country", senderIpAddressCountryId);
-//		}
 
 		// generate email body
 		try {
