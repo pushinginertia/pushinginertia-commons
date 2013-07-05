@@ -15,6 +15,8 @@
  */
 package com.pushinginertia.commons.core.validation;
 
+import java.util.Map;
+
 /**
  * Provides some common validation logic.
  */
@@ -145,5 +147,20 @@ public final class ValidateAs {
 			throw new IllegalArgumentException("Value for [" + name + "] must be non-negative: " + value);
 		}
 		return value;
+	}
+
+	/**
+	 * Validates that a {@link Map} does not contain a given key.
+	 * @param map map to test
+	 * @param key key that must not exist in the map
+	 * @param <K> type of the key
+	 * @throws IllegalArgumentException if the key exists in the map or either argument is null
+	 */
+	public static <K> void mapDoesNotContainKey(final Map<K, ?> map, final K key) throws IllegalArgumentException {
+		ValidateAs.notNull(map, "map");
+		ValidateAs.notNull(key, "key");
+		if (map.containsKey(key)) {
+			throw new IllegalArgumentException("Map already contains key [" + key + "]: " + map);
+		}
 	}
 }

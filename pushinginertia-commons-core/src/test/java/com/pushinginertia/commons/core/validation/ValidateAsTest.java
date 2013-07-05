@@ -18,6 +18,9 @@ package com.pushinginertia.commons.core.validation;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ValidateAsTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void notNull() {
@@ -72,5 +75,22 @@ public class ValidateAsTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void positiveMinus1() {
 		ValidateAs.positive(-1, "minusOneParameter");
+	}
+
+	@Test
+	public void mapDoesNotContainKey() {
+		final Map<String, String> m = new HashMap<String, String>();
+
+		// positive case
+		ValidateAs.mapDoesNotContainKey(m, "a");
+
+		// negative case
+		m.put("a", "1");
+		try {
+			ValidateAs.mapDoesNotContainKey(m, "a");
+			Assert.fail("Expected IllegalArgumentException");
+		} catch (final IllegalArgumentException e) {
+			// expected
+		}
 	}
 }
