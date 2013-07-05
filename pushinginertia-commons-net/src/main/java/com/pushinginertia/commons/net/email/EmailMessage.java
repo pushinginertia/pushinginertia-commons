@@ -23,18 +23,14 @@ import java.io.Serializable;
  * Encapsulates the information required to construct a multipart email with all headers and both text and html content.
  */
 public class EmailMessage implements Serializable {
-	private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = 3L;
 
 	private NameEmail sender;
 	private Recipient recipient;
+	private EmailMessageHeaders headers;
 	private NameEmail replyTo;
 	private String bounceEmailAddress;
 	private String subject;
-	private String senderIpAddress;
-	/**
-	 * The two-character country code of the country that {@link #senderIpAddress} resolves to.
-	 */
-	private String senderIpAddressCountryId;
 	private String textContent;
 	private String htmlContent;
 
@@ -57,8 +53,7 @@ public class EmailMessage implements Serializable {
 
 		this.replyTo = null;
 		this.bounceEmailAddress = null;
-		this.senderIpAddress = null;
-		this.senderIpAddressCountryId = null;
+		this.headers = null;
 	}
 
 	public NameEmail getSender() {
@@ -76,6 +71,15 @@ public class EmailMessage implements Serializable {
 
 	public EmailMessage setRecipient(final Recipient recipient) {
 		this.recipient = recipient;
+		return this;
+	}
+
+	public EmailMessageHeaders getHeaders() {
+		return headers;
+	}
+
+	public EmailMessage setHeaders(final EmailMessageHeaders headers) {
+		this.headers = headers;
 		return this;
 	}
 
@@ -106,24 +110,6 @@ public class EmailMessage implements Serializable {
 
 	public EmailMessage setSubject(final String subject) {
 		this.subject = subject;
-		return this;
-	}
-
-	public String getSenderIpAddress() {
-		return senderIpAddress;
-	}
-
-	public EmailMessage setSenderIpAddress(final String senderIpAddress) {
-		this.senderIpAddress = senderIpAddress;
-		return this;
-	}
-
-	public String getSenderIpAddressCountryId() {
-		return senderIpAddressCountryId;
-	}
-
-	public EmailMessage setSenderIpAddressCountryId(final String senderIpAddressCountryId) {
-		this.senderIpAddressCountryId = senderIpAddressCountryId;
 		return this;
 	}
 

@@ -22,6 +22,7 @@ import org.apache.commons.mail.MultiPartEmail;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
+import java.util.Map;
 
 /**
  * Common email logic.
@@ -94,14 +95,22 @@ public final class EmailUtils {
 			email.addHeader("Language", languageId);
 			email.addHeader("Content-Language", languageId);
 		}
-		final String senderIpAddress = msg.getSenderIpAddress();
-		if (senderIpAddress != null && senderIpAddress.length() > 0) {
-			email.addHeader("X-Originating-IP", senderIpAddress);
+
+		final EmailMessageHeaders headers = msg.getHeaders();
+		if (headers != null) {
+			for (final Map.Entry<String, String> header: headers.getHeaders().entrySet()) {
+				email.addHeader(header.getKey(), header.getValue());
+			}
 		}
-		final String senderIpAddressCountryId = msg.getSenderIpAddressCountryId();
-		if (senderIpAddressCountryId != null) {
-			email.addHeader("X-Originating-Country", senderIpAddressCountryId);
-		}
+
+//		final String senderIpAddress = msg.getSenderIpAddress();
+//		if (senderIpAddress != null && senderIpAddress.length() > 0) {
+//			email.addHeader("X-Originating-IP", senderIpAddress);
+//		}
+//		final String senderIpAddressCountryId = msg.getSenderIpAddressCountryId();
+//		if (senderIpAddressCountryId != null) {
+//			email.addHeader("X-Originating-Country", senderIpAddressCountryId);
+//		}
 
 		// generate email body
 		try {
