@@ -93,4 +93,14 @@ public class ValidateAsTest {
 			// expected
 		}
 	}
+
+	@Test
+	public void ofLength() {
+		ValidateAs.ofLength("abc", 3, "string1");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void ofLengthFail() {
+		ValidateAs.ofLength("abc", 2, "string1");
+	}
 }

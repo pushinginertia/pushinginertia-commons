@@ -163,4 +163,20 @@ public final class ValidateAs {
 			throw new IllegalArgumentException("Map already contains key [" + key + "]: " + map);
 		}
 	}
+
+	/**
+	 * Validates that a string is of a specific length.
+	 * @param value string to test
+	 * @param expectedLength expected length of the string
+	 * @param name name of the value that will be echoed in the exception if validation fails
+	 * @return the given value
+	 * @throws IllegalArgumentException if the length doesn't match or the input is null
+	 */
+	public static String ofLength(final String value, final int expectedLength, final String name) throws IllegalArgumentException {
+		ValidateAs.notNull(value, name);
+		if (value.length() != expectedLength) {
+			throw new IllegalArgumentException("Value for [" + name + "] must be of length " + expectedLength + ": " + value);
+		}
+		return value;
+	}
 }
