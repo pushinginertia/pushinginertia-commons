@@ -24,10 +24,10 @@ import java.io.Serializable;
  * Not thread-safe.
  */
 public class IpAddress implements Serializable {
-	private static final long serialVersionUID = -3005794221601450268L;
+	private static final long serialVersionUID = 1L;
 
-	private long ipNumber;
-	private String ipAddress;
+	private final long ipNumber;
+	private transient String ipAddress;
 
 	/**
 	 * Constructs the instance from a string representation of the IP address.
@@ -159,6 +159,23 @@ public class IpAddress implements Serializable {
 			ipAddress = IpAddressUtils.toIpAddress(ipNumber);
 		}
 		return ipAddress;
+	}
+
+	@Override
+	public boolean equals(final Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		final IpAddress ipAddress = (IpAddress)o;
+		return ipNumber == ipAddress.ipNumber;
+	}
+
+	@Override
+	public int hashCode() {
+		return (int) (ipNumber ^ (ipNumber >>> 32));
 	}
 
 	@Override
