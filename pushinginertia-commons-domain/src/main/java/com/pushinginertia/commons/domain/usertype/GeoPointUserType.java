@@ -78,6 +78,13 @@ public class GeoPointUserType implements CompositeUserType {
 		return TYPES;
 	}
 
+	/**
+	 * Get the value of a property.
+	 * @param component an instance of class mapped by this "type"
+	 * @param property an index corresponding to {@link #PROPERTY_NAMES}
+	 * @return the property value
+	 * @throws HibernateException
+	 */
 	@Override
 	public Object getPropertyValue(final Object component, final int property) throws HibernateException {
 		final GeoPoint point = (GeoPoint)component;
