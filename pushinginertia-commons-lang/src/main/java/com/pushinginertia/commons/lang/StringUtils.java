@@ -92,19 +92,39 @@ public final class StringUtils {
 
 	/**
 	 * Returns the first N words in a string or the entire string if it has less than N words.
-	 * @param s string to search
-	 * @param n number of words to return
+	 * @param searchString string to search
+	 * @param wordCount number of words to return
+	 * @param maxLength Hard maximum character length of the output string (will be cut at the last word that falls
+	 * within this limit). If the first word's length exceeds this limit, it will be truncated and returned as the
+	 * output.
 	 * @return null if s is null
 	 */
-	public static String firstNWords(final String s, final int n) {
-		if (s == null)
+	public static String firstNWords(final String searchString, final int wordCount, final int maxLength) {
+		if (searchString == null) {
 			return null;
+		}
+		ValidateAs.positive(maxLength, "maxLength");
 
-		final String[] sArr = s.split("\\s+", n + 1); // this might not work with newlines
+		final String[] sArr = searchString.split("\\s+", wordCount + 1); // this might not work with newlines
 		final StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < n && i < sArr.length; i++)
-			sb.append(sArr[i]).append(' ');
-		sb.setLength(sb.length() - 1);
+		for (int i = 0; i < wordCount && i < sArr.length; i++) {
+			final String s = sArr[i];
+			if (i == 0) {
+				// first word always gets included, but is truncated if it will exceed the hard maximum char length
+				sb.append(StringUtils.truncate(s, maxLength));
+			} else {
+				if (sb.length() + s.length() > maxLength) {
+					// break when the length will exceed the hard maximum, but only starting on the second word
+					break;
+				}
+				sb.append(s);
+			}
+			sb.append(' ');
+		}
+		if (sb.length() > 0) {
+			// remove the trailing whitespace
+			sb.setLength(sb.length() - 1);
+		}
 		return sb.toString();
 	}
 

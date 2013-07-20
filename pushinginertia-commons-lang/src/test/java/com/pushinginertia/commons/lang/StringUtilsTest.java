@@ -45,8 +45,11 @@ public class StringUtilsTest {
 
 	@Test
 	public void firstNWords() {
-		Assert.assertEquals("a b c", StringUtils.firstNWords("a b c d e f g h i j", 3));
-		Assert.assertEquals("a b", StringUtils.firstNWords("a b", 3));
+		Assert.assertEquals("a b c", StringUtils.firstNWords("a b c d e f g h i j", 3, 100));
+		Assert.assertEquals("a b", StringUtils.firstNWords("a b", 3, 100));
+		Assert.assertEquals("word1 word2", StringUtils.firstNWords("word1 word2 word3 word4", 5, 15));
+		Assert.assertEquals("123456789012345", StringUtils.firstNWords("12345678901234567890 word2 word3 word4", 5, 15));
+		Assert.assertEquals("word1", StringUtils.firstNWords("word1 12345678901234567890 word3 word4", 5, 15));
 	}
 
 	@Test
