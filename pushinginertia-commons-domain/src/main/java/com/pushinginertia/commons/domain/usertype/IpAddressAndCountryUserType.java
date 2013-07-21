@@ -120,7 +120,11 @@ public class IpAddressAndCountryUserType implements CompositeUserType {
 		if (ipAddress == null) {
 			return null;
 		}
-		return new IpAddressAndCountry(ipAddress, countryCode);
+		final String ipAddressTrim = ipAddress.trim();
+		if (ipAddressTrim.isEmpty()) {
+			return null;
+		}
+		return new IpAddressAndCountry(ipAddressTrim, countryCode);
 	}
 
 	@Override

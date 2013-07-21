@@ -43,7 +43,6 @@ public class IpAddressUtils {
 		NON_ROUTABLE_IPS.add(new Tuple2<IpAddress, IpAddress>(new IpAddress("192.168.0.0"), new IpAddress("192.168.255.255")));
 	}
 
-
 	/**
 	 * Converts an IP address to an IP number for efficient database lookups.
 	 * @param ipAddress IPv4 address with four octets separated by dots
@@ -51,9 +50,7 @@ public class IpAddressUtils {
 	 * @throws IllegalArgumentException if the input is not a valid IPv4 address or is null
 	 */
 	public static long toIpNumber(final String ipAddress) throws IllegalArgumentException {
-		if (ipAddress == null) {
-			throw new IllegalArgumentException("ipAddress is null");
-		}
+		ValidateAs.notEmpty(ipAddress, "ipAddress");
 
 		// 1. split string into octets
 		final String[] s = ipAddress.split("\\.");
