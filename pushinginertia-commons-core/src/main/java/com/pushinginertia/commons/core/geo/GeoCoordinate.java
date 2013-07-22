@@ -18,7 +18,7 @@ package com.pushinginertia.commons.core.geo;
 import com.pushinginertia.commons.core.validation.ValidateAs;
 
 import java.io.Serializable;
-import java.lang.Math;import java.lang.NumberFormatException;import java.lang.Object;import java.lang.Override;import java.lang.String;import java.math.BigDecimal;
+import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 /**
