@@ -21,11 +21,11 @@ package com.pushinginertia.commons.net.client;
 public class HttpConnectException extends Exception {
 	private static final long serialVersionUID = 1L;
 
-	public HttpConnectException(String s) {
+	public HttpConnectException(final String s) {
 		super(s);
 	}
 
-	public HttpConnectException(String s, Throwable throwable) {
+	public HttpConnectException(final String s, final Throwable throwable) {
 		super(s, throwable);
 	}
 }
