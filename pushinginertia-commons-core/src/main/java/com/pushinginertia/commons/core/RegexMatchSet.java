@@ -18,9 +18,8 @@ package com.pushinginertia.commons.core;
 import com.pushinginertia.commons.core.validation.ValidateAs;
 
 import java.io.Serializable;
-import java.lang.String;import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
