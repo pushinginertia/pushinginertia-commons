@@ -71,6 +71,13 @@ public class EmailMessageHeaders implements Serializable {
 			headers.put(name, value);
 		}
 
+		/**
+		 * @see #add(String, String)
+		 */
+		public void add(final String name, final long value) throws IllegalArgumentException {
+			add(name, Long.toString(value));
+		}
+
 		public EmailMessageHeaders build() {
 			return new EmailMessageHeaders(headers);
 		}
