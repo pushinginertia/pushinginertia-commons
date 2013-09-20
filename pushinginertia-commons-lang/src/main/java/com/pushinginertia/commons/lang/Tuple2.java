@@ -21,6 +21,8 @@ import java.io.Serializable;
  * A generic container for a set of two values.
  */
 public class Tuple2<V1 extends Serializable, V2 extends Serializable> implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private final V1 v1;
 	private final V2 v2;
 
