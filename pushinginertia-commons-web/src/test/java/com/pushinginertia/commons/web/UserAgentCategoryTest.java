@@ -99,6 +99,7 @@ public class UserAgentCategoryTest {
 		Assert.assertEquals(UserAgentCategory.IE6, UserAgentCategory.parseUserAgent("Mozilla/4.0 (Compatible; Windows NT 5.1; MSIE 6.0) (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)"));
 		Assert.assertEquals(UserAgentCategory.IE6, UserAgentCategory.parseUserAgent("Mozilla/4.0 (compatible; U; MSIE 6.0; Windows NT 5.1) (Compatible; ; ; Trident/4.0; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET CLR 1.0.3705; .NET CLR 1.1.4322)"));
 		Assert.assertEquals(UserAgentCategory.IE6, UserAgentCategory.parseUserAgent("Mozilla/4.0 (compatible; U; MSIE 6.0; Windows NT 5.1)"));
+		Assert.assertEquals(UserAgentCategory.IE6, UserAgentCategory.parseUserAgent("Mozilla/5.0 (compatible; MSIE 6.0; Windows NT 5.1; Windows NT 6.1; Trident/5.0)"));
 
 		// IE 8 strings that look like IE 6 strings
 		Assert.assertEquals(UserAgentCategory.USER, UserAgentCategory.parseUserAgent("Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) ; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)"));
