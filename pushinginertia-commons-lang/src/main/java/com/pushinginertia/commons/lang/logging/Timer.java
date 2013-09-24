@@ -54,7 +54,7 @@ public class Timer {
 	 * @return new immutable instance
 	 */
 	public Duration toDuration() {
-		return new Duration(elapsedMs());
+		return Duration.millis(elapsedMs());
 	}
 
 	/**
