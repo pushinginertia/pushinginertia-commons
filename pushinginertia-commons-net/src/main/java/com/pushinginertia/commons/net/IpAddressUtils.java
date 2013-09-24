@@ -88,14 +88,6 @@ public class IpAddressUtils {
 		return sb.toString();
 	}
 
-//	/**
-//	 * Converts an IP address in CIDR notation (n.n.n.n/n) into an IP number range.
-//	 * @param cidr
-//	 */
-//	public static void cidrToIpNumberRange(final String cidr) {
-//		// TODO
-//	}
-
 	/**
 	 * Converts a range of IP addresses to a list of CIDR blocks in n.n.n.n/n notation.
 	 * @param lowIpAddress lowest inclusive IP address in the range
