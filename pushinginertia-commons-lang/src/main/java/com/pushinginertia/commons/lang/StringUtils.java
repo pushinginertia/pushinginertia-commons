@@ -33,6 +33,37 @@ public final class StringUtils {
 	private StringUtils() {}
 
 	/**
+	 * Identifies if a given string can be converted to a number.
+	 * @param s string to test
+	 * @return true if the string represents a numeric value
+	 * @throws IllegalArgumentException if the input is null
+	 */
+	public static boolean isNumeric(final String s) throws IllegalArgumentException {
+		ValidateAs.notNull(s, "s");
+		if (s.isEmpty()) {
+			return false;
+		}
+
+		int i;
+		if (s.charAt(0) == '-') {
+			if (s.length() == 1) {
+				// catch the case when the input is "-"
+				return false;
+			}
+			i = 1;
+		} else {
+			i = 0;
+		}
+		for (; i < s.length(); i++) {
+			final char c = s.charAt(i);
+			if (c < '0' || c > '9') {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
 	 * Constructs a string containing a given character repeated N times.
 	 * @param c character to repeat
 	 * @param n number of times to repeat the character

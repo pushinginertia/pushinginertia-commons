@@ -25,6 +25,16 @@ import java.util.TreeMap;
 
 public class StringUtilsTest {
 	@Test
+	public void isNumeric() {
+		Assert.assertTrue(StringUtils.isNumeric("999"));
+		Assert.assertTrue(StringUtils.isNumeric("-999"));
+		Assert.assertFalse(StringUtils.isNumeric(""));
+		Assert.assertFalse(StringUtils.isNumeric(" 999"));
+		Assert.assertFalse(StringUtils.isNumeric("-"));
+		Assert.assertFalse(StringUtils.isNumeric("9x9"));
+	}
+
+	@Test
 	public void repeat() {
 		Assert.assertEquals("", StringUtils.repeat('x', 0));
 		Assert.assertEquals("x", StringUtils.repeat('x', 1));
