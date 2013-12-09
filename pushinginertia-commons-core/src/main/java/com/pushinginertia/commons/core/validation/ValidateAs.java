@@ -70,13 +70,13 @@ public final class ValidateAs {
 	}
 
 	/**
-	 * Validates that two values are not equal to each other via their {@link T#equals(Object)} methods.
+	 * Validates that two values are not equal to each other via their {@link Object#equals(Object)} methods.
 	 * @param value1 first value to check
 	 * @param value2 second value to check
 	 * @param value1Name name of the value that will be echoed in the exception if the value is null
 	 * @param value2Name name of the value that will be echoed in the exception if the value is null
 	 * @param <T> type of the values to check
-	 * @throws IllegalArgumentException if one of the values is null or {@link T#equals(Object)} returns true
+	 * @throws IllegalArgumentException if one of the values is null or {@link Object#equals(Object)} returns true
 	 */
 	public static <T> void notEqual(final T value1, final T value2, final String value1Name, final String value2Name)
 	throws IllegalArgumentException {
@@ -176,6 +176,23 @@ public final class ValidateAs {
 		ValidateAs.notNull(value, name);
 		if (value.length() != expectedLength) {
 			throw new IllegalArgumentException("Value for [" + name + "] must be of length " + expectedLength + ": " + value);
+		}
+		return value;
+	}
+
+	/**
+	 * Validates that a given string consists only of uppercase characters.
+	 * @param value string to test
+	 * @param name name of the value that will be echoed in the exception if validation fails
+	 * @return the given value
+	 * @throws IllegalArgumentException if the validation fails or the input is null
+	 */
+	public static String allUppercase(final String value, final String name) throws IllegalArgumentException {
+		ValidateAs.notNull(value, name);
+		for (char c: value.toCharArray()) {
+			if (!Character.isUpperCase(c)) {
+				throw new IllegalArgumentException("Value for [" + name + "] must be all uppercase: " + value);
+			}
 		}
 		return value;
 	}

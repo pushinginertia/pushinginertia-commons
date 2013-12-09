@@ -103,4 +103,19 @@ public class ValidateAsTest {
 	public void ofLengthFail() {
 		ValidateAs.ofLength("abc", 2, "string1");
 	}
+
+	@Test
+	public void allUppercase() {
+		ValidateAs.allUppercase("ABC", "string");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void allUppercaseFail1() {
+		ValidateAs.allUppercase("ABc", "string");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void allUppercaseFail2() {
+		ValidateAs.allUppercase("ABC1", "string");
+	}
 }
