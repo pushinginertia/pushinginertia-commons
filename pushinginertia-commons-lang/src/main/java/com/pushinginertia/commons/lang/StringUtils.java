@@ -305,8 +305,9 @@ public final class StringUtils {
 	 * @param s string to truncate
 	 * @param length length to truncate the string to
 	 * @return truncated string
+	 * @throws IllegalArgumentException if the input is null
 	 */
-	public static String truncate(final String s, final int length) {
+	public static String truncate(final String s, final int length) throws IllegalArgumentException {
 		ValidateAs.notNull(s, "s");
 		ValidateAs.nonNegative(length, "length");
 
@@ -314,6 +315,19 @@ public final class StringUtils {
 			return s;
 		}
 		return s.substring(0, length);
+	}
+
+	/**
+	 * Truncates a string exceeding a given length to that length and does not fail if the input is null.
+	 * @param s string to truncate
+	 * @param length length to truncate the string to
+	 * @return truncated string or null if the input is null
+	 */
+	public static String truncateNullable(final String s, final int length) {
+		if (s == null) {
+			return null;
+		}
+		return truncate(s, length);
 	}
 
 	/**
