@@ -29,20 +29,22 @@ public abstract class LoadEntityAction<E> {
 
 	/**
 	 * Executed when no entity is found.
+	 * @param input the input criteria for the search
 	 */
-	public void onEntityNotFound() {
+	public <I> void onEntityNotFound(final I input) {
 	}
 
 	/**
 	 * Called by the service loading an entity when the load operation completes. This method triggers the
-	 * {@link #onEntityFound(Object)} and {@link #onEntityNotFound()} methods, depending on whether the entity
+	 * {@link #onEntityFound(Object)} and {@link #onEntityNotFound(I)} methods, depending on whether the entity
 	 * passed in as input is null or not.
+	 * @param input the input criteria for the search
 	 * @param entity entity loaded by the service or null
 	 * @return the entity passed in
 	 */
-	public final E onLoadFinished(final E entity) {
+	public final <I> E onLoadFinished(final I input, final E entity) {
 		if (entity == null) {
-			onEntityNotFound();
+			onEntityNotFound(input);
 		} else {
 			onEntityFound(entity);
 		}

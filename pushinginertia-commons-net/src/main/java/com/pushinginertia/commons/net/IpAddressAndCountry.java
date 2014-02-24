@@ -56,6 +56,10 @@ public class IpAddressAndCountry implements Serializable {
 		return ipAddress;
 	}
 
+	/**
+	 * Returns the 2 character country code.
+	 * @return can be null, always uppercase
+	 */
 	public String getCountryCode() {
 		return countryCode;
 	}

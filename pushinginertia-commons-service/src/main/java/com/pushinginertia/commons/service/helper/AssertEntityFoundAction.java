@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2013 Pushing Inertia
+/* Copyright (c) 2011-2014 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,8 @@ import javax.persistence.EntityNotFoundException;
  * Fails with a {@link EntityNotFoundException} exception when an entity is not found.
  */
 public class AssertEntityFoundAction<E> extends LoadEntityAction<E> {
-	public void onEntityNotFound() {
-		throw new EntityNotFoundException();
+	@Override
+	public <I> void onEntityNotFound(final I input) {
+		throw new EntityNotFoundException("Entity not found for input: " + input);
 	}
 }
