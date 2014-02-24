@@ -1,0 +1,8 @@
+# comment line 1
+    # comment line 2 with indentation
+
+# test that whitespace is stripped between fields
+A1, A2
+
+# test that whitespace is stripped at the beginning
+ B1,B2
