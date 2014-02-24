@@ -64,6 +64,7 @@ public class RegexMatchSet implements Serializable {
 	 * @return true when the given string matches a regular expression
 	 */
 	public boolean matches(final String s) {
+		ValidateAs.notNull(s, "s");
 		for (final Pattern regex: dataSet) {
 			final Matcher m = regex.matcher(s);
 			if (m.matches()) {

@@ -129,6 +129,7 @@ public class StringUtilsTest {
 	public void removeChars() {
 		Assert.assertEquals("abc", StringUtils.removeChars("<abc>", new char[]{'<', '>'}));
 		Assert.assertEquals("abc", StringUtils.removeChars("abc", new char[]{'<', '>'}));
+		Assert.assertEquals(" A i t B", StringUtils.removeChars("\"< A i t B\"", new char[]{'<', '>', '"'}));
 	}
 
 	@Test

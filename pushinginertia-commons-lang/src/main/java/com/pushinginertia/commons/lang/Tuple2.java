@@ -15,6 +15,8 @@
  */
 package com.pushinginertia.commons.lang;
 
+import com.pushinginertia.commons.core.validation.ValidateAs;
+
 import java.io.Serializable;
 
 /**
@@ -27,8 +29,8 @@ public class Tuple2<V1 extends Serializable, V2 extends Serializable> implements
 	private final V2 v2;
 
 	public Tuple2(final V1 v1, final V2 v2) {
-		this.v1 = v1;
-		this.v2 = v2;
+		this.v1 = ValidateAs.notNull(v1, "v1");
+		this.v2 = ValidateAs.notNull(v2, "v2");
 	}
 
 	public V1 getV1() {
@@ -37,6 +39,24 @@ public class Tuple2<V1 extends Serializable, V2 extends Serializable> implements
 
 	public V2 getV2() {
 		return v2;
+	}
+
+	@Override
+	public boolean equals(final Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+
+		final Tuple2 tuple2 = (Tuple2)o;
+		return v1.equals(tuple2.v1) && v2.equals(tuple2.v2);
+	}
+
+	@Override
+	public int hashCode() {
+		return 31 * v1.hashCode() + v2.hashCode();
 	}
 
 	@Override
