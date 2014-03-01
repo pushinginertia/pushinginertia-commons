@@ -17,13 +17,16 @@ package com.pushinginertia.commons.net;
 
 import org.apache.commons.net.util.SubnetUtils;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
 /**
  * Represents a range of IP addresses from a low to a high address, with the ability to convert to/from CIDR notation.
  */
-public class IpAddressRange {
+public class IpAddressRange implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private IpAddress lowAddress;
 	private IpAddress highAddress;
 	private List<String> cidrNotationList;
