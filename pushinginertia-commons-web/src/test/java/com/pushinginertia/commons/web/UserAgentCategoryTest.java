@@ -75,6 +75,7 @@ public class UserAgentCategoryTest {
 		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("Mozilla/5.0 (compatible; MJ12bot/v1.4.3; http://www.majestic12.co.uk/bot.php?+)"));
 		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.110 Safari/537.36 Squider/0.01"));
 		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("WhatWeb/0.4.7"));
+		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("YisouSpider"));
 	}
 
 	@Test
