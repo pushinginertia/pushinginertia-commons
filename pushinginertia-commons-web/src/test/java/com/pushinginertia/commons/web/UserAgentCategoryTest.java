@@ -77,6 +77,7 @@ public class UserAgentCategoryTest {
 		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("WhatWeb/0.4.7"));
 		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("YisouSpider"));
 		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("Mozilla/5.0 (compatible; BLEXBot/1.0; +http://webmeup-crawler.com/)"));
+		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("Apache-HttpClient/4.3 (java 1.5)"));
 	}
 
 	@Test
