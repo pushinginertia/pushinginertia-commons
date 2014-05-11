@@ -151,4 +151,10 @@ public class StringUtilsTest {
 		Assert.assertTrue(StringUtils.isLatin("abc"));
 		Assert.assertFalse(StringUtils.isLatin("중국어"));
 	}
+
+	@Test
+	public void charFrequencyInString() {
+		Assert.assertEquals(0, StringUtils.charFrequencyInString('a', null));
+		Assert.assertEquals(4, StringUtils.charFrequencyInString('a', "abcabcabcabc"));
+	}
 }

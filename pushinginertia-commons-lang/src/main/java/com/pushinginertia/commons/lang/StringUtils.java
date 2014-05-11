@@ -384,4 +384,24 @@ public final class StringUtils {
 
 		return true;
 	}
+
+	/**
+	 * Counts the number of times a given character appears in a string.
+	 * @param search character to search
+	 * @param s string to examine
+	 * @return number of times the character appears in the string
+	 */
+	public static int charFrequencyInString(final char search, final String s) {
+		if (s == null) {
+			return 0;
+		}
+
+		int i = 0;
+		for (final char c: s.toCharArray()) {
+			if (c == search) {
+				i++;
+			}
+		}
+		return i;
+	}
 }
