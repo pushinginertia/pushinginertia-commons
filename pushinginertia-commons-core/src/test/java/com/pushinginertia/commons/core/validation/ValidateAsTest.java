@@ -105,6 +105,17 @@ public class ValidateAsTest {
 	}
 
 	@Test
+	public void ofMinimumLength() {
+		ValidateAs.ofMinimumLength("abc", 3, "string1");
+		ValidateAs.ofMinimumLength("abcd", 3, "string1");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void ofMinimumLengthFail() {
+		ValidateAs.ofMinimumLength("ab", 3, "string1");
+	}
+
+	@Test
 	public void allUppercase() {
 		ValidateAs.allUppercase("ABC", "string");
 	}

@@ -180,6 +180,14 @@ public final class ValidateAs {
 		return value;
 	}
 
+	public static String ofMinimumLength(final String value, final int minimumLength, final String name) throws IllegalArgumentException {
+		ValidateAs.notNull(value, name);
+		if (value.length() < minimumLength) {
+			throw new IllegalArgumentException("Value for [" + name + "] must have minimum length " + minimumLength + ": " + value);
+		}
+		return value;
+	}
+
 	/**
 	 * Validates that a given string consists only of uppercase characters.
 	 * @param value string to test
