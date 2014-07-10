@@ -69,6 +69,7 @@ public class KCombinations<P extends Combination.Payload<P>> {
 
 	/**
 	 * Merges all of the payloads into a single payload.
+	 * @param payload Empty payload to merge everything into.
 	 * @return Merged payload.
 	 */
 	public P merge(final P payload) {
