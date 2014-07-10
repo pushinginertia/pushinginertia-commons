@@ -74,7 +74,7 @@ public class KCombinations<P extends Combination.Payload<P>> {
 	 */
 	public P merge(final P payload) {
 		for (final Map<Combination.Key, Combination<P>> row: rows) {
-			for (final Combination<P> combination : row.values()) {
+			for (final Combination<P> combination: row.values()) {
 				payload.merge(combination.getPayload());
 			}
 		}
@@ -99,12 +99,11 @@ public class KCombinations<P extends Combination.Payload<P>> {
 			throw new IllegalArgumentException("k (" + k + ") must be < n (" + rows.size() + ")");
 		}
 		final Map<Combination.Key, Combination<P>> row = rows.get(k - 1);
-		if (!row.containsKey(key)) {
-			row.put(key, combination);
-			size++;
-		} else {
+		if (row.containsKey(key)) {
 			throw new IllegalArgumentException("Combination already exists: " + combination);
 		}
+		row.put(key, combination);
+		size++;
 	}
 
 	private void computeK(final int k) {
@@ -114,9 +113,9 @@ public class KCombinations<P extends Combination.Payload<P>> {
 		final Map<Combination.Key, Combination<P>> row0 = rows.get(0);
 		final Map<Combination.Key, Combination<P>> rowPrevious = rows.get(k - 1);
 
-		for (final Combination<P> combinationPrevious : rowPrevious.values()) {
+		for (final Combination<P> combinationPrevious: rowPrevious.values()) {
 			final int r = combinationPrevious.getKey().getRightIndex();
-			for (final Combination<P> combinationFirst : row0.values()) {
+			for (final Combination<P> combinationFirst: row0.values()) {
 				final int i = combinationFirst.getKey().getOnlyIndex();
 				if (r < i) {
 					add(new Combination<P>(combinationPrevious, combinationFirst));
