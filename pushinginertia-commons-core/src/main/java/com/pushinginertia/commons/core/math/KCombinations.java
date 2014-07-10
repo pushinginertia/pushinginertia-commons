@@ -60,16 +60,16 @@ public class KCombinations<P extends Combination.Payload<P>> {
 	}
 
 	/**
-	 * Identifies the number of combinations identified for N choose K for K in 1..N.
-	 * @return
+	 * The number of combinations identified for N choose K for K in 1..N.
+	 * @return Combination count.
 	 */
 	public int size() {
 		return size;
 	}
 
 	/**
-	 * Merges all of the computed rates into a single map of guest count to lowest price for that count.
-	 * @return Map of guest counts and rates.
+	 * Merges all of the payloads into a single payload.
+	 * @return Merged payload.
 	 */
 	public P merge(final P payload) {
 		for (final Map<Combination.Key, Combination<P>> row: rows) {
@@ -102,7 +102,7 @@ public class KCombinations<P extends Combination.Payload<P>> {
 			row.put(key, combination);
 			size++;
 		} else {
-			throw new IllegalArgumentException("S already exists: " + combination);
+			throw new IllegalArgumentException("Combination already exists: " + combination);
 		}
 	}
 
