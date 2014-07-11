@@ -18,6 +18,7 @@ package com.pushinginertia.commons.core.validation;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -75,6 +76,17 @@ public class ValidateAsTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void positiveMinus1() {
 		ValidateAs.positive(-1, "minusOneParameter");
+	}
+
+	@Test
+	public void nonNegative() {
+		ValidateAs.nonNegative(BigDecimal.ZERO, "bd1");
+		ValidateAs.nonNegative(BigDecimal.ONE, "bd2");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void nonNegativeFail() {
+		ValidateAs.nonNegative(new BigDecimal(-1), "bd1");
 	}
 
 	@Test
