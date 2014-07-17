@@ -33,6 +33,17 @@ public class ListUtilsTest {
 	}
 
 	@Test
+	public void intArrayToList() {
+		final int[] array = {1,2,3,4};
+		final List<Integer> list = ListUtils.intArrayToList(array);
+		Assert.assertEquals(4, list.size());
+		Assert.assertEquals(1, (int)list.get(0));
+		Assert.assertEquals(2, (int)list.get(1));
+		Assert.assertEquals(3, (int)list.get(2));
+		Assert.assertEquals(4, (int)list.get(3));
+	}
+
+	@Test
 	public void asSortedList() {
 		final Set<SomeEnumeration> s =
 				new HashSet<SomeEnumeration>(Arrays.asList(SomeEnumeration.A, SomeEnumeration.B, SomeEnumeration.C, SomeEnumeration.D));

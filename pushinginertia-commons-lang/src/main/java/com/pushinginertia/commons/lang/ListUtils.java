@@ -20,6 +20,7 @@ import com.pushinginertia.commons.core.validation.ValidateAs;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -31,6 +32,20 @@ import java.util.Set;
  */
 public final class ListUtils {
 	private ListUtils() {}
+
+	/**
+	 * Returns an unmodifiable List containing the primitive integers given in an array.
+	 * @param array Array of ints to transform into a List object.
+	 * @return Unmodifiable list.
+	 */
+	public static List<Integer> intArrayToList(final int[] array) {
+		ValidateAs.notNull(array, "array");
+		final List<Integer> list = new ArrayList<Integer>(array.length);
+		for (final int item: array) {
+			list.add(item);
+		}
+		return Collections.unmodifiableList(list);
+	}
 
 	/**
 	 * Sorts a collection of objects into an indexed list. For example, a {@link java.util.Set} could be passed in and
