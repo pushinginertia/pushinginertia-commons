@@ -55,9 +55,9 @@ public final class ByteUtils {
 
 	/**
 	 * Converts 8 bytes in a byte array to a long.
-	 * @param by
+	 * @param by Byte array to read.
 	 * @param offset offset to start at in the byte array
-	 * @return
+	 * @return A primitive long value for the 8 bytes (or less if the end of the array is reached).
 	 */
 	public static long byteArrayToLong(byte[] by, int offset) {
 		int length = by.length - offset;
