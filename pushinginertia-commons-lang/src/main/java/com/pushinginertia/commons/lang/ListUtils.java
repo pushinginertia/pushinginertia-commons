@@ -34,6 +34,23 @@ public final class ListUtils {
 	private ListUtils() {}
 
 	/**
+	 * Creates a sequentially numbered list for a given inclusive range.
+	 * @param min Lowest number to place in the list.
+	 * @param max Highest number to place in the list.
+	 * @return List of size max - min + 1.
+	 */
+	public static List<Integer> sequentialList(final int min, final int max) {
+		if (min > max) {
+			throw new IllegalArgumentException("Min cannot be greater than max: " + min + " > " + max);
+		}
+		final List<Integer> l = new ArrayList<Integer>(max - min + 1);
+		for (int i = min; i <= max; i++) {
+			l.add(i);
+		}
+		return l;
+	}
+
+	/**
 	 * Returns an unmodifiable List containing the primitive integers given in an array.
 	 * @param array Array of ints to transform into a List object.
 	 * @return Unmodifiable list.

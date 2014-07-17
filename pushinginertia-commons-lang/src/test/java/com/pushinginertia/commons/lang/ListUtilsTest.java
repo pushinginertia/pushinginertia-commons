@@ -33,6 +33,17 @@ public class ListUtilsTest {
 	}
 
 	@Test
+	public void sequentialList() {
+		final List<Integer> list = ListUtils.sequentialList(1, 5);
+		Assert.assertEquals(5, list.size());
+		Assert.assertEquals(1, (int)list.get(0));
+		Assert.assertEquals(2, (int)list.get(1));
+		Assert.assertEquals(3, (int)list.get(2));
+		Assert.assertEquals(4, (int)list.get(3));
+		Assert.assertEquals(5, (int)list.get(4));
+	}
+
+	@Test
 	public void intArrayToList() {
 		final int[] array = {1,2,3,4};
 		final List<Integer> list = ListUtils.intArrayToList(array);
