@@ -51,7 +51,11 @@ public class SearchResultList<T> implements Serializable {
 	 */
 	public SearchResultList(final long count, final List<T> matches, final int page) {
 		this.count = count;
-		this.matches = Collections.unmodifiableList(matches);
+		if (matches == null) {
+			this.matches = null;
+		} else {
+			this.matches = Collections.unmodifiableList(matches);
+		}
 		this.page = page;
 	}
 
