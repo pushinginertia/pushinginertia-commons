@@ -50,6 +50,17 @@ public final class ListUtils {
 		return l;
 	}
 
+	public static List<Integer> toListWithMax(final Collection<Integer> collection, final int max) {
+		ValidateAs.notNull(collection, "collection");
+		final List<Integer> list = new ArrayList<Integer>();
+		for (final Integer i: collection) {
+			if (i <= max) {
+				list.add(i);
+			}
+		}
+		return list;
+	}
+
 	/**
 	 * Returns an unmodifiable List containing the primitive integers given in an array.
 	 * @param array Array of ints to transform into a List object.

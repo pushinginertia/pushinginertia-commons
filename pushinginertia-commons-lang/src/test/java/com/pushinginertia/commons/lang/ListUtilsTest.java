@@ -44,6 +44,15 @@ public class ListUtilsTest {
 	}
 
 	@Test
+	public void toListWithMax() {
+		final List<Integer> in = Arrays.asList(1, 2, 3, 4, 5);
+		Assert.assertEquals(3, ListUtils.toListWithMax(in, 3).size());
+		Assert.assertEquals(1, (int)ListUtils.toListWithMax(in, 3).get(0));
+		Assert.assertEquals(2, (int)ListUtils.toListWithMax(in, 3).get(1));
+		Assert.assertEquals(3, (int)ListUtils.toListWithMax(in, 3).get(2));
+	}
+
+	@Test
 	public void intArrayToList() {
 		final int[] array = {1,2,3,4};
 		final List<Integer> list = ListUtils.intArrayToList(array);
