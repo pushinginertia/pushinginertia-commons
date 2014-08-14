@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2013 Pushing Inertia
+/* Copyright (c) 2011-2014 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,9 +33,10 @@ public class EmailSubscriptionUtilsTest {
 		Assert.assertEquals(0, next.getMillisOfSecond());
 	}
 
+	@Test
 	public void testCalculateNextNotificationTimestampNull() {
 		final DateTime now = DateTime.now().withMillisOfSecond(0).plusDays(5);
-		final DateTime next = EmailSubscriptionUtils.calculateNextNotificationTimestamp((DateTime)null, 5);
+		final DateTime next = EmailSubscriptionUtils.calculateNextNotificationTimestamp(null, 5);
 		Assert.assertEquals(now, next);
 	}
 }

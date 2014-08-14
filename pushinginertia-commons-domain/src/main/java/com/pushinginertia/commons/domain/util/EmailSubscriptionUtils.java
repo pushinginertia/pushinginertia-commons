@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2013 Pushing Inertia
+/* Copyright (c) 2011-2014 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,8 +16,6 @@
 package com.pushinginertia.commons.domain.util;
 
 import org.joda.time.DateTime;
-
-import java.util.Date;
 
 /**
  * Logic to handle changes to subscription data.
@@ -39,18 +37,5 @@ public final class EmailSubscriptionUtils {
 		}
 
 		return lastNotificationTimestamp.withMillisOfSecond(0).plusDays(notificationInterval);
-	}
-
-	/**
-	 * Provided for backward compatibility but better to use {@link #calculateNextNotificationTimestamp(org.joda.time.DateTime, int)}.
-	 * @param lastNotificationTimestamp null is ok
-	 * @param notificationInterval number of days
-	 * @return calculated date/time
-	 */
-	public static DateTime calculateNextNotificationTimestamp(final Date lastNotificationTimestamp, final int notificationInterval) {
-		if (lastNotificationTimestamp == null) {
-			return calculateNextNotificationTimestamp((Date)null, notificationInterval);
-		}
-		return calculateNextNotificationTimestamp(new DateTime(lastNotificationTimestamp), notificationInterval);
 	}
 }
