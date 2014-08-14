@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2012 Pushing Inertia
+/* Copyright (c) 2011-2014 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,6 +17,8 @@ package com.pushinginertia.commons.lang;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.math.BigDecimal;
 
 public class MathUtilsTest {
 	@Test
@@ -62,5 +64,14 @@ public class MathUtilsTest {
 		Assert.assertEquals(2, MathUtils.integerDivisionRound(58, 30));
 		Assert.assertEquals(2, MathUtils.integerDivisionRound(59, 30));
 		Assert.assertEquals(2, MathUtils.integerDivisionRound(60, 30));
+	}
+
+	@Test
+	public void min() {
+		Assert.assertEquals(BigDecimal.ZERO, MathUtils.min(BigDecimal.ZERO, BigDecimal.ONE));
+		Assert.assertEquals(BigDecimal.ZERO, MathUtils.min(BigDecimal.ONE, BigDecimal.ZERO));
+		Assert.assertEquals(BigDecimal.ZERO, MathUtils.min(BigDecimal.ZERO, BigDecimal.ZERO));
+		Assert.assertEquals(BigDecimal.ONE, MathUtils.min(BigDecimal.TEN, BigDecimal.ONE));
+		Assert.assertEquals(BigDecimal.ONE, MathUtils.min(BigDecimal.ONE, BigDecimal.TEN));
 	}
 }

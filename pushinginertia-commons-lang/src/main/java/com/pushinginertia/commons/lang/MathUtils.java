@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2012 Pushing Inertia
+/* Copyright (c) 2011-2014 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,6 +15,10 @@
  */
 package com.pushinginertia.commons.lang;
 
+import com.pushinginertia.commons.core.validation.ValidateAs;
+
+import java.math.BigDecimal;
+
 /**
  * Reusable math functionality.
  */
@@ -29,5 +33,14 @@ public final class MathUtils {
 	 */
 	public static long integerDivisionRound(long a, long b) {
 		return (a + (b/2)) / b;
+	}
+
+	public static BigDecimal min(final BigDecimal bd1, final BigDecimal bd2) {
+		ValidateAs.notNull(bd1, "bd1");
+		ValidateAs.notNull(bd2, "bd2");
+		if (bd1.compareTo(bd2) < 0) {
+			return bd1;
+		}
+		return bd2;
 	}
 }
