@@ -73,5 +73,22 @@ public class MathUtilsTest {
 		Assert.assertEquals(BigDecimal.ZERO, MathUtils.min(BigDecimal.ZERO, BigDecimal.ZERO));
 		Assert.assertEquals(BigDecimal.ONE, MathUtils.min(BigDecimal.TEN, BigDecimal.ONE));
 		Assert.assertEquals(BigDecimal.ONE, MathUtils.min(BigDecimal.ONE, BigDecimal.TEN));
+
+		Assert.assertEquals(BigDecimal.ONE, MathUtils.min(BigDecimal.ONE, null));
+		Assert.assertEquals(BigDecimal.ONE, MathUtils.min(null, BigDecimal.ONE));
+		Assert.assertNull(MathUtils.min(null, null));
+	}
+
+	@Test
+	public void max() {
+		Assert.assertEquals(BigDecimal.ONE, MathUtils.max(BigDecimal.ZERO, BigDecimal.ONE));
+		Assert.assertEquals(BigDecimal.ONE, MathUtils.max(BigDecimal.ONE, BigDecimal.ZERO));
+		Assert.assertEquals(BigDecimal.ZERO, MathUtils.max(BigDecimal.ZERO, BigDecimal.ZERO));
+		Assert.assertEquals(BigDecimal.TEN, MathUtils.max(BigDecimal.TEN, BigDecimal.ONE));
+		Assert.assertEquals(BigDecimal.TEN, MathUtils.max(BigDecimal.ONE, BigDecimal.TEN));
+
+		Assert.assertEquals(BigDecimal.ONE, MathUtils.max(BigDecimal.ONE, null));
+		Assert.assertEquals(BigDecimal.ONE, MathUtils.max(null, BigDecimal.ONE));
+		Assert.assertNull(MathUtils.max(null, null));
 	}
 }

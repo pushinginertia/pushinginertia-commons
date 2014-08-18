@@ -35,10 +35,39 @@ public final class MathUtils {
 		return (a + (b/2)) / b;
 	}
 
+	/**
+	 * Selects the lower of two BigDecimals, preferring the non-null value if one is null.
+	 * @param bd1 First value.
+	 * @param bd2 Second value.
+	 * @return Min of the two values or the non-null reference or null if both inputs are null.
+	 */
 	public static BigDecimal min(final BigDecimal bd1, final BigDecimal bd2) {
-		ValidateAs.notNull(bd1, "bd1");
-		ValidateAs.notNull(bd2, "bd2");
+		if (bd1 == null) {
+			return bd2;
+		}
+		if (bd2 == null) {
+			return bd1;
+		}
 		if (bd1.compareTo(bd2) < 0) {
+			return bd1;
+		}
+		return bd2;
+	}
+
+	/**
+	 * Selects the higher of two BigDecimals, preferring the non-null value if one is null.
+	 * @param bd1 First value.
+	 * @param bd2 Second value.
+	 * @return Max of the two values or the non-null reference or null if both inputs are null.
+	 */
+	public static BigDecimal max(final BigDecimal bd1, final BigDecimal bd2) {
+		if (bd1 == null) {
+			return bd2;
+		}
+		if (bd2 == null) {
+			return bd1;
+		}
+		if (bd1.compareTo(bd2) > 0) {
 			return bd1;
 		}
 		return bd2;
