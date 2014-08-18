@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2013 Pushing Inertia
+/* Copyright (c) 2011-2014 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +16,7 @@
 package com.pushinginertia.commons.core.validation;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -219,5 +220,28 @@ public final class ValidateAs {
 			}
 		}
 		return value;
+	}
+
+	/**
+	 * Validates that a given index falls within the bounds of a non-empty list.
+	 * @param list List to test (cannot be null or empty).
+	 * @param index Index to test.
+	 * @param listName Name of the list that will be echoed in the exception if validation fails.
+	 * @param <T> Type of the items in the list.
+	 * @return The given index.
+	 * @throws IllegalArgumentException If the validation fails or the list is null or empty.
+	 */
+	public static <T> int indexInList(final List<T> list, final int index, final String listName)
+	throws IllegalArgumentException {
+		ValidateAs.notNull(list, listName);
+		if (list.size() == 0) {
+			throw new IllegalArgumentException("List [" + listName + "] is empty.");
+		}
+		if (index < 0 || index >= list.size()) {
+			throw new IllegalArgumentException(
+					"Index " + index + " must be in the range of 0.." + (list.size() - 1) +
+					" for lookups from list [" + listName + "].");
+		}
+		return index;
 	}
 }

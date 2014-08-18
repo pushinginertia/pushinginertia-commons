@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2013 Pushing Inertia
+/* Copyright (c) 2011-2014 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,6 +19,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -140,5 +142,32 @@ public class ValidateAsTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void allUppercaseFail2() {
 		ValidateAs.allUppercase("ABC1", "string");
+	}
+
+	@Test
+	public void indexInList() {
+		ValidateAs.indexInList(Arrays.asList(1, 2, 3), 0, "listname");
+		ValidateAs.indexInList(Arrays.asList(1, 2, 3), 1, "listname");
+		ValidateAs.indexInList(Arrays.asList(1, 2, 3), 2, "listname");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void indexInListFailNegativeIndex() {
+		ValidateAs.indexInList(Arrays.asList(1, 2, 3), -1, "listname");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void indexInListFailOutOfBoundsIndex() {
+		ValidateAs.indexInList(Arrays.asList(1, 2, 3), 3, "listname");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void indexInListFailEmptyList() {
+		ValidateAs.indexInList(new ArrayList(), 0, "listname");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void indexInListFailNullList() {
+		ValidateAs.indexInList(null, 0, "listname");
 	}
 }
