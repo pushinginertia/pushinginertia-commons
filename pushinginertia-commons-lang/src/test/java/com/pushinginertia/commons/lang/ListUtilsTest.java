@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2012 Pushing Inertia
+/* Copyright (c) 2011-2014 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,18 +18,48 @@ package com.pushinginertia.commons.lang;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 public class ListUtilsTest {
+
+	private static final int QUICKSELECT_LIST_MAX_SIZE = 2000;
+
 	public enum SomeEnumeration {
 		A,
 		C,
 		B,
 		D
+	}
+
+	public boolean hasRepeatedDigit(int i) {
+		int quotient = i;
+		int remainder;
+		boolean[] digits = {false,false,false,false,false,false,false,false,false,false};
+		while (quotient > 0) {
+			remainder = quotient % 10;
+			quotient = quotient / 10;
+			if (digits[remainder]) {
+				return true;
+			}
+			digits[remainder] = true;
+		}
+		return false;
+	}
+
+	@Test
+	public void testHasRepeatingDigit() {
+		Assert.assertEquals(true, hasRepeatedDigit(99));
+		Assert.assertEquals(true, hasRepeatedDigit(77));
+		Assert.assertEquals(true, hasRepeatedDigit(162343));
+		Assert.assertEquals(true, hasRepeatedDigit(237823));
+		Assert.assertEquals(false, hasRepeatedDigit(12345));
 	}
 
 	@Test
@@ -108,5 +138,31 @@ public class ListUtilsTest {
 	public void randomSampleFloydFail() {
 		final List<Integer> list = Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30);
 		ListUtils.randomSampleFloyd(list, 31);
+	}
+
+	@Test
+	public void quickselect() {
+		final Random rand = new SecureRandom();
+
+		// run this test on 20 randomly generated lists
+		for (int pass = 0; pass < 20; pass++) {
+			final int size = rand.nextInt(QUICKSELECT_LIST_MAX_SIZE) + 1;
+			final List<Integer> list = new ArrayList<Integer>(size);
+			for (int i = 0; i < size; i++) {
+				list.add(rand.nextInt(QUICKSELECT_LIST_MAX_SIZE * 2));  // we want some collisions with same values
+			}
+
+			// sort the list to compare the identified value against the expected value
+			final List<Integer> sortedList = new ArrayList<Integer>(list);
+			Collections.sort(sortedList);
+
+			// assert that selection works for every value of k in the list
+			for (int k = 0; k < size; k++) {
+				// make a copy so we always work with the same source list
+				final List<Integer> listCopy = new ArrayList<Integer>(list);
+				final Integer kthValue = ListUtils.quickselect(listCopy, k);
+				Assert.assertEquals(kthValue, sortedList.get(k));
+			}
+		}
 	}
 }

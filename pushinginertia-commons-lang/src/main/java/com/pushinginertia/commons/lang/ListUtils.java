@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2013 Pushing Inertia
+/* Copyright (c) 2011-2014 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,6 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Random;
@@ -108,7 +107,7 @@ public final class ListUtils {
 	 * Produces a random sample from a list of items using Floyd's algorithm. The returned set retains the order in
 	 * which the items were inserted, which means that iterating on the set will give the items in a random order.
 	 * @param list source list of items
-	 * @param m number of items to
+	 * @param m number of items to select
 	 * @param <T> type of the items in the list
 	 * @return subset of the list of the given size
 	 * @throws IllegalArgumentException if m is greater than the size of the list
@@ -134,5 +133,102 @@ public final class ListUtils {
 			}
 		}
 		return res;
+	}
+
+	/**
+	 * Swaps two elements in a list.
+	 * @param list List to mutate.
+	 * @param index1 First index.
+	 * @param index2 Second index.
+	 * @param <T> Type of the elements in the list.
+	 */
+	private static <T> void swap(final List<T> list, final int index1, final int index2) {
+		if (index1 != index2) {
+			final T value = list.get(index1);
+			list.set(index1, list.get(index2));
+			list.set(index2, value);
+		}
+	}
+
+	/**
+	 * An implementation of the partition step in a quicksort.
+	 * @param list Entire list to partition.
+	 * @param startIndex Starting index of the sublist to partition.
+	 * @param endIndex Ending index of the sublist to partition.
+	 * @param pivotIndex Index of the pivot element.
+	 * @param <T> Type of the items in the list.
+	 * @return The new index that the pivot item has been moved to.
+	 */
+	public static <T extends Comparable<T>> int partition(
+			final List<T> list,
+			final int startIndex,
+			final int endIndex,
+			final int pivotIndex) {
+		if (startIndex > endIndex) {
+			throw new IllegalArgumentException(
+					"startIndex " + startIndex + " cannot be greater than endIndex " + endIndex);
+		}
+		if (pivotIndex < startIndex || pivotIndex > endIndex) {
+			throw new IllegalArgumentException(
+					"pivotIndex " + pivotIndex + " is not in the range [" + startIndex + ".." + endIndex + "].");
+		}
+		if (startIndex == endIndex) {
+			// nothing to do
+			return pivotIndex;
+		}
+
+		final T pivotValue = list.get(pivotIndex);
+		swap(list, startIndex, pivotIndex);  // move the pivot to the start of the sublist
+		int left = startIndex;
+		int right = endIndex;
+		while (left < right) {
+			while (left <= right && list.get(left).compareTo(pivotValue) <= 0) {
+				// move left to the right until an item > pivotValue is found
+				left++;
+			}
+			while (left <= right && list.get(right).compareTo(pivotValue) > 0) {
+				// move right to the left until an item <= pivotValue is found
+				right--;
+			}
+			if (left < right) {
+				swap(list, left, right);
+			}
+		}
+		list.set(startIndex, list.get(right));
+		list.set(right, pivotValue);
+		return right;
+	}
+
+	/**
+	 * Finds the kth largest value in a list of unsorted items. This is useful for identifying the median in a list
+	 * where k = n/2 and n is the size of the list. The implementation is based on the quickselect algorithm by Floyd
+	 * and Rivest. The input list is mutated and items are moved. Complexity is O(n) on average.
+	 * @param list Source list of items (order of items will be mutated).
+	 * @param k Indicates the kth item to select.
+	 * @param <T> Type of the items in the list.
+	 * @return kth item.
+	 * @see <a href="http://www.stat.cmu.edu/~ryantibs/papers/median.pdf">http://www.stat.cmu.edu/~ryantibs/papers/median.pdf</a>
+	 */
+	public static <T extends Comparable<T>> T quickselect(final List<T> list, final int k) {
+		ValidateAs.indexInList(list, k, "list");
+
+		int start = 0;
+		int end = list.size() - 1;
+		final Random rand = new SecureRandom();
+
+		while (start < end) {
+			final int pivotIndex = rand.nextInt(end - start + 1) + start;  // select a random item within the range
+			final int pivotIndex2 = partition(list, start, end, pivotIndex);
+			if (pivotIndex2 == k) {
+				return list.get(k);
+			}
+			if (pivotIndex2 < k) {
+				start = pivotIndex2 + 1;
+			} else {
+				end = pivotIndex2 - 1;
+			}
+		}
+
+		return list.get(start);
 	}
 }
