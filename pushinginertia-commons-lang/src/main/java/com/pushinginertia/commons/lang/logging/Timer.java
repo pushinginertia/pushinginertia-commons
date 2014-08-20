@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2013 Pushing Inertia
+/* Copyright (c) 2011-2014 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
  * Provides a very simple timer for logging the time it takes to complete units of work.
  */
 public class Timer {
-	private final long startNs;
+	private long startNs;
 
 	/**
 	 * Provides a very simple timer for logging the time it takes to complete units of work.
@@ -38,6 +38,13 @@ public class Timer {
 	 */
 	Timer(final long startNs) {
 		this.startNs = startNs;
+	}
+
+	/**
+	 * Resets the timer to a duration of zero.
+	 */
+	public void reset() {
+		this.startNs = nanoTime();
 	}
 
 	/**
