@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2013 Pushing Inertia
+/* Copyright (c) 2011-2014 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -102,8 +102,7 @@ public class GeoPoint implements Serializable {
 	 * @throws NullPointerException if lat or lon is null
 	 */
 	public String getLatLonString() throws NullPointerException {
-		final StringBuilder sb = new StringBuilder();
-		return sb.append(lat.getDegrees()).append(',').append(lon.getDegrees()).toString();
+		return String.valueOf(lat.getDegrees()) + ',' + lon.getDegrees();
 	}
 
 	@Override
@@ -144,13 +143,8 @@ public class GeoPoint implements Serializable {
 	 * @return change in latitude
 	 */
 	public BigDecimal calculateLatDelta(double distanceKm) {
-		final double lat1 = this.getLatRadians();
-		final double dist = distanceKm / EARTH_RADIUS_KM;
-		final double lat2 =
-				Math.asin(
-						Math.sin(lat1) * Math.cos(dist) +
-						Math.cos(lat1) * Math.sin(dist));   // Math.cos(bearingRad) removed because it equals 1 when bearing north
-		return BigDecimal.valueOf(Math.toDegrees(lat2 - lat1)).setScale(GeoCoordinate.PRECISION, RoundingMode.HALF_UP);
+		final double delta = (distanceKm / EARTH_RADIUS_KM) * (180 / Math.PI);
+		return BigDecimal.valueOf(delta).setScale(GeoCoordinate.PRECISION, RoundingMode.HALF_UP);
 	}
 
 	/**
@@ -159,16 +153,9 @@ public class GeoPoint implements Serializable {
 	 * @return change in longitude
 	 */
 	public BigDecimal calculateLonDelta(double distanceKm) {
-		final double lat1 = this.getLatRadians();
-		final double lon1 = this.getLonRadians();
-		final double dist = distanceKm / EARTH_RADIUS_KM;
-		double lon2 =
-				lon1 +
-				Math.atan2(
-						Math.sin(dist) * Math.cos(lat1),    // Math.sin(bearingRad) removed because it equals 1 when bearing east
-						Math.cos(dist) - Math.sin(lat1) * Math.sin(lat1));
-		lon2 = (lon2 + 3 * Math.PI) % (2 * Math.PI) - Math.PI;  // normalise to -180...+180
-		return BigDecimal.valueOf(Math.toDegrees(lon2 - lon1)).setScale(GeoCoordinate.PRECISION, RoundingMode.HALF_UP);
+		final double lat = getLatRadians();
+		final double delta = Math.toDegrees(distanceKm / (Math.cos(lat) * EARTH_RADIUS_KM));
+		return BigDecimal.valueOf(delta).setScale(GeoCoordinate.PRECISION, RoundingMode.HALF_UP);
 	}
 
 	/**

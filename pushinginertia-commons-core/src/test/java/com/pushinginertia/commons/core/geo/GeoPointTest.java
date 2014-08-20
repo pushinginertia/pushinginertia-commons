@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2013 Pushing Inertia
+/* Copyright (c) 2011-2014 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,6 +24,13 @@ import java.math.RoundingMode;
 public class GeoPointTest {
 	final GeoPoint p1 = new GeoPoint("49.284849", "-123.120389"); // 49°17′05.5″N, 123°07′13.4″W
 	final GeoPoint p2 = new GeoPoint("49.220061", "-123.203583"); // 49°13′12″N, 123°12′13″W
+
+	@Test
+	public void calculateDeltas() {
+		final GeoPoint point = new GeoPoint(40.782710, -73.965310);
+		Assert.assertEquals(new BigDecimal("89.932161"), point.calculateLatDelta(10000));
+		Assert.assertEquals(new BigDecimal("118.770585"), point.calculateLonDelta(10000));
+	}
 
 	@Test
 	public void testDistanceTo() {
