@@ -21,6 +21,7 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Random;
@@ -164,6 +165,27 @@ public final class ListUtils {
 			final int startIndex,
 			final int endIndex,
 			final int pivotIndex) {
+		return partition(list, null, startIndex, endIndex, pivotIndex);
+	}
+
+	/**
+	 * An implementation of the partition step in a quicksort.
+	 * @param list Entire list to partition.
+	 * @param comparator The comparator to determine the order of the list. A null value indicates that the elements'
+	 * natural ordering should be used.
+	 * @param startIndex Starting index of the sublist to partition.
+	 * @param endIndex Ending index of the sublist to partition.
+	 * @param pivotIndex Index of the pivot element.
+	 * @param <T> Type of the items in the list. If comparator is null, this must implement
+	 * {@link java.lang.Comparable}.
+	 * @return The new index that the pivot item has been moved to.
+	 */
+	public static <T> int partition(
+			final List<T> list,
+			final Comparator<T> comparator,
+			final int startIndex,
+			final int endIndex,
+			final int pivotIndex) {
 		if (startIndex > endIndex) {
 			throw new IllegalArgumentException(
 					"startIndex " + startIndex + " cannot be greater than endIndex " + endIndex);
@@ -182,11 +204,11 @@ public final class ListUtils {
 		int left = startIndex;
 		int right = endIndex;
 		while (left < right) {
-			while (left <= right && list.get(left).compareTo(pivotValue) <= 0) {
+			while (left <= right && compare(comparator, list.get(left), pivotValue) <= 0) {
 				// move left to the right until an item > pivotValue is found
 				left++;
 			}
-			while (left <= right && list.get(right).compareTo(pivotValue) > 0) {
+			while (left <= right && compare(comparator, list.get(right), pivotValue) > 0) {
 				// move right to the left until an item <= pivotValue is found
 				right--;
 			}
@@ -197,6 +219,17 @@ public final class ListUtils {
 		list.set(startIndex, list.get(right));
 		list.set(right, pivotValue);
 		return right;
+	}
+
+	private static <T> int compare(final Comparator<T> comparator, final T o1, final T o2) {
+		if (comparator != null) {
+			return comparator.compare(o1, o2);
+		}
+		if (!(o1 instanceof Comparable && o2 instanceof Comparable)) {
+			throw new IllegalArgumentException(
+					"Input must implement Comparable interface or a comparator must be given.");
+		}
+		return ((Comparable<T>)o1).compareTo(o2);
 	}
 
 	/**
@@ -210,6 +243,25 @@ public final class ListUtils {
 	 * @see <a href="http://www.stat.cmu.edu/~ryantibs/papers/median.pdf">http://www.stat.cmu.edu/~ryantibs/papers/median.pdf</a>
 	 */
 	public static <T extends Comparable<T>> T quickselect(final List<T> list, final int k) {
+		return quickselect(list, k, null);
+	}
+
+	/**
+	 * Finds the kth largest value in a list of unsorted items. This is useful for identifying the median in a list
+	 * where k = n/2 and n is the size of the list. The implementation is based on the quickselect algorithm by Floyd
+	 * and Rivest. The input list is mutated and items are moved. Complexity is O(n) on average.
+	 * @param list Source list of items (order of items will be mutated).
+	 * @param k Indicates the kth item to select.
+	 * @param comparator The comparator to determine the order of the list. A null value indicates that the elements'
+	 * natural ordering should be used.
+	 * @param <T> Type of the items in the list.
+	 * @return kth item.
+	 * @see <a href="http://www.stat.cmu.edu/~ryantibs/papers/median.pdf">http://www.stat.cmu.edu/~ryantibs/papers/median.pdf</a>
+	 */
+	public static <T> T quickselect(
+			final List<T> list,
+			final int k,
+			final Comparator<T> comparator) {
 		ValidateAs.indexInList(list, k, "list");
 
 		int start = 0;
@@ -217,15 +269,15 @@ public final class ListUtils {
 		final Random rand = new SecureRandom();
 
 		while (start < end) {
-			final int pivotIndex = rand.nextInt(end - start + 1) + start;  // select a random item within the range
-			final int pivotIndex2 = partition(list, start, end, pivotIndex);
-			if (pivotIndex2 == k) {
+			final int randPivotIndex = rand.nextInt(end - start + 1) + start;  // select a random item within the range
+			final int pivotIndex = partition(list, comparator, start, end, randPivotIndex);
+			if (pivotIndex == k) {
 				return list.get(k);
 			}
-			if (pivotIndex2 < k) {
-				start = pivotIndex2 + 1;
+			if (pivotIndex < k) {
+				start = pivotIndex + 1;
 			} else {
-				end = pivotIndex2 - 1;
+				end = pivotIndex - 1;
 			}
 		}
 

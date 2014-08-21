@@ -22,6 +22,7 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -140,6 +141,13 @@ public class ListUtilsTest {
 		ListUtils.randomSampleFloyd(list, 31);
 	}
 
+	public static class DefaultComparator<T extends Comparable<T>> implements Comparator<T> {
+		@Override
+		public int compare(final T o1, final T o2) {
+			return o1.compareTo(o2);
+		}
+	}
+
 	@Test
 	public void quickselect() {
 		final Random rand = new SecureRandom();
@@ -160,7 +168,13 @@ public class ListUtilsTest {
 			for (int k = 0; k < size; k++) {
 				// make a copy so we always work with the same source list
 				final List<Integer> listCopy = new ArrayList<Integer>(list);
-				final Integer kthValue = ListUtils.quickselect(listCopy, k);
+				final Integer kthValue;
+				if (pass % 2 == 0) {
+					// every second pass, use the comparator instead of natural ordering
+					kthValue = ListUtils.quickselect(listCopy, k, new DefaultComparator<Integer>());
+				} else {
+					kthValue = ListUtils.quickselect(listCopy, k);
+				}
 				Assert.assertEquals(kthValue, sortedList.get(k));
 			}
 		}
