@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2013 Pushing Inertia
+/* Copyright (c) 2011-2014 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +18,6 @@ package com.pushinginertia.commons.lang;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -156,5 +155,15 @@ public class StringUtilsTest {
 	public void charFrequencyInString() {
 		Assert.assertEquals(0, StringUtils.charFrequencyInString('a', null));
 		Assert.assertEquals(4, StringUtils.charFrequencyInString('a', "abcabcabcabc"));
+	}
+
+	@Test
+	public void longestCommonPrefixLength() {
+		Assert.assertEquals(0, StringUtils.longestCommonPrefixLength("", "abc"));
+		Assert.assertEquals(0, StringUtils.longestCommonPrefixLength("xyz", "abc"));
+		Assert.assertEquals(1, StringUtils.longestCommonPrefixLength("axyz", "abc"));
+		Assert.assertEquals(2, StringUtils.longestCommonPrefixLength("abxyz", "abc"));
+		Assert.assertEquals(3, StringUtils.longestCommonPrefixLength("abcxyz", "abc"));
+		Assert.assertEquals(3, StringUtils.longestCommonPrefixLength("abcxyz", "abcd"));
 	}
 }

@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2013 Pushing Inertia
+/* Copyright (c) 2011-2014 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -403,5 +403,23 @@ public final class StringUtils {
 			}
 		}
 		return i;
+	}
+
+	/**
+	 * Identifies the length of the longest prefix that is common to two strings.
+	 * @param s1 First string to compare.
+	 * @param s2 Second string to compare.
+	 * @return Length of the longest common prefix.
+	 */
+	public static int longestCommonPrefixLength(final String s1, final String s2) {
+		ValidateAs.notNull(s1, "s1");
+		ValidateAs.notNull(s2, "s2");
+		final int len = Math.min(s1.length(), s2.length());
+		for (int i = 0; i < len; i++) {
+			if (s1.charAt(i) != s2.charAt(i)) {
+				return i;
+			}
+		}
+		return len;
 	}
 }
