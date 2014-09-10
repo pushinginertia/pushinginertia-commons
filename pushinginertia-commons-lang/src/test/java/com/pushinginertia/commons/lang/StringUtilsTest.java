@@ -152,6 +152,12 @@ public class StringUtilsTest {
 	}
 
 	@Test
+	public void removeAccents() {
+		Assert.assertEquals("aaeeiioooouuuu AAEEIIOOOOUUUU", StringUtils.removeAccents("aáeéiíoóöőuúüű AÁEÉIÍOÓÖŐUÚÜŰ"));
+		Assert.assertEquals("arvizturo tukorfurogep", StringUtils.removeAccents("árvíztűrő tükörfúrógép"));
+	}
+
+	@Test
 	public void charFrequencyInString() {
 		Assert.assertEquals(0, StringUtils.charFrequencyInString('a', null));
 		Assert.assertEquals(4, StringUtils.charFrequencyInString('a', "abcabcabcabc"));

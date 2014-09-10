@@ -17,6 +17,7 @@ package com.pushinginertia.commons.lang;
 
 import com.pushinginertia.commons.core.validation.ValidateAs;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -383,6 +384,17 @@ public final class StringUtils {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Removes accented characters from a string, replacing them with English character equivalents.
+	 * @param value Value to normalize.
+	 */
+	public static String removeAccents(final String value) {
+		// normalize
+		final String decomposed = Normalizer.normalize(value, Normalizer.Form.NFD);
+		// remove diacritics
+		return decomposed.replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
 	}
 
 	/**
