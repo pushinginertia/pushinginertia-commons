@@ -10,7 +10,6 @@
     <modules>
         <module>pushinginertia-commons-core</module>
         <module>pushinginertia-commons-domain</module>
-        <module>pushinginertia-commons-domain-hibernate</module>
         <module>pushinginertia-commons-io</module>
         <module>pushinginertia-commons-lang</module>
         <module>pushinginertia-commons-net</module>
