@@ -8,6 +8,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>pushinginertia-commons-collect</module>
         <module>pushinginertia-commons-core</module>
         <module>pushinginertia-commons-domain</module>
         <module>pushinginertia-commons-io</module>
@@ -30,7 +31,7 @@
 
         <maven-compiler-plugin.version>3.0</maven-compiler-plugin.version>
         <maven-source-plugin.version>2.2.1</maven-source-plugin.version>
-        <maven-javadoc-plugin.version>2.9</maven-javadoc-plugin.version>
+        <maven-javadoc-plugin.version>2.10.1</maven-javadoc-plugin.version>
         <junit.version>4.11</junit.version>
         <encoding>UTF-8</encoding>
     </properties>
@@ -111,6 +112,10 @@
                         <goals>
                             <goal>jar</goal>
                         </goals>
+                        <!-- This is required for backward compatibility with Java < 8 -->
+                        <configuration>
+                            <additionalparam>-Xdoclint:none</additionalparam>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
