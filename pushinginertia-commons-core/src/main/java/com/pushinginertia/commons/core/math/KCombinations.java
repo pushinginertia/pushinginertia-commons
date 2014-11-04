@@ -37,7 +37,7 @@ public class KCombinations<P extends Combination.Payload<P>> {
 	 * up to about 16. After that, it becomes inefficient and optimizations would need to be made.
 	 *
 	 * @param initialPayloads List of initial payloads for N choose 1. The size of this list defines N and all N choose
-	 * K combinations for K > 1 are calculated from this initial list.
+	 * K combinations for K &gt; 1 are calculated from this initial list.
 	 */
 	public KCombinations(final List<P> initialPayloads) {
 		final int n = initialPayloads.size();
