@@ -116,6 +116,27 @@ public class StringUtilsTest {
 	}
 
 	@Test
+	public void toValid3ByteUTF8String() {
+		final String grinningFace = "\uD83D\uDE01";    // http://apps.timwhitlock.info/unicode/inspect/hex/1F601
+		final String replacementCharacter = "\ufffd";  // http://apps.timwhitlock.info/unicode/inspect/hex/FFFD
+
+		Assert.assertEquals("", StringUtils.replaceUTF8SupplementaryChars(grinningFace, null));
+		Assert.assertEquals(
+				"hello .",
+				StringUtils.replaceUTF8SupplementaryChars("hello " + grinningFace + ".", null));
+		Assert.assertEquals(
+				replacementCharacter,
+				StringUtils.replaceUTF8SupplementaryChars(grinningFace, replacementCharacter));
+		Assert.assertEquals(
+				"hello " + replacementCharacter + ".",
+				StringUtils.replaceUTF8SupplementaryChars("hello " + grinningFace + ".", replacementCharacter));
+		Assert.assertEquals("?", StringUtils.replaceUTF8SupplementaryChars(grinningFace, "?"));
+		Assert.assertEquals(
+				"hello ?.",
+				StringUtils.replaceUTF8SupplementaryChars("hello " + grinningFace + ".", "?"));
+	}
+
+	@Test
 	public void truncate() {
 		Assert.assertEquals("abc", StringUtils.truncate("abc", 4));
 		Assert.assertEquals("abc", StringUtils.truncate("abc", 3));

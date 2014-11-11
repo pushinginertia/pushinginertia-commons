@@ -34,6 +34,11 @@ public final class StringUtils {
 	private StringUtils() {}
 
 	/**
+	 * Greatest code point for a 3 byte UTF character. Anything above this would require 4 bytes.
+	 */
+	private static final int UTF8_3BYTE_MAX_CODE_POINT = 0xFFFF;
+
+	/**
 	 * Identifies if a given string can be converted to a number.
 	 * @param s string to test
 	 * @return true if the string represents a numeric value
@@ -283,6 +288,44 @@ public final class StringUtils {
 			return s.substring(0, s.length() - 1);
 		}
 		return s;
+	}
+
+	/**
+	 * Supplementary characters are characters in the Unicode standard whose code points are above U+FFFF, and are
+	 * comprised of 4 bytes. Some systems don't support these characters (such as MySQL prior to 5.5) and this method
+	 * provides a way to either strip out these characters or replace them with something else.
+	 * @param encodedString String to transform.
+	 * @param replacementChar Character to insert as a replacement. Can be null, in which case the supplementary
+	 * characters are simply stripped. A good replacement string is "\uFFFD", which is reserved as the unicode
+	 * replacement character when an incoming character is unknown or unrepresentable.
+	 * @return Transformed string.
+	 * @see <a href="http://www.fileformat.info/info/unicode/char/0fffd/index.htm">Unicode Character 'REPLACEMENT CHARACTER' (U+FFFD)</a>
+	 */
+	public static String replaceUTF8SupplementaryChars(final String encodedString, final String replacementChar)  {
+		ValidateAs.notNull(encodedString, "encodedString");
+
+		final int length = encodedString.length();
+		final StringBuilder sb = new StringBuilder(length);
+		int i = 0;
+		while (i < length) {
+			final int codepoint = encodedString.codePointAt(i);
+
+			if (codepoint > UTF8_3BYTE_MAX_CODE_POINT) {
+				if (replacementChar != null) {
+					sb.append(replacementChar);
+				}
+			} else {
+				if (Character.isValidCodePoint(codepoint)) {
+					sb.appendCodePoint(codepoint);
+				} else {
+					if (replacementChar != null) {
+						sb.append(replacementChar);
+					}
+				}
+			}
+			i += Character.charCount(codepoint);
+		}
+		return sb.toString();
 	}
 
 	/**
