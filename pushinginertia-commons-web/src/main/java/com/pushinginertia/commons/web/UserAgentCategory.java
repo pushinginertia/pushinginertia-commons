@@ -66,7 +66,7 @@ public enum UserAgentCategory {
 		ABUSE_BOT_SET.add("^Jakarta.*");
 		ABUSE_BOT_SET.add("^User-Agent.*"); // strings should not start with "User-Agent"
 		ABUSE_BOT_SET.add(".*compatible ;.*");
-		ABUSE_BOT_SET.add("^Mozilla(/[0-9]\\.0)?( \\(\\))?$");
+		ABUSE_BOT_SET.add("^Mozilla(/[0-9]\\.0)?( \\((compatible;)?\\))?$");
 		ABUSE_BOT_SET.add(".*(libwww|lwp-trivial|curl|PHP/|urllib|GT::WWW|Snoopy|MFC_Tear_Sample|HTTP::Lite|PHPCrawl|URI::Fetch|Zend_Http_Client|http client|PECL::HTTP|IBM EVV|Bork-edition|Fetch API Request|WEP Search|Wells Search II|Missigua Locator|ISC Systems iRc Search 2.1|Microsoft URL Control|Indy Library|SiteSucker|LWP::|larbin|Nutch|WBSearchBot|intelium_bot|CPython|CatchBot|360Spider|MJ12bot|Squider|WhatWeb|YisouSpider|BLEXBot|Apache-HttpClient|AppEngine-Google).*");
 		ABUSE_BOT_SET.add("^[A-Z][a-z]{3,} [a-z]{4,} [a-z]{4,}.*");
 		ABUSE_BOT_SET.add(".*;1813.*"); // http://www.the-art-of-web.com/system/logs-avg/
