@@ -116,7 +116,7 @@ public class StringUtilsTest {
 	}
 
 	@Test
-	public void toValid3ByteUTF8String() {
+	public void replaceUTF8SupplementaryChars() {
 		final String grinningFace = "\uD83D\uDE01";    // http://apps.timwhitlock.info/unicode/inspect/hex/1F601
 		final String replacementCharacter = "\ufffd";  // http://apps.timwhitlock.info/unicode/inspect/hex/FFFD
 
@@ -134,6 +134,9 @@ public class StringUtilsTest {
 		Assert.assertEquals(
 				"hello ?.",
 				StringUtils.replaceUTF8SupplementaryChars("hello " + grinningFace + ".", "?"));
+		Assert.assertEquals(
+				"my smiley:?\na new line",
+				StringUtils.replaceUTF8SupplementaryChars("my smiley:" + grinningFace + "\na new line", "?"));
 	}
 
 	@Test

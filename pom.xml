@@ -28,6 +28,7 @@
         <org.springframework.version>3.0.4.RELEASE</org.springframework.version>
         <hibernate.version>3.6.8.Final</hibernate.version>
         <org.springframework.version>3.0.4.RELEASE</org.springframework.version>
+        <jackson.version>1.9.13</jackson.version>
 
         <maven-compiler-plugin.version>3.0</maven-compiler-plugin.version>
         <maven-source-plugin.version>2.2.1</maven-source-plugin.version>
@@ -87,6 +88,8 @@
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <encoding>${encoding}</encoding>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
             <plugin>
