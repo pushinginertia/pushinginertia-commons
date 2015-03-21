@@ -17,6 +17,7 @@ package com.pushinginertia.commons.net;
 
 import com.pushinginertia.commons.core.validation.ValidateAs;
 
+import javax.annotation.Nonnull;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -66,7 +67,7 @@ public class URLUtils {
 	 * @return -1 if no scheme is present or otherwise the length of the scheme.
 	 * @see <a href="http://en.wikipedia.org/wiki/URI_scheme">http://en.wikipedia.org/wiki/URI_scheme</a>
 	 */
-	public static int uriSchemeLength(final String uri) {
+	public static int uriSchemeLength(@Nonnull final String uri) {
 		if (uri.length() == 0) {
 			return -1;
 		}

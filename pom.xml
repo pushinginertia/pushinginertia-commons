@@ -29,6 +29,7 @@
         <hibernate.version>3.6.8.Final</hibernate.version>
         <org.springframework.version>3.0.4.RELEASE</org.springframework.version>
         <jackson.version>1.9.13</jackson.version>
+        <jsr305.version>2.0.1</jsr305.version>
 
         <maven-compiler-plugin.version>3.0</maven-compiler-plugin.version>
         <maven-source-plugin.version>2.2.1</maven-source-plugin.version>
@@ -70,6 +71,11 @@
             <groupId>commons-net</groupId>
             <artifactId>commons-net</artifactId>
             <version>${commons-net.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <version>${jsr305.version}</version>
         </dependency>
 
         <dependency>
