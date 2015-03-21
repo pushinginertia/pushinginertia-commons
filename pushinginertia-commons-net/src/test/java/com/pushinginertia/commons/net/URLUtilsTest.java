@@ -27,4 +27,15 @@ public class URLUtilsTest {
 		Assert.assertEquals("com", URLUtils.extractTopLevelDomainFromHost("com"));
 		Assert.assertEquals(".com", URLUtils.extractTopLevelDomainFromHost("..com"));
 	}
+
+	@Test
+	public void uriSchemeLength() {
+		Assert.assertEquals(-1, URLUtils.uriSchemeLength(""));
+		Assert.assertEquals(-1, URLUtils.uriSchemeLength("/absolute/path"));
+		Assert.assertEquals(-1, URLUtils.uriSchemeLength("relative/path"));
+		Assert.assertEquals(4, URLUtils.uriSchemeLength("http://www.example.com"));
+		Assert.assertEquals(16, URLUtils.uriSchemeLength("chrome-extension://www.example.com"));
+		Assert.assertEquals(9, URLUtils.uriSchemeLength("soap.beep://www.example.com"));
+		Assert.assertEquals(6, URLUtils.uriSchemeLength("tn3270://www.example.com"));
+	}
 }

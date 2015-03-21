@@ -57,4 +57,38 @@ public class URLUtils {
 		}
 		return host;
 	}
+
+	/**
+	 * Identifies the length of the scheme/protocol in a given URI.
+	 * The scheme name consists of a sequence of characters beginning with a letter and followed by any combination
+	 * of letters, digits, plus ("+"), period ("."), or hyphen ("-").
+	 * @param uri URI to evaluate.
+	 * @return -1 if no scheme is present or otherwise the length of the scheme.
+	 * @see <a href="http://en.wikipedia.org/wiki/URI_scheme">http://en.wikipedia.org/wiki/URI_scheme</a>
+	 */
+	public static int uriSchemeLength(final String uri) {
+		if (uri.length() == 0) {
+			return -1;
+		}
+
+		// first character must be a letter
+		final char firstChar = uri.charAt(0);
+		if (firstChar < 'a' || firstChar > 'z') {
+			return -1;
+		}
+
+		// evaluate remaining string
+		for (int i = 1; i < uri.length(); i++) {
+			final char c = uri.charAt(i);
+			if (c == ':') {
+				// end of the scheme
+				return i;
+			}
+			if ((c < 'a' || c > 'z') && (c < '0' || c > '9') && c != '+' && c != '.' && c != '-') {
+				// invalid character found before the colon
+				return -1;
+			}
+		}
+		return -1;
+	}
 }
