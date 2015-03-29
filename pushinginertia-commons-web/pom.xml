@@ -6,7 +6,6 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.pushinginertia.commons</groupId>
     <artifactId>pushinginertia-commons-web</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -31,12 +30,6 @@
             <groupId>edu.jwetherell</groupId>
             <artifactId>jw-algorithms</artifactId>
             <version>${jw-algorithms.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
