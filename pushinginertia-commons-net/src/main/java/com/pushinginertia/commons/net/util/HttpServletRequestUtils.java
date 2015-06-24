@@ -16,15 +16,21 @@
 package com.pushinginertia.commons.net.util;
 
 import com.pushinginertia.commons.core.validation.ValidateAs;
+import com.pushinginertia.commons.lang.StringUtils;
 import com.pushinginertia.commons.net.IpAddress;
 import com.pushinginertia.commons.net.IpAddressUtils;
 import org.apache.http.HttpHeaders;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.nio.ByteBuffer;
+import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.Optional;
 import java.util.StringTokenizer;
+import java.util.UUID;
 
 /**
  * Utility methods for extracting information out of a {@link javax.servlet.http.HttpServletRequest}.
@@ -112,6 +118,7 @@ public final class HttpServletRequestUtils {
 	 * @param req request received from the user agent
 	 * @return null if req is null
 	 */
+	@SuppressWarnings("unchecked")
 	public static String toString(final HttpServletRequest req) {
 		ValidateAs.notNull(req, "req");
 
@@ -124,5 +131,55 @@ public final class HttpServletRequestUtils {
 			}
 		}
 		return sb.toString();
+	}
+
+	/**
+	 * Searches for the first cookie in the given servlet request with a name matching the name to search.
+	 * @param request Request containing cookies.
+	 * @param name Cookie name to search.
+	 * @return Matching cookie.
+	 */
+	public static Optional<Cookie> findCookie(final HttpServletRequest request, final String name) {
+		final Cookie[] cookies = request.getCookies();
+		if (cookies == null) {
+			return Optional.empty();
+		}
+
+		return Arrays.stream(cookies)
+				.filter(cookie -> name.equals(cookie.getName()))
+				.findFirst();
+	}
+
+	/**
+	 * Searches for the first cookie in the given servlet request with a name matching the name to search.
+	 * @param request Request containing cookies.
+	 * @param name Cookie name to search.
+	 * @return Matching cookie value or null.
+	 */
+	public static String findCookieAsString(final HttpServletRequest request, final String name) {
+		final Optional<Cookie> cookie = findCookie(request, name);
+		if (cookie.isPresent()) {
+			return cookie.get().getValue();
+		}
+		return null;
+	}
+
+	/**
+	 * Searches for the first cookie in the given servlet request with a name matching the name to search and parses
+	 * it into a UUID.
+	 * @param request Request containing cookies.
+	 * @param name Cookie name to search.
+	 * @return Matching cookie value or null.
+	 * @throws IllegalArgumentException If the cookie value cannot be parsed into a UUID.
+	 */
+	public static UUID findCookieAsUUID(
+			final HttpServletRequest request,
+			final String name) throws IllegalArgumentException {
+		final Optional<Cookie> cookie = findCookie(request, name);
+		if (cookie.isPresent()) {
+			final String value = cookie.get().getValue();
+			return StringUtils.parseUUID(value);
+		}
+		return null;
 	}
 }
