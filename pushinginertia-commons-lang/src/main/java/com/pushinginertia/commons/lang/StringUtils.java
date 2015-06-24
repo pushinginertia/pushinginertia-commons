@@ -17,13 +17,18 @@ package com.pushinginertia.commons.lang;
 
 import com.pushinginertia.commons.core.validation.ValidateAs;
 
+import javax.annotation.Nonnull;
+import javax.xml.bind.DatatypeConverter;
+import java.nio.ByteBuffer;
 import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -401,7 +406,7 @@ public final class StringUtils {
 	public static Set<Character.UnicodeBlock> unicodeBlocksInString(final String value) {
 		ValidateAs.notNull(value, "value");
 
-		final Set<Character.UnicodeBlock> set = new HashSet<Character.UnicodeBlock>();
+		final Set<Character.UnicodeBlock> set = new HashSet<>();
 		for (final char c: value.toCharArray()) {
 			final Character.UnicodeBlock block = Character.UnicodeBlock.of(c);
 			set.add(block);
@@ -476,5 +481,34 @@ public final class StringUtils {
 			}
 		}
 		return len;
+	}
+
+	/**
+	 * Instantiates a new UUID from a string that may or may not have had its hyphens stripped. e.g.,
+	 * 00000000000000000000000000000000 vs. 00000000-0000-0000-0000-000000000000.
+	 * @param uuid String representation to parse.
+	 * @return Parsed UUID object.
+	 * @throws java.lang.IllegalArgumentException If the input is not parseable.
+	 */
+	@Nonnull
+	public static UUID parseUUID(@Nonnull final String uuid) throws IllegalArgumentException{
+		if (uuid.length() == 32) {
+			// assume hyphens have been stripped and need to be re-added so it can be parsed
+			final byte[] bytes = DatatypeConverter.parseHexBinary(uuid);
+			final ByteBuffer buf = ByteBuffer.wrap(bytes);
+			return new UUID(buf.getLong(), buf.getLong());
+		}
+		return UUID.fromString(uuid);
+
+	}
+
+	/**
+	 * Identifies if a given string is a sequence of hex characters and of a given number of bytes.
+	 * @param s String to test.
+	 * @param expectedBytes
+	 * @return
+	 */
+	public static boolean isHexOfLength(@Nonnull final String s, final int expectedBytes) {
+		return s.length() == expectedBytes * 2 && s.chars().allMatch(i -> Character.digit(i, 16) != -1);
 	}
 }

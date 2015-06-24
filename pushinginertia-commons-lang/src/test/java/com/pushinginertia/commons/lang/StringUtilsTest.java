@@ -21,6 +21,7 @@ import org.junit.Test;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.UUID;
 
 public class StringUtilsTest {
 	@Test
@@ -195,5 +196,37 @@ public class StringUtilsTest {
 		Assert.assertEquals(2, StringUtils.longestCommonPrefixLength("abxyz", "abc"));
 		Assert.assertEquals(3, StringUtils.longestCommonPrefixLength("abcxyz", "abc"));
 		Assert.assertEquals(3, StringUtils.longestCommonPrefixLength("abcxyz", "abcd"));
+	}
+
+	@Test
+	public void verifyParseUUIDOnGoodInput() {
+		final String uuid = "038d0a23-891a-4dcf-aeaa-a8029c5ccf77";
+		final String uuidNoHyphens = "038d0a23891a4dcfaeaaa8029c5ccf77";
+		final UUID expectedUuid = UUID.fromString(uuid);
+
+		Assert.assertEquals(expectedUuid, StringUtils.parseUUID(uuidNoHyphens));
+		Assert.assertEquals(expectedUuid, StringUtils.parseUUID(uuidNoHyphens.toUpperCase()));
+		Assert.assertEquals(expectedUuid, StringUtils.parseUUID(uuid));
+		Assert.assertEquals(expectedUuid, StringUtils.parseUUID(uuid.toUpperCase()));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void parseUUIDNoHyphensBadCharacterThrows() {
+		StringUtils.parseUUID("x38d0a23891a4dcfaeaaa8029c5ccf77");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void parseUUIDWithHyphensBadCharacterThrows() {
+		StringUtils.parseUUID("x38d0a23-891a4dcfaeaaa8029c5ccf77");
+	}
+
+	@Test
+	public void isHexOfLength() {
+		Assert.assertTrue(StringUtils.isHexOfLength("0123456789abcdef", 8));
+		Assert.assertFalse(StringUtils.isHexOfLength("0123456789abcdef", 5));
+		Assert.assertTrue(StringUtils.isHexOfLength("0123456789ABCDEF", 8));
+		Assert.assertFalse(StringUtils.isHexOfLength("0123456789ABCDEF", 5));
+		Assert.assertFalse(StringUtils.isHexOfLength("x123456789abcdef", 8));
+		Assert.assertFalse(StringUtils.isHexOfLength("x123456789abcdef", 5));
 	}
 }
