@@ -33,9 +33,10 @@ public class IpIntervalMappingsTest {
 	@Test
 	public void initializer() throws IOException {
 		final IpIntervalMappings.CsvInitializer initializer = new IpIntervalMappings.CsvInitializer(IpIntervalMappings.class);
-		final IpIntervalMappings f = new IpIntervalMappings(initializer);
+		final IpIntervalMappings<String> f = new IpIntervalMappings<>(initializer);
 
 		Assert.assertEquals("Google", f.get(new IpAddress("66.249.64.0")));
+		Assert.assertEquals("Baidu", f.get(new IpAddress("180.76.15.143")));
 		Assert.assertNull(f.get(new IpAddress("1.1.1.1")));
 	}
 }

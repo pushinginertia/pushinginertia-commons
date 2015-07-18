@@ -30,12 +30,12 @@ import java.util.Set;
 public class IpIntervalMappings<T> {
 	private static final Logger LOG = LoggerFactory.getLogger(IpIntervalMappings.class);
 
-	private IntervalTree tree;
+	private IntervalTree<T> tree;
 
 	public IpIntervalMappings(final ListInitializer<IntervalTree.IntervalData<T>> initializer) {
 		try {
 			final List<IntervalTree.IntervalData<T>> list = initializer.newList();
-			tree = new IntervalTree<T>(list);
+			tree = new IntervalTree<>(list);
 		} catch (final Exception e) {
 			LOG.error("A failure occurred initializing class: " + this.getClass().getName(), e);
 			tree = null;
@@ -88,7 +88,7 @@ public class IpIntervalMappings<T> {
 			if (LOG.isDebugEnabled()) {
 				LOG.debug("Adding " + range + " => " + netName);
 			}
-			return new IntervalTree.IntervalData<String>(
+			return new IntervalTree.IntervalData<>(
 					range.getLowAddress().getIpNumber(),
 					range.getHighAddress().getIpNumber(),
 					netName);
