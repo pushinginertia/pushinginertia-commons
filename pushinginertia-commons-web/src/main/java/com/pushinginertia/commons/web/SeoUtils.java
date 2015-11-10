@@ -38,13 +38,14 @@ public class SeoUtils {
 			 247};
 	/**
 	 * characters to convert to hyphen:
-	 * &+/_
+	 * &+/_()
 	 * #150-#152, #160
+	 * Chinese characters 65288, 65289, 65292 (parentheses and comma)
 	 */
 	public static final char[] REPLACE_HYPHEN =
-			{'-', ' ', '&', '+', '/', '_', 150, 151, 152, 160};
-	// characters to keave untouched:
-	//  ()-
+			{'-', ' ', '&', '+', '/', '_', '(', ')',
+			 150, 151, 152, 160,
+			 65288, 65289, 65292};
 
 	/**
 	 * Generates a slug (SEO-friendly short text) based on a title of a page by removing punctuation and formatting and
@@ -54,8 +55,9 @@ public class SeoUtils {
 	 * @return null iff input is null
 	 */
 	public static String generateSlug(final String name) {
-		if (name == null)
+		if (name == null) {
 			return null;
+		}
 
 		// TODO: support maximum words in the slug or maximum output length
 

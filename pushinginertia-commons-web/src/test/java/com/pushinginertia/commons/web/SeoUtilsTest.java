@@ -21,21 +21,38 @@ import org.junit.Test;
 
 public class SeoUtilsTest {
 	@Test
-	public void generateSlug() {
+	public void generateSlugNull() {
 		Assert.assertNull(SeoUtils.generateSlug(null));
+	}
 
+	@Test
+	public void generateSlugEN() {
 		// English
 		Assert.assertEquals("Someones-WebPage", SeoUtils.generateSlug("Someone's WebPage"));
 		Assert.assertEquals("Someones-WebPage", SeoUtils.generateSlug(" Someone's - WebPage-*- *"));
 		Assert.assertEquals("My-Web-Page-1", SeoUtils.generateSlug("My Web Page = (#1)"));
+	}
 
+	@Test
+	public void generateSlugKO() {
 		// Korean
 		Assert.assertEquals("지불-가능-최대예산", SeoUtils.generateSlug("지불 가능 최대예산"));
+	}
 
+	@Test
+	public void generateSlugDE() {
 		// German
 		Assert.assertEquals(
 				"Die-Stadt-verfügt-über-ein-gut-ausgebautes-Netz-von-Verkehrsmitteln-sodaß-ein-Auto-nicht-nötig-ist",
 				SeoUtils.generateSlug("Die Stadt verfügt über ein gut ausgebautes Netz von Verkehrsmitteln, sodaß ein Auto nicht nötig ist."));
+	}
+
+	@Test
+	public void generateSlugCN() {
+		// Chinese
+		Assert.assertEquals(
+				"999-限-家住",
+				SeoUtils.generateSlug("，$999，限 （家住）"));
 	}
 
 	@Test
