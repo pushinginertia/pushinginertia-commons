@@ -81,6 +81,8 @@ public class UserAgentCategoryTest {
 		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("Apache-HttpClient/4.3 (java 1.5)"));
 		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.131 Safari/537.36 AppEngine-Google; (+http://code.google.com/appengine; appid: s~abcd)"));
 		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("Xenu Link Sleuth/1.3.8"));
+		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("Chilkat/1.0.0 (+http://www.chilkatsoft.com/ChilkatHttpUA.asp)"));
+		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("Curl/PHP 5.6.14-0+deb8u1 (http://github.com/shuber/curl)"));
 	}
 
 	@Test
