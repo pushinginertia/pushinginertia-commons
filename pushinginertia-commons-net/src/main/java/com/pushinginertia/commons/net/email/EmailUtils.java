@@ -19,6 +19,7 @@ import com.pushinginertia.commons.core.validation.ValidateAs;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.MultiPartEmail;
 
+import javax.annotation.Nonnull;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
@@ -63,17 +64,23 @@ public final class EmailUtils {
 	 * Populates a newly instantiated {@link MultiPartEmail} with the given arguments.
 	 * @param email email instance to populate
 	 * @param smtpHost SMTP host that the message will be sent to
+	 * @param smtpPort SMTP port to connect to on the given host.
 	 * @param msg container object for the email's headers and contents
 	 * @throws IllegalArgumentException if the inputs are not valid
 	 * @throws EmailException if a problem occurs constructing the email
 	 */
-	public static void populateMultiPartEmail(final MultiPartEmail email, final String smtpHost, final EmailMessage msg)
+	public static void populateMultiPartEmail(
+			@Nonnull final MultiPartEmail email,
+			@Nonnull final String smtpHost,
+			final int smtpPort,
+			@Nonnull final EmailMessage msg)
 	throws IllegalArgumentException, EmailException {
 		ValidateAs.notNull(email, "email");
 		ValidateAs.notNull(smtpHost, "smtpHost");
 		ValidateAs.notNull(msg, "msg");
 
 		email.setHostName(smtpHost);
+		email.setSmtpPort(smtpPort);
 		email.setCharset(UTF_8);
 		email.setFrom(msg.getSender().getEmail(), msg.getSender().getName(), UTF_8);
 		email.addTo(msg.getRecipient().getEmail(), msg.getRecipient().getName(), UTF_8);

@@ -28,4 +28,31 @@ public class ArrayUtilsTest {
 		Assert.assertEquals("a", out[1]);
 		Assert.assertEquals("b", out[2]);
 	}
+
+	@Test
+	public void mergeSorted() {
+		Assert.assertArrayEquals(
+				new int[]{10, 15, 20, 25, 30, 35, 45},
+				ArrayUtils.mergeSorted(
+						new int[]{10, 20, 30},
+						new int[]{15, 25, 35, 45}));
+
+		Assert.assertArrayEquals(
+				new int[]{10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70},
+				ArrayUtils.mergeSorted(
+						new int[]{10, 20, 30, 40, 50, 60, 70},
+						new int[]{15, 25, 35, 45}));
+
+		Assert.assertArrayEquals(
+				new int[]{15, 25, 35, 45},
+				ArrayUtils.mergeSorted(
+						new int[]{15, 25, 35, 45},
+						new int[]{}));
+
+		Assert.assertArrayEquals(
+				new int[]{15, 25, 35, 45},
+				ArrayUtils.mergeSorted(
+						new int[]{},
+						new int[]{15, 25, 35, 45}));
+	}
 }

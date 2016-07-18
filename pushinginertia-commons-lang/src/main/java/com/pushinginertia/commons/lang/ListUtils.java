@@ -52,7 +52,7 @@ public final class ListUtils {
 
 	public static List<Integer> toListWithMax(final Collection<Integer> collection, final int max) {
 		ValidateAs.notNull(collection, "collection");
-		final List<Integer> list = new ArrayList<Integer>();
+		final List<Integer> list = new ArrayList<>();
 		for (final Integer i: collection) {
 			if (i <= max) {
 				list.add(i);
@@ -68,7 +68,7 @@ public final class ListUtils {
 	 */
 	public static List<Integer> intArrayToList(final int[] array) {
 		ValidateAs.notNull(array, "array");
-		final List<Integer> list = new ArrayList<Integer>(array.length);
+		final List<Integer> list = new ArrayList<>(array.length);
 		for (final int item: array) {
 			list.add(item);
 		}

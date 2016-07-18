@@ -17,7 +17,9 @@ package com.pushinginertia.commons.lang;
 
 import com.pushinginertia.commons.core.validation.ValidateAs;
 
+import javax.annotation.Nonnull;
 import java.util.Arrays;
+import java.util.List;
 
 public final class ArrayUtils {
 	private ArrayUtils() {}
@@ -50,5 +52,36 @@ public final class ArrayUtils {
 		result[0] = item;
 		System.arraycopy(arr, 0, result, 1, length);
 		return result;
+	}
+
+
+	public static int[] mergeSorted(
+			@Nonnull final int[] a1,
+			@Nonnull final int[] a2) {
+		final int[] out = new int[a1.length + a2.length];
+
+		int pos = 0;
+		int i1 = 0;
+		int i2 = 0;
+
+		while (i1 < a1.length && i2 < a2.length) {
+			if (a1[i1] <= a2[i2]) {
+				out[pos] = a1[i1];
+				pos++;
+				i1++;
+			} else if (a1[i1] >= a2[i2]) {
+				out[pos] = a2[i2];
+				pos++;
+				i2++;
+			}
+		}
+
+		if (i1 < a1.length) {
+			System.arraycopy(a1, i1, out, pos, a1.length - i1);
+		} else if (i2 < a2.length) {
+			System.arraycopy(a2, i2, out, pos, a2.length - i2);
+		}
+
+		return out;
 	}
 }
