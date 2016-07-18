@@ -78,6 +78,8 @@ public enum UserAgentCategory {
 		ABUSE_BOT_SET.add("^Mozilla/4\\.0 \\(compatible; MSIE 5\\.5; Windows 95; BCD2000\\)$");  // Xrumer forum spam bot: http://www.forumpostersunion.com/showthread.php?p=83742
 		ABUSE_BOT_SET.add("^[a-zA-Z0-9-.]+\\.[a-z]{2,4}$"); // matches user agents that point to a domain
 		ABUSE_BOT_SET.add("^Chilkat.*");
+		// Ararat Syanpse: http://superuser.com/questions/146133/what-is-apache-synapse/654109#654109
+		ABUSE_BOT_SET.add("^Mozilla/4\\.0 \\(compatible; Synapse\\)");
 	}
 
 	/**
