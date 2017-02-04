@@ -50,7 +50,7 @@ public class FileUtils {
 	 */
 	public static void writeFileToDisk(final File file, final byte[] bytes)
 	throws IOException {
-		LOG.info("Saving file of {} bytes to disk: {}", bytes.length, file.getAbsolutePath());
+		LOG.info("Saving {} byte file to disk: {}", bytes.length, file.getAbsolutePath());
 		// TODO: make it configurable if an existing file should be overwritten or not
 
 		final OutputStream out = new FileOutputStream(file);
