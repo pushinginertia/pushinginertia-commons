@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2013 Pushing Inertia
+/* Copyright (c) 2011-2017 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +19,6 @@ import com.pushinginertia.commons.core.validation.ValidateAs;
 import com.pushinginertia.commons.lang.StringUtils;
 import com.pushinginertia.commons.net.IpAddress;
 import com.pushinginertia.commons.net.IpAddressUtils;
-import org.apache.http.HttpHeaders;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -108,7 +107,7 @@ public final class HttpServletRequestUtils {
 	 */
 	public static String getUserAgent(final HttpServletRequest req) {
 		ValidateAs.notNull(req, "req");
-		return req.getHeader(HttpHeaders.USER_AGENT);
+		return req.getHeader("User-Agent");
 	}
 
 	/**

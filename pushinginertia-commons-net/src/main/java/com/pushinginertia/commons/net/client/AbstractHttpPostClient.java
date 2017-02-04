@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2013 Pushing Inertia
+/* Copyright (c) 2011-2017 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +15,6 @@
  */
 package com.pushinginertia.commons.net.client;
 
-import org.apache.http.client.methods.HttpPost;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -161,7 +160,7 @@ public abstract class AbstractHttpPostClient<C extends HttpURLConnection> {
 			final URL u = new URL(getUrl());
 			@SuppressWarnings("unchecked") final C con = (C) u.openConnection();
 			con.setDoOutput(true);						  // indicates a POST request
-			con.setRequestMethod(HttpPost.METHOD_NAME);
+			con.setRequestMethod("POST");
 			con.setFixedLengthStreamingMode(contentLength); // content length is known so set it for efficiency
 			con.setConnectTimeout(getConnectionTimeout());  // default value is zero (never time out)
 			con.setRequestProperty("Accept", "application/xml");
