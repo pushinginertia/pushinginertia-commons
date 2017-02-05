@@ -15,27 +15,20 @@
  */
 package com.pushinginertia.commons.net;
 
-import com.pushinginertia.commons.core.init.ListInitializer;
-import edu.jwetherell.algorithms.dataStructures.IntervalTree;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
 
 public class IpIntervalMappingsTest {
-	public class TestClass extends IpIntervalMappings<String> {
-		public TestClass(final ListInitializer<IntervalTree.IntervalData<String>> intervalDataResourceListInitializer)
-		throws IOException {
-			super(intervalDataResourceListInitializer);
-		}
-	}
-
 	@Test
 	public void initializer() throws IOException {
 		final IpIntervalMappings.CsvInitializer initializer = new IpIntervalMappings.CsvInitializer(IpIntervalMappings.class);
 		final IpIntervalMappings<String> f = new IpIntervalMappings<>(initializer);
 
 		Assert.assertEquals("Google", f.get(new IpAddress("66.249.64.0")));
+		Assert.assertEquals("Google", f.get(new IpAddress("66.249.95.255")));
+		Assert.assertNull(f.get(new IpAddress("66.249.96.0")));
 		Assert.assertEquals("Baidu", f.get(new IpAddress("180.76.15.143")));
 		Assert.assertNull(f.get(new IpAddress("1.1.1.1")));
 	}
