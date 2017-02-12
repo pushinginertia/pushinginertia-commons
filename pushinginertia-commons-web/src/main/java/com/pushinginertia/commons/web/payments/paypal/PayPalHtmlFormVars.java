@@ -60,6 +60,13 @@ public final class PayPalHtmlFormVars {
 	public static final String CURRENCY_CODE = "currency_code";
 	/**
 	 * Optional.
+	 * Transaction-based tax override variable. Set this variable to a flat tax amount to apply to the payment
+	 * regardless of the buyer's location. This value overrides any tax settings set in your account profile. Valid
+	 * only for Buy Now and Add to Cart buttons. Default — Profile tax settings, if any, apply.
+	 */
+	public static final String TAX = "tax";
+	/**
+	 * Optional.
 	 * Pass-through variable for your own tracking purposes, which buyers do not see.
 	 * Max 256 chars.
 	 */
