@@ -152,7 +152,7 @@ public final class NormalizeStringCaseUtils {
 		boolean capitalizeNext = true;
 		for (int i = 0; i < sb.length(); i++) {
 			final char c = sb.charAt(i);
-			if (c == '.') {
+			if (c == '.' || c == '&') {
 				capitalizeNext = true;
 			} else if (capitalizeNext && !isSeparator(c)) {
 				sb.setCharAt(i, Character.toTitleCase(c));
@@ -178,7 +178,7 @@ public final class NormalizeStringCaseUtils {
 		boolean capitalizeNext = true;
 		for (int i = 0; i < sb.length(); i++) {
 			final char c = sb.charAt(i);
-			if (isSeparator(c)) {
+			if (isSeparator(c) || c == '&') {
 				capitalizeNext = true;
 			} else if (capitalizeNext) {
 				sb.setCharAt(i, Character.toTitleCase(c));

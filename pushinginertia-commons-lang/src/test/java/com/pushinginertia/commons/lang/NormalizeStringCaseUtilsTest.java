@@ -27,6 +27,7 @@ public class NormalizeStringCaseUtilsTest extends TestCase {
 		assertEquals("Abcd Efgh", NormalizeStringCaseUtils.toTitleCase("aBcd eFgh"));
 		assertEquals("Abcd (Efgh Ijkl)", NormalizeStringCaseUtils.toTitleCase("abcd (efgh ijkl)"));
 		assertEquals("Abcd/Efgh", NormalizeStringCaseUtils.toTitleCase("abcd/efgh"));
+		assertEquals("A&Bcd/Efgh", NormalizeStringCaseUtils.toTitleCase("a&bcd/efgh"));
 	}
 
 	public void testToSentenceCase() {
@@ -39,6 +40,7 @@ public class NormalizeStringCaseUtilsTest extends TestCase {
 		assertEquals("Abcd efgh. Ijkl.", NormalizeStringCaseUtils.toSentenceCase("abcd efgh. ijkl."));
 		assertEquals("Abcd efgh. Ijkl.", NormalizeStringCaseUtils.toSentenceCase("ABCD EFGH. IJKL."));
 		assertEquals("Abcd efgh. Ijkl.", NormalizeStringCaseUtils.toSentenceCase("aBcd eFgh. ijKl."));
+		assertEquals("A&Bcd/Efgh. Ijkl.", NormalizeStringCaseUtils.toTitleCase("a&bcd/efgh. ijkl."));
 	}
 
 	public void testSatisfiesCriteria() {
