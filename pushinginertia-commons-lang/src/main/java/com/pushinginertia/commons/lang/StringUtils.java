@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2014 Pushing Inertia
+/* Copyright (c) 2011-2017 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -293,6 +293,20 @@ public final class StringUtils {
 			return s.substring(0, s.length() - 1);
 		}
 		return s;
+	}
+
+	public static String stripLeadingTrailingCharacters(final String s, final char[] charsToStrip) {
+		final char[] chars = s.toCharArray();
+		int startIdx = 0;
+		int endIdx = s.length();
+
+		while (startIdx < endIdx && (CharUtils.inCharArray(chars[startIdx], charsToStrip) != -1)) {
+			startIdx++;
+		}
+		while (endIdx > startIdx && (CharUtils.inCharArray(chars[endIdx - 1], charsToStrip) != -1)) {
+			endIdx--;
+		}
+		return s.substring(startIdx, endIdx);
 	}
 
 	/**

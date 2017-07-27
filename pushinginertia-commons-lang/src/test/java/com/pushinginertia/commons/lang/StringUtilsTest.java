@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2014 Pushing Inertia
+/* Copyright (c) 2011-2017 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -102,6 +102,14 @@ public class StringUtilsTest {
 	public void addTrailingCharIfMissing() {
 		Assert.assertEquals("abc/", StringUtils.addTrailingCharIfMissing("abc", '/'));
 		Assert.assertEquals("abc/", StringUtils.addTrailingCharIfMissing("abc/", '/'));
+	}
+
+	@Test
+	public void stripLeadingTrailingCharacters() {
+		Assert.assertEquals("", StringUtils.stripLeadingTrailingCharacters("", new char[]{' '}));
+		Assert.assertEquals("", StringUtils.stripLeadingTrailingCharacters("  ", new char[]{' '}));
+		Assert.assertEquals("abc", StringUtils.stripLeadingTrailingCharacters("~~ abc! ~~", new char[]{' ', '!', '~'}));
+		Assert.assertEquals("", StringUtils.stripLeadingTrailingCharacters("~~~~ ~~~~", new char[]{' ', '!', '~'}));
 	}
 
 	@Test
