@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2016 Pushing Inertia
+/* Copyright (c) 2011-2018 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,9 +19,44 @@ package com.pushinginertia.commons.lang;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
 public class EnumUtilsTest {
+	enum X {
+		A, B,
+	}
+
+	@Test
+	public void toEnumSet() {
+		final List<String> input = Arrays.asList("A", "X");
+		final HashSet<X> expected = new HashSet<>(Arrays.asList(X.A));
+
+		Assert.assertEquals(
+				expected,
+				EnumUtils.toEnumSet(
+						input,
+						X.class,
+						false));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void toEnumSetThrowWhenUnknown() {
+		final List<String> input = Arrays.asList("A", "X");
+		final HashSet<X> expected = new HashSet<>(Arrays.asList(X.A));
+
+		Assert.assertEquals(
+				expected,
+				EnumUtils.toEnumSet(
+						input,
+						X.class,
+						true));
+	}
+
 	private enum ToCamelCaseString {
 		ONE_TWO_THREE("One Two Three"),
 		FOUR_FIVE_6_SEVEN("Four Five 6 Seven");
