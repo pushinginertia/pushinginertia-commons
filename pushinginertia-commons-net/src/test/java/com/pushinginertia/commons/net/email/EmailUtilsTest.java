@@ -22,5 +22,6 @@ public class EmailUtilsTest {
 	@Test
 	public void textToHtml() {
 		Assert.assertEquals("s&lt;1&gt;<br/>s&lt;2&gt;", EmailUtils.textToHtml("s<1>\ns<2>"));
+		Assert.assertEquals("&nbsp;a<br/>&nbsp;&lt; x<br/>&nbsp;x y", EmailUtils.textToHtml(" a\n < x\n x y"));
 	}
 }

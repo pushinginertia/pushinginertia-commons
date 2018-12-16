@@ -38,23 +38,33 @@ public final class EmailUtils {
 	 * @return message in html format
 	 */
 	public static String textToHtml(final String s) {
+		boolean lineStart = true;
 		final StringBuilder sb = new StringBuilder();
 		for (final char c: s.toCharArray()) {
+			if (c == ' ' && lineStart) {
+				sb.append("&nbsp;");
+				continue;
+			}
 			switch (c) {
 				case '\n':
 					sb.append("<br/>");
+					lineStart = true;
 					break;
 				case '<':
 					sb.append("&lt;");
+					lineStart = false;
 					break;
 				case '>':
 					sb.append("&gt;");
+					lineStart = false;
 					break;
 				case '&':
 					sb.append("&amp;");
+					lineStart = false;
 					break;
 				default:
 					sb.append(c);
+					lineStart = false;
 			}
 		}
 		return sb.toString();
