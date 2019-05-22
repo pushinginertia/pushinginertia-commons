@@ -113,6 +113,17 @@ public class StringUtilsTest {
 	}
 
 	@Test
+	public void stripRepeatedCharacters() {
+		Assert.assertEquals("", StringUtils.stripRepeatedCharacters("", new char[]{' ', '-'}));
+		Assert.assertEquals("a b", StringUtils.stripRepeatedCharacters("a  b", new char[]{' ', '-'}));
+		Assert.assertEquals(" a b", StringUtils.stripRepeatedCharacters(" a  b", new char[]{' ', '-'}));
+		Assert.assertEquals(" a b", StringUtils.stripRepeatedCharacters("  a  b", new char[]{' ', '-'}));
+		Assert.assertEquals("a b ", StringUtils.stripRepeatedCharacters("a  b ", new char[]{' ', '-'}));
+		Assert.assertEquals("a b ", StringUtils.stripRepeatedCharacters("a  b  ", new char[]{' ', '-'}));
+		Assert.assertEquals("a-b ", StringUtils.stripRepeatedCharacters("a--b  ", new char[]{' ', '-'}));
+	}
+
+	@Test
 	public void stripTrailingCharIfPresent() {
 		Assert.assertEquals("abc", StringUtils.stripTrailingCharIfPresent("abc", '/'));
 		Assert.assertEquals("abc", StringUtils.stripTrailingCharIfPresent("abc/", '/'));

@@ -310,6 +310,45 @@ public final class StringUtils {
 	}
 
 	/**
+	 * Strips multiple occurrences of a given collection of characters from a
+	 * string. Can be used to replace multiple whitespace with a single space.
+	 */
+	@Nonnull
+	public static String stripRepeatedCharacters(
+			@Nonnull final String s,
+			final char[] charsToStrip) {
+		final StringBuilder sb = new StringBuilder();
+
+		final char[] chars = s.toCharArray();
+		int startIdx = -1;
+
+		for (int i = 0; i < s.length(); i++) {
+			if (CharUtils.inCharArray(chars[i], charsToStrip) != -1) {
+				if (startIdx == -1) {
+					// Previous character was not in charsToStrip
+					startIdx = i;
+				} else if (chars[i - 1] != chars[i]) {
+					// Two characters to strip but they are different.
+					sb.append(chars[i - 1]);
+					startIdx = i;
+				}
+			} else if (startIdx != -1) {
+				sb.append(chars[i - 1]);
+				sb.append(chars[i]);
+				startIdx = -1;
+			} else {
+				sb.append(chars[i]);
+			}
+		}
+
+		if (startIdx != -1) {
+			sb.append(chars[s.length() - 1]);
+		}
+
+		return sb.toString();
+	}
+
+	/**
 	 * Supplementary characters are characters in the Unicode standard whose code points are above U+FFFF, and are
 	 * comprised of 4 bytes. Some systems don't support these characters (such as MySQL prior to 5.5) and this method
 	 * provides a way to either strip out these characters or replace them with something else.
