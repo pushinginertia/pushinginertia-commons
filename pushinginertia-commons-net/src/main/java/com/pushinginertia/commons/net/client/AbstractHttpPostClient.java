@@ -215,9 +215,12 @@ public abstract class AbstractHttpPostClient<C extends HttpURLConnection> {
 	protected void verifyResponseCode(final HttpURLConnection con) throws HttpConnectException {
 		try {
 			if (con.getResponseCode() != HttpURLConnection.HTTP_OK) {
-				final String msg = "Bad HTTP response code [" + con.getResponseCode() + ": " + con.getResponseMessage() + "] reported by host: " + getHostName();
-				LOG.error(getClass().getSimpleName(), msg);
-				throw new HttpConnectException(msg);
+				final UnexpectedHTTPStatusCode e = new UnexpectedHTTPStatusCode(
+						getHostName(),
+						con.getResponseCode(),
+						con.getResponseMessage());
+				LOG.error(getClass().getSimpleName(), e.getMessage());
+				throw e;
 			}
 		} catch (HttpConnectException e) {
 			// don't double-wrap the exception!
