@@ -18,6 +18,8 @@ package com.pushinginertia.commons.net.client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.io.BufferedOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -96,6 +98,40 @@ public abstract class AbstractHttpPostClient<C extends HttpURLConnection> {
 	public void setUserAgent(final String userAgent) {
 		LOG.debug("Setting user agent to: " + userAgent);
 		this.userAgent = userAgent;
+	}
+
+	/**
+	 * Sends a message of name-value pairs to the remote host and returns its
+	 * response. If an error occurs while communicating with the server, the
+	 * request is retried.
+	 *
+	 * @param parameters Name-value pairs to post.
+	 * @param encoding How to encode the POST parameters.
+	 * @param maxAttempts Maximum number of attempts to make before failing.
+	 * @return Response received from the host.
+	 * @throws HttpConnectException If the connection to the remote host cannot
+	 * be completed or there is a problem encoding the request. In the event of
+	 * multiple failures, only the last failure is thrown but all are logged.
+	 */
+	@Nullable
+	public String sendMessageWithRetry(
+			@Nonnull final Map<String, String> parameters,
+			@Nonnull final String encoding,
+			final int maxAttempts) throws HttpConnectException {
+		int i = 0;
+		while (true) {
+			i++;
+			try {
+				return sendMessage(parameters, encoding);
+			} catch (final HttpConnectException e) {
+				LOG.error(
+						"Failed attempt " + i + " to send POST request to server.",
+						e);
+				if (i >= maxAttempts) {
+					throw e;
+				}
+			}
+		}
 	}
 
 	/**
