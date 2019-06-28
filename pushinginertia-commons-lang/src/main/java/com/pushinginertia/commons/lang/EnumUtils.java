@@ -88,17 +88,6 @@ public final class EnumUtils {
 	 */
 	@Nonnull
 	public static <E extends Enum<E>> String toCamelCaseString(@Nonnull final E enumValue) {
-		final char[] name = enumValue.name().toCharArray();
-		final StringBuilder sb = new StringBuilder(name.length);
-		for (int i = 0; i < name.length; i++) {
-			if (i == 0 || name[i - 1] == '_') {
-				sb.append(Character.toUpperCase(name[i]));
-			} else if (name[i] == '_') {
-				sb.append(' ');
-			} else {
-				sb.append(Character.toLowerCase(name[i]));
-			}
-		}
-		return sb.toString();
+		return StringUtils.toCamelCaseString(enumValue.name());
 	}
 }

@@ -564,4 +564,24 @@ public final class StringUtils {
 	public static boolean isHexOfLength(@Nonnull final String s, final int expectedBytes) {
 		return s.length() == expectedBytes * 2 && s.chars().allMatch(i -> Character.digit(i, 16) != -1);
 	}
+
+	/**
+	 * Transforms an uppercased string with underscores into a string that
+	 * could be presented to a user.
+	 */
+	@Nonnull
+	public static String toCamelCaseString(@Nonnull final String s) {
+		final char[] name = s.toCharArray();
+		final StringBuilder sb = new StringBuilder(name.length);
+		for (int i = 0; i < name.length; i++) {
+			if (i == 0 || name[i - 1] == '_') {
+				sb.append(Character.toUpperCase(name[i]));
+			} else if (name[i] == '_') {
+				sb.append(' ');
+			} else {
+				sb.append(Character.toLowerCase(name[i]));
+			}
+		}
+		return sb.toString();
+	}
 }
