@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2013 Pushing Inertia
+/* Copyright (c) 2011-2021 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,5 +37,15 @@ public class URLUtilsTest {
 		Assert.assertEquals(16, URLUtils.uriSchemeLength("chrome-extension://www.example.com"));
 		Assert.assertEquals(9, URLUtils.uriSchemeLength("soap.beep://www.example.com"));
 		Assert.assertEquals(6, URLUtils.uriSchemeLength("tn3270://www.example.com"));
+	}
+
+	@Test
+	public void isPathRootRelative() {
+		Assert.assertTrue(URLUtils.isPathRootRelative("/"));
+		Assert.assertTrue(URLUtils.isPathRootRelative("/images/abc.png"));
+		Assert.assertFalse(URLUtils.isPathRootRelative(""));
+		Assert.assertFalse(URLUtils.isPathRootRelative("./abc.png"));
+		Assert.assertFalse(URLUtils.isPathRootRelative("../abc.png"));
+		Assert.assertFalse(URLUtils.isPathRootRelative("//host.com/images/abc.png"));
 	}
 }

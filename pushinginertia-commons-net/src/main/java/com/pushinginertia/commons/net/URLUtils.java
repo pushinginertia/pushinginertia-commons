@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2013 Pushing Inertia
+/* Copyright (c) 2011-2021 Pushing Inertia
  * All rights reserved.  http://pushinginertia.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -91,5 +91,14 @@ public class URLUtils {
 			}
 		}
 		return -1;
+	}
+
+	/**
+	 * A root relative path is something like "/images/abc.png".
+	 */
+	public static boolean isPathRootRelative(final String path) {
+		// Check that the second character is not '/' to prevent protocol
+		// relative URLs like "//host/path"
+		return path.startsWith("/") && (path.length() == 1 || path.charAt(1) != '/');
 	}
 }
