@@ -29,7 +29,7 @@ public class SeoUtilsTest {
 	public void generateSlugEN() {
 		// English
 		Assert.assertEquals("Someones-WebPage", SeoUtils.generateSlug("Someone's WebPage"));
-		Assert.assertEquals("Someones-WebPage", SeoUtils.generateSlug(" Someone's - WebPage-*- *"));
+		Assert.assertEquals("Someones-WebPage", SeoUtils.generateSlug(" Someone’s - WebPage-*- *"));
 		Assert.assertEquals("My-Web-Page-1", SeoUtils.generateSlug("My Web Page = (#1)"));
 	}
 
