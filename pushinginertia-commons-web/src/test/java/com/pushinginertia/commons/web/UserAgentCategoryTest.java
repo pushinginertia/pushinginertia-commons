@@ -25,6 +25,7 @@ public class UserAgentCategoryTest {
 		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent(""));
 		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("Java 6"));
 		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("Java"));
+		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("Go-http-client/1.1"));
 		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("Jakarta"));
 		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("User-Agent: abcd"));
 		Assert.assertEquals(UserAgentCategory.ABUSE, UserAgentCategory.parseUserAgent("Mozilla/5.0 (compatible;)"));
@@ -125,6 +126,7 @@ public class UserAgentCategoryTest {
 		Assert.assertEquals(UserAgentCategory.SEARCHBOT, UserAgentCategory.parseUserAgent("Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)"));
 		Assert.assertEquals(UserAgentCategory.SEARCHBOT, UserAgentCategory.parseUserAgent("Baiduspider-image+(+http://www.baidu.com/search/spider.htm)"));
 		Assert.assertEquals(UserAgentCategory.SEARCHBOT, UserAgentCategory.parseUserAgent("Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)"));
+		Assert.assertEquals(UserAgentCategory.SEARCHBOT, UserAgentCategory.parseUserAgent("Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/116.0.1938.76 Safari/537.36"));
 		Assert.assertEquals(UserAgentCategory.SEARCHBOT, UserAgentCategory.parseUserAgent("Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534+ (KHTML, like Gecko) BingPreview/1.0b"));
 		Assert.assertEquals(UserAgentCategory.SEARCHBOT, UserAgentCategory.parseUserAgent("Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"));
 		Assert.assertEquals(UserAgentCategory.SEARCHBOT, UserAgentCategory.parseUserAgent("Mozilla/5.0 (compatible; MSIE or Firefox mutant; not on Windows server; + http://tab.search.daum.net/aboutWebSearch.html) Daumoa/3.0"));

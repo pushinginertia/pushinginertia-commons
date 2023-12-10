@@ -52,7 +52,7 @@ public enum UserAgentCategory {
 		// this is baidu's v1.0 crawler user agent: Baiduspider+(+http://www.baidu.com/search/spider.htm)
 		SEARCH_BOT_SET.add("^Mozilla/5\\.0 \\(compatible; Baiduspider/[0-9.]+; \\+http://www\\.baidu\\.com/search/spider\\.html\\)$");
 		SEARCH_BOT_SET.add("^Baiduspider-image\\+\\(\\+http://www\\.baidu\\.com/search/spider\\.htm\\)$");
-		SEARCH_BOT_SET.add("^Mozilla/5\\.0 \\(compatible; bingbot/[0-9.]+; \\+http://www\\.bing\\.com/bingbot\\.htm\\)$");
+		SEARCH_BOT_SET.add("^Mozilla/5\\.0 ([a-zA-Z0-9/.]+ )*\\(([a-zA-Z, ]+; )?compatible; bingbot/[0-9.]+; \\+http://www\\.bing\\.com/bingbot\\.htm\\)( .*)?");
 		SEARCH_BOT_SET.add("^Mozilla/5\\.0 \\(Windows NT 6\\.1; WOW64\\) AppleWebKit/534\\+ \\(KHTML, like Gecko\\) BingPreview/1\\.0b$");
 		SEARCH_BOT_SET.add("^Mozilla/5\\.0 \\(compatible; Googlebot/[0-9.]+; \\+http://www\\.google\\.com/bot\\.html\\)$");
 		SEARCH_BOT_SET.add("^Mozilla/5\\.0 \\(compatible; MSIE or Firefox mutant; not on Windows server; \\+ ?http://(tab\\.search|ws).daum.net/aboutWebSearch.html\\) Daumoa/[0-9.]+$");
@@ -62,6 +62,7 @@ public enum UserAgentCategory {
 		SEARCH_BOT_SET.add("^Mozilla/4\\.0 \\(compatible; NaverBot/1.0; http://help.naver.com/[a-z0-9_]+.[aj]sp\\)");
 
 		ABUSE_BOT_SET.add("^Java.*");
+		ABUSE_BOT_SET.add("^Go-http-client.*");
 		ABUSE_BOT_SET.add("^$");
 		ABUSE_BOT_SET.add("^Jakarta.*");
 		ABUSE_BOT_SET.add("^User-Agent.*"); // strings should not start with "User-Agent"
