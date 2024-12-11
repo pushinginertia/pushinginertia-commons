@@ -20,7 +20,7 @@
     </modules>
 
     <properties>
-        <commons-net.version>3.1</commons-net.version>
+        <commons-net.version>3.9.0</commons-net.version>
         <slf4j.version>1.7.22</slf4j.version>
         <jodatime.version>2.2</jodatime.version>
         <google-collections.version>1.0</google-collections.version>
