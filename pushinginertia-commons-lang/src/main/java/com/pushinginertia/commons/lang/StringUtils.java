@@ -18,17 +18,9 @@ package com.pushinginertia.commons.lang;
 import com.pushinginertia.commons.core.validation.ValidateAs;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.DatatypeConverter;
 import java.nio.ByteBuffer;
 import java.text.Normalizer;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -547,12 +539,38 @@ public final class StringUtils {
 	public static UUID parseUUID(@Nonnull final String uuid) throws IllegalArgumentException{
 		if (uuid.length() == 32) {
 			// assume hyphens have been stripped and need to be re-added so it can be parsed
-			final byte[] bytes = DatatypeConverter.parseHexBinary(uuid);
+			final byte[] bytes = hexStringToByteArray(uuid);
 			final ByteBuffer buf = ByteBuffer.wrap(bytes);
 			return new UUID(buf.getLong(), buf.getLong());
 		}
 		return UUID.fromString(uuid);
 
+	}
+
+	public static byte[] hexStringToByteArray(String s) {
+		final int len = s.length();
+		if (len % 2 != 0) {
+			throw new IllegalArgumentException("expected hex string of even length");
+		}
+		final byte[] data = new byte[len / 2];
+		for (int i = 0; i < len; i += 2) {
+			final int c0 = Character.digit(s.charAt(i), 16);
+			if (c0 < 0) {
+				throw new IllegalArgumentException(
+					String.format("illegal character '%c' at index %d", s.charAt(i), i)
+				);
+			}
+			final int c1 = Character.digit(s.charAt(i + 1), 16);
+			if (c1 < 0) {
+				throw new IllegalArgumentException(
+					String.format("illegal character '%c' at index %d", s.charAt(i + 1), i + 1)
+				);
+			}
+			data[i / 2] = (byte) (
+				(c0 << 4) + c1
+			);
+		}
+		return data;
 	}
 
 	/**
