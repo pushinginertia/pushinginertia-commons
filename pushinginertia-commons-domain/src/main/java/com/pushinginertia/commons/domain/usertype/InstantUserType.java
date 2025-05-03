@@ -16,9 +16,9 @@
 package com.pushinginertia.commons.domain.usertype;
 
 import org.hibernate.HibernateException;
+import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.usertype.UserType;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.Serializable;
 import java.sql.PreparedStatement;
@@ -40,7 +40,7 @@ public class InstantUserType implements UserType {
 	}
 
 	@Override
-	public Class returnedClass() {
+	public Class<Instant> returnedClass() {
 		return Instant.class;
 	}
 
@@ -55,7 +55,7 @@ public class InstantUserType implements UserType {
 	}
 
 	@Override
-	public Object nullSafeGet(final ResultSet rs, final String[] names, final Object owner)
+	public Object nullSafeGet(final ResultSet rs, final String[] names, SessionImplementor session, final Object owner)
 	throws HibernateException, SQLException {
 		final Object object = rs.getObject(names[0]);
 
@@ -72,7 +72,7 @@ public class InstantUserType implements UserType {
 	}
 
 	@Override
-	public void nullSafeSet(final PreparedStatement st, final Object value, final int index)
+	public void nullSafeSet(final PreparedStatement st, final Object value, final int index, SessionImplementor session)
 	throws HibernateException, SQLException {
 		if (value == null) {
 			st.setNull(index, Types.TIMESTAMP);

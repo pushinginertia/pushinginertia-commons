@@ -19,6 +19,7 @@ import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.hibernate.HibernateException;
+import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.type.StandardBasicTypes;
 import org.hibernate.usertype.EnhancedUserType;
 import org.slf4j.Logger;
@@ -67,7 +68,8 @@ public class MapAsJsonUserType implements EnhancedUserType, Serializable {
 	}
 
 	@Override
-	public Object nullSafeGet(final ResultSet rs, String[] names, Object owner) throws HibernateException, SQLException {
+	public Object nullSafeGet(final ResultSet rs, String[] names, SessionImplementor session, Object owner)
+	throws HibernateException, SQLException {
 		if (rs == null) {
 			return null;
 		}
@@ -84,7 +86,7 @@ public class MapAsJsonUserType implements EnhancedUserType, Serializable {
 	}
 
 	@Override
-	public void nullSafeSet(final PreparedStatement statement, Object value, int index)
+	public void nullSafeSet(final PreparedStatement statement, Object value, int index, SessionImplementor session)
 	throws HibernateException, SQLException {
 		if (value == null) {
 			statement.setNull(index, StandardBasicTypes.STRING.sqlType());

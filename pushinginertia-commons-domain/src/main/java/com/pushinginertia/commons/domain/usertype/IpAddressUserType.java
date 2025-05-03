@@ -17,6 +17,7 @@ package com.pushinginertia.commons.domain.usertype;
 
 import com.pushinginertia.commons.net.IpAddress;
 import org.hibernate.HibernateException;
+import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.type.StandardBasicTypes;
 import org.hibernate.usertype.EnhancedUserType;
 import org.slf4j.Logger;
@@ -63,7 +64,8 @@ public class IpAddressUserType implements EnhancedUserType, Serializable {
 	}
 
 	@Override
-	public Object nullSafeGet(final ResultSet rs, String[] names, Object owner) throws HibernateException, SQLException {
+	public Object nullSafeGet(final ResultSet rs, String[] names, SessionImplementor session, Object owner)
+	throws HibernateException, SQLException {
 		if (rs == null) {
 			return null;
 		}
@@ -80,7 +82,7 @@ public class IpAddressUserType implements EnhancedUserType, Serializable {
 	}
 
 	@Override
-	public void nullSafeSet(final PreparedStatement statement, Object value, int index)
+	public void nullSafeSet(final PreparedStatement statement, Object value, int index, SessionImplementor session)
 	throws HibernateException, SQLException {
 		if (value == null) {
 			statement.setNull(index, StandardBasicTypes.INTEGER.sqlType());

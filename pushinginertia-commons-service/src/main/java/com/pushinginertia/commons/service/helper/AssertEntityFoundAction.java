@@ -15,12 +15,17 @@
  */
 package com.pushinginertia.commons.service.helper;
 
-import javax.persistence.EntityNotFoundException;
-
 /**
  * Fails with a {@link EntityNotFoundException} exception when an entity is not found.
  */
 public class AssertEntityFoundAction<E> extends LoadEntityAction<E> {
+	static class EntityNotFoundException extends RuntimeException {
+		public EntityNotFoundException(String message) {
+			super(message);
+		}
+
+	}
+
 	@Override
 	public <I> void onEntityNotFound(final I input) {
 		throw new EntityNotFoundException("Entity not found for input: " + input);
